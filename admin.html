@@ -3,24 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Control Panel - EngiVora</title>
+    <title>Data Storage Panel</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        :root {
-            --primary-bg: linear-gradient(135deg, #0d1421 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%);
-            --admin-gradient: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%);
-            --success-gradient: linear-gradient(135deg, #06ffa5 0%, #00d4aa 100%);
-            --warning-gradient: linear-gradient(135deg, #ffbe0b 0%, #fb8500 100%);
-            --danger-gradient: linear-gradient(135deg, #ff006e 0%, #c44569 100%);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 0, 110, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #b8bcc8;
-            --text-accent: #ff006e;
-            --shadow-glow: rgba(255, 0, 110, 0.3);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -28,670 +12,410 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--primary-bg);
-            min-height: 100vh;
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .admin-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(131, 56, 236, 0.1) 0%, transparent 50%),
-                linear-gradient(rgba(255, 0, 110, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 110, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            animation: adminPulse 8s ease-in-out infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes adminPulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.05); }
-        }
-
-        /* Header */
-        .admin-header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-bottom: 2px solid var(--glass-border);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--admin-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 800;
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes logoGlow {
-            0% { box-shadow: 0 0 20px var(--shadow-glow); }
-            100% { box-shadow: 0 0 40px rgba(255, 0, 110, 0.6); }
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--admin-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .admin-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--success-gradient);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-        }
-
-        /* Main Container */
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 30px;
-        }
-
-        /* Page Title */
-        .page-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .page-title {
-            font-size: 48px;
-            font-weight: 800;
-            background: var(--admin-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-        }
-
-        .page-subtitle {
-            color: var(--text-secondary);
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        /* Dashboard Grid */
-        .admin-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        /* Admin Cards */
-        .admin-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 35px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .admin-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 110, 0.1), transparent);
-            animation: cardScan 4s infinite;
-        }
-
-        @keyframes cardScan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .admin-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            border-color: var(--text-accent);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--admin-gradient);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 10px 30px var(--shadow-glow);
-        }
-
-        .card-title {
-            font-size: 24px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-        }
-
-        /* Credentials Section */
-        .credentials-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .credential-item {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 0, 110, 0.3);
-            border-radius: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
             padding: 20px;
-            transition: all 0.3s ease;
         }
 
-        .credential-item:hover {
-            background: rgba(0, 0, 0, 0.6);
-            border-color: var(--text-accent);
-            transform: translateX(5px);
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
         }
 
-        .credential-label {
-            color: var(--text-accent);
-            font-size: 12px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
             margin-bottom: 8px;
         }
 
-        .credential-value {
-            color: var(--text-primary);
-            font-size: 16px;
+        .subtitle {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
             font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
+            color: #495057;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #007bff;
+        }
+
+        .data-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .data-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .data-item:hover {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+
+        .data-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .data-value {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px 12px;
             word-break: break-all;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
         }
 
-        .copy-button {
+        .copy-btn {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            background: var(--admin-gradient);
+            background: #007bff;
+            color: white;
             border: none;
-            color: #000;
-            padding: 6px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .copy-button:hover {
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 5px 15px var(--shadow-glow);
-        }
-
-        /* Management Section */
-        .management-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .management-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            text-align: center;
-        }
-
-        .management-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--text-accent);
-        }
-
-        .management-icon {
-            font-size: 36px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .management-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .management-desc {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--success-gradient);
-            color: #000;
-            padding: 6px 12px;
-            border-radius: 15px;
+            border-radius: 4px;
+            padding: 4px 8px;
             font-size: 11px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
 
-        .coming-soon-badge {
-            background: var(--warning-gradient);
+        .copy-btn:hover {
+            background: #0056b3;
         }
 
-        /* Statistics Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .stat-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 2px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 25px;
+        .add-section {
+            background: #e8f5e8;
+            border: 2px dashed #28a745;
+            border-radius: 6px;
+            padding: 20px;
             text-align: center;
-            transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--text-accent);
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            background: var(--admin-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
             font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.2s;
         }
 
-        /* Footer */
-        .admin-footer {
-            margin-top: 60px;
-            padding: 30px 0;
-            border-top: 2px solid var(--glass-border);
-            text-align: center;
+        .add-btn:hover {
+            background: #1e7e34;
         }
 
-        .footer-text {
-            color: var(--text-secondary);
-            font-size: 14px;
+        .form-group {
             margin-bottom: 15px;
+            text-align: left;
         }
 
-        .version-info {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 8px 16px;
-            border-radius: 20px;
+        .form-label {
+            display: block;
             font-size: 12px;
             font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
+            color: #495057;
+            margin-bottom: 5px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-container {
-                padding: 0 20px;
-            }
-            
-            .admin-container {
-                padding: 30px 20px;
-            }
-            
-            .page-title {
-                font-size: 36px;
-            }
-            
-            .management-grid {
-                grid-template-columns: 1fr;
-            }
+        .form-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
-        /* Success Message */
-        .copy-success {
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        .form-buttons {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cancel-btn:hover {
+            background: #545b62;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--success-gradient);
-            color: #000;
+            background: #28a745;
+            color: white;
             padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 700;
+            border-radius: 6px;
             font-size: 14px;
-            z-index: 1000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            z-index: 1000;
         }
 
-        .copy-success.show {
+        .notification.show {
             transform: translateX(0);
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0 10px;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="admin-bg"></div>
-    
-    <!-- Header -->
-    <header class="admin-header">
-        <div class="header-container">
-            <div class="admin-logo">
-                <div class="logo-icon">⚡</div>
-                <div class="logo-text">ENGIVORA</div>
-            </div>
-            <div class="admin-status">
-                <span>🔒</span>
-                ADMIN AUTHENTICATED
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Data Storage Panel</h1>
+            <p class="subtitle">Secure storage for IDs, passwords, and links</p>
+        </div>
+
+        <!-- IDs Section -->
+        <div class="section">
+            <h2 class="section-title">User IDs</h2>
+            <div class="data-grid" id="ids-grid">
+                <div class="data-item">
+                    <div class="data-label">Primary User ID</div>
+                    <div class="data-value">
+                        user@example.com
+                        <button class="copy-btn" onclick="copyToClipboard('user@example.com')">Copy</button>
+                        <button class="delete-btn" onclick="deleteItem(this)">Delete</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- Success Message -->
-    <div class="copy-success" id="copySuccess">
-        ✅ Credential copied to clipboard!
+        <!-- Passwords Section -->
+        <div class="section">
+            <h2 class="section-title">Passwords</h2>
+            <div class="data-grid" id="passwords-grid">
+                <div class="data-item">
+                    <div class="data-label">Main Account</div>
+                    <div class="data-value">
+                        SecurePass123!
+                        <button class="copy-btn" onclick="copyToClipboard('SecurePass123!')">Copy</button>
+                        <button class="delete-btn" onclick="deleteItem(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="section">
+            <h2 class="section-title">Important Links</h2>
+            <div class="data-grid" id="links-grid">
+                <div class="data-item">
+                    <div class="data-label">Dashboard URL</div>
+                    <div class="data-value">
+                        https://dashboard.example.com
+                        <button class="copy-btn" onclick="copyToClipboard('https://dashboard.example.com')">Copy</button>
+                        <button class="delete-btn" onclick="deleteItem(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add New Data Section -->
+        <div class="add-section">
+            <div id="add-buttons">
+                <button class="add-btn" onclick="showAddForm('id')">+ Add ID</button>
+                <button class="add-btn" onclick="showAddForm('password')">+ Add Password</button>
+                <button class="add-btn" onclick="showAddForm('link')">+ Add Link</button>
+            </div>
+
+            <div id="add-form" class="hidden">
+                <div class="form-group">
+                    <label class="form-label">Label:</label>
+                    <input type="text" class="form-input" id="form-label" placeholder="Enter a descriptive label">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Value:</label>
+                    <input type="text" class="form-input" id="form-value" placeholder="Enter the value">
+                </div>
+                <div class="form-buttons">
+                    <button class="add-btn" onclick="saveData()">Save</button>
+                    <button class="cancel-btn" onclick="hideAddForm()">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="admin-container">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">Admin Control Panel</h1>
-            <p class="page-subtitle">Secure credential management and system administration</p>
-        </div>
-
-        <!-- Main Admin Grid -->
-        <div class="admin-grid">
-            <!-- Credentials Card -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">🔐</div>
-                    <h2 class="card-title">Access Credentials</h2>
-                </div>
-                
-                <div class="credentials-list">
-                    <div class="credential-item">
-                        <div class="credential-label">👤 User Access Key</div>
-                        <div class="credential-value">
-                            EngiVora@private2025
-                            <button class="copy-button" onclick="copyCredential('EngiVora@private2025')">COPY</button>
-                        </div>
-                    </div>
-                    
-                    <div class="credential-item">
-                        <div class="credential-label">⚡ Admin Access Key</div>
-                        <div class="credential-value">
-                            EngiVora@205082
-                            <button class="copy-button" onclick="copyCredential('EngiVora@205082')">COPY</button>
-                        </div>
-                    </div>
-                    
-                    <div class="credential-item">
-                        <div class="credential-label">🔑 Secure User Token</div>
-                        <div class="credential-value">
-                            b3f6a1e9c2d4f78a9b1e64d7a0f8e2bc3d4a9f1e6b72c85f4a9d8e2b7c3f1a2d
-                            <button class="copy-button" onclick="copyCredential('b3f6a1e9c2d4f78a9b1e64d7a0f8e2bc3d4a9f1e6b72c85f4a9d8e2b7c3f1a2d')">COPY</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- System Status Card -->
-            <div class="admin-card">
-                <div class="card-header">
-                    <div class="card-icon">📊</div>
-                    <h2 class="card-title">System Status</h2>
-                </div>
-                
-                <div class="credentials-list">
-                    <div class="credential-item">
-                        <div class="credential-label">🛡️ Security Level</div>
-                        <div class="credential-value" style="color: #06ffa5;">
-                            MAXIMUM QUANTUM ENCRYPTION
-                        </div>
-                    </div>
-                    
-                    <div class="credential-item">
-                        <div class="credential-label">🌐 Portal Status</div>
-                        <div class="credential-value" style="color: #06ffa5;">
-                            ONLINE & SECURED
-                        </div>
-                    </div>
-                    
-                    <div class="credential-item">
-                        <div class="credential-label">📱 Support Channel</div>
-                        <div class="credential-value" style="color: #00f5ff;">
-                            @helpengivora
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Management Options -->
-        <div class="management-grid">
-            <div class="management-card" onclick="showDemo('User Management')">
-                <span class="management-icon">👥</span>
-                <h3 class="management-title">User Management</h3>
-                <p class="management-desc">Manage user accounts, permissions, and access levels</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-
-            <div class="management-card" onclick="showDemo('Security Logs')">
-                <span class="management-icon">📋</span>
-                <h3 class="management-title">Security Logs</h3>
-                <p class="management-desc">View access attempts, security alerts, and system logs</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-
-            <div class="management-card" onclick="showDemo('Content Management')">
-                <span class="management-icon">📚</span>
-                <h3 class="management-title">Content Management</h3>
-                <p class="management-desc">Manage premium content, lectures, and exclusive materials</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-
-            <div class="management-card" onclick="showDemo('Analytics Dashboard')">
-                <span class="management-icon">📈</span>
-                <h3 class="management-title">Analytics Dashboard</h3>
-                <p class="management-desc">View user engagement, access patterns, and statistics</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-
-            <div class="management-card" onclick="showDemo('System Settings')">
-                <span class="management-icon">⚙️</span>
-                <h3 class="management-title">System Settings</h3>
-                <p class="management-desc">Configure security parameters, captcha settings, and more</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-
-            <div class="management-card" onclick="showDemo('Backup & Recovery')">
-                <span class="management-icon">💾</span>
-                <h3 class="management-title">Backup & Recovery</h3>
-                <p class="management-desc">Manage system backups and disaster recovery options</p>
-                <span class="status-badge coming-soon-badge">🚧 DEMO</span>
-            </div>
-        </div>
-
-        <!-- Statistics -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Security Level</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Monitoring</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">10</div>
-                <div class="stat-label">Quantum Codes</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Encryption</div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="admin-footer">
-            <p class="footer-text">EngiVora Secure Access Portal - Admin Control Panel</p>
-            <div class="version-info">
-                <span>🚀</span>
-                VERSION 1.0 - QUANTUM SECURE
-            </div>
-        </footer>
-    </div>
+    <div class="notification" id="notification"></div>
 
     <script>
-        // Copy credential to clipboard
-        function copyCredential(credential) {
-            navigator.clipboard.writeText(credential).then(() => {
-                showCopySuccess();
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+        let currentDataType = '';
+
+        function showAddForm(type) {
+            currentDataType = type;
+            document.getElementById('add-buttons').classList.add('hidden');
+            document.getElementById('add-form').classList.remove('hidden');
+            
+            const valueInput = document.getElementById('form-value');
+            if (type === 'password') {
+                valueInput.type = 'password';
+            } else {
+                valueInput.type = 'text';
+            }
+        }
+
+        function hideAddForm() {
+            document.getElementById('add-buttons').classList.remove('hidden');
+            document.getElementById('add-form').classList.add('hidden');
+            document.getElementById('form-label').value = '';
+            document.getElementById('form-value').value = '';
+        }
+
+        function saveData() {
+            const label = document.getElementById('form-label').value.trim();
+            const value = document.getElementById('form-value').value.trim();
+
+            if (!label || !value) {
+                showNotification('Please fill in both fields', 'error');
+                return;
+            }
+
+            const gridId = currentDataType === 'id' ? 'ids-grid' : 
+                          currentDataType === 'password' ? 'passwords-grid' : 'links-grid';
+            
+            const grid = document.getElementById(gridId);
+            const newItem = document.createElement('div');
+            newItem.className = 'data-item';
+            newItem.innerHTML = `
+                <div class="data-label">${label}</div>
+                <div class="data-value">
+                    ${value}
+                    <button class="copy-btn" onclick="copyToClipboard('${value}')">Copy</button>
+                    <button class="delete-btn" onclick="deleteItem(this)">Delete</button>
+                </div>
+            `;
+
+            grid.appendChild(newItem);
+            hideAddForm();
+            showNotification('Data saved successfully');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Copied to clipboard');
+            }).catch(() => {
+                showNotification('Failed to copy', 'error');
             });
         }
 
-        // Show copy success message
-        function showCopySuccess() {
-            const successMsg = document.getElementById('copySuccess');
-            successMsg.classList.add('show');
+        function deleteItem(btn) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                btn.closest('.data-item').remove();
+                showNotification('Item deleted');
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = type === 'error' ? '#dc3545' : '#28a745';
+            notification.classList.add('show');
+            
             setTimeout(() => {
-                successMsg.classList.remove('show');
-            }, 2000);
+                notification.classList.remove('show');
+            }, 3000);
         }
 
-        // Demo function for management cards
-        function showDemo(feature) {
-            alert(`🚧 ${feature} Demo\n\nThis feature is currently in development and will be available in future updates. \n\nFor now, this admin panel displays all current credentials and system status.`);
+        // Simple data persistence using localStorage
+        function saveToStorage() {
+            const data = {
+                ids: [],
+                passwords: [],
+                links: []
+            };
+
+            ['ids-grid', 'passwords-grid', 'links-grid'].forEach((gridId, index) => {
+                const grid = document.getElementById(gridId);
+                const items = grid.querySelectorAll('.data-item');
+                const type = ['ids', 'passwords', 'links'][index];
+
+                items.forEach(item => {
+                    const label = item.querySelector('.data-label').textContent;
+                    const value = item.querySelector('.data-value').textContent.trim().split('\n')[0];
+                    data[type].push({ label, value });
+                });
+            });
+
+            localStorage.setItem('dataStorage', JSON.stringify(data));
         }
 
-        // Security protection for admin panel
-        (function() {
-            'use strict';
-            
-            // Disable right-click
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            
-            // Disable key combinations
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'F12' || 
-                    (e.ctrlKey && ['u', 'i', 's', 'a'].includes(e.key.toLowerCase())) ||
-                    (e.ctrlKey && e.shiftKey && ['i', 'c', 'j'].includes(e.key.toLowerCase()))) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-            // Disable text selection on sensitive areas
-            document.querySelectorAll('.credential-value').forEach(el => {
-                el.addEventListener('selectstart', e => e.preventDefault());
-            });
-        })();
-
-        // Auto-refresh page every 30 minutes for security
-        setTimeout(() => {
-            location.reload();
-        }, 1800000);
+        // Auto-save when page unloads
+        window.addEventListener('beforeunload', saveToStorage);
     </script>
 </body>
 </html>
