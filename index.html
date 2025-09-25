@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,53 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EngiVora - Premium Learning Portal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #2563eb;
-            --primary-light: #60a5fa;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --info: #06b6d4;
-            
-            --background: #0a0e1a;
-            --surface: #1a1f2e;
-            --surface-light: #252b3b;
-            --surface-hover: #2d3548;
-            --card: #1e2532;
-            --card-hover: #252b3b;
-            
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #059669;
+            --error: #dc2626;
+            --warning: #d97706;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
             --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --text-disabled: #64748b;
-            
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             --border: #334155;
             --border-light: #475569;
-            --border-hover: #64748b;
-            
-            --glass: rgba(30, 37, 50, 0.6);
-            --glass-light: rgba(37, 43, 59, 0.4);
-            --glass-border: rgba(203, 213, 225, 0.1);
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            
-            --radius-sm: 8px;
-            --radius: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            --radius-2xl: 24px;
-            
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(148, 163, 184, 0.1);
         }
 
         * {
@@ -62,78 +34,30 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--background);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Advanced Background System */
-        .animated-background {
+        /* Background Animation */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #252b3b 100%);
-        }
-
-        .background-orbs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(220, 38, 38, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
             z-index: -1;
-            overflow: hidden;
         }
 
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            animation: orbFloat 20s ease-in-out infinite;
-            opacity: 0.3;
-        }
-
-        .orb:nth-child(1) {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .orb:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
-            top: 60%;
-            right: 20%;
-            animation-delay: -5s;
-        }
-
-        .orb:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            bottom: 30%;
-            left: 60%;
-            animation-delay: -10s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            33% {
-                transform: translate(30px, -30px) rotate(120deg) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 20px) rotate(240deg) scale(0.9);
-            }
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
         }
 
         /* Grid Pattern */
@@ -144,76 +68,45 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
             z-index: -1;
             animation: gridMove 30s linear infinite;
         }
 
         @keyframes gridMove {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            100% { transform: translate(60px, 60px); }
         }
 
-        /* Particle System */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            opacity: 0;
-            animation: particleFloat 8s infinite linear;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Page Container System */
-        .page {
-            display: none;
+        /* Main Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition);
+            padding: 2rem;
         }
 
-        .page.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .portal {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(148, 163, 184, 0.05);
+            animation: portalEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes pageEnter {
+        @keyframes portalEntry {
             0% {
                 opacity: 0;
-                transform: translateY(30px) scale(0.98);
+                transform: translateY(20px) scale(0.95);
             }
             100% {
                 opacity: 1;
@@ -221,289 +114,93 @@
             }
         }
 
-        /* Navigation System */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: var(--transition);
-        }
-
-        .navbar.hidden {
-            transform: translateY(-100%);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .nav-brand .logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-primary);
-            background: var(--surface-light);
-        }
-
-        .nav-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            background: var(--error);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .logout-btn:hover {
-            background: #dc2626;
-            transform: translateY(-1px);
-        }
-
-        /* Mobile Navigation */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-
-        .mobile-menu-btn:hover {
-            background: var(--surface-light);
-        }
-
-        /* Login Page */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .login-portal {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-2xl);
-            padding: 3rem;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: var(--shadow-2xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-portal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .login-header {
+        /* Header */
+        .header {
             text-align: center;
             margin-bottom: 2.5rem;
         }
 
-        .brand-badge {
+        .brand {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--success));
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            animation: badgeGlow 2s ease-in-out infinite alternate;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
-        @keyframes badgeGlow {
-            0% { box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3); }
-            100% { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5); }
-        }
-
-        .login-title {
+        .title {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .login-subtitle {
+        .subtitle {
             color: var(--text-secondary);
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 400;
         }
 
-        /* Form Components */
+        /* Form Styles */
+        .form {
+            margin-bottom: 2rem;
+        }
+
         .form-group {
             margin-bottom: 1.5rem;
-            position: relative;
         }
 
-        .form-label {
+        .label {
             display: block;
             color: var(--text-primary);
             font-size: 0.875rem;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 0.5rem;
         }
 
-        .form-input {
+        .input {
             width: 100%;
-            padding: 1rem;
+            padding: 0.875rem 1rem;
             background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             color: var(--text-primary);
             font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .form-input:focus {
+        .input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             background: var(--surface-light);
         }
 
-        .form-input::placeholder {
+        .input::placeholder {
             color: var(--text-muted);
         }
 
-        .input-icon {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            transition: var(--transition);
-            pointer-events: none;
-        }
-
-        .form-input:focus + .input-icon {
-            color: var(--primary);
-        }
-
-        /* Verification Component */
-        .verification-card {
+        /* Verification */
+        .verification {
             background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .verification-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
-            animation: scanLine 4s infinite;
-        }
-
-        @keyframes scanLine {
-            0% { left: -100%; }
-            100% { left: 100%; }
         }
 
         .verification-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: between;
             align-items: center;
             margin-bottom: 1rem;
         }
@@ -511,474 +208,170 @@
         .verification-label {
             color: var(--text-secondary);
             font-size: 0.875rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-weight: 500;
         }
 
-        .refresh-code-btn {
+        .refresh-btn {
             background: var(--primary);
-            color: white;
             border: none;
+            color: white;
             padding: 0.5rem 0.75rem;
-            border-radius: var(--radius-sm);
+            border-radius: 8px;
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s ease;
+            margin-left: auto;
         }
 
-        .refresh-code-btn:hover {
+        .refresh-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
         }
 
-        .verification-display {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .challenge {
+            background: linear-gradient(135deg, var(--primary), var(--success));
             color: white;
-            padding: 1.25rem;
-            border-radius: var(--radius);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.75rem;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
             font-weight: 700;
             text-align: center;
-            letter-spacing: 8px;
+            letter-spacing: 4px;
             margin-bottom: 1rem;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
         }
 
-        .verification-display::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        /* Button */
+        .submit-btn {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: codeShimmer 2s infinite;
-        }
-
-        @keyframes codeShimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Button Components */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
-            border-radius: var(--radius);
+            border-radius: 12px;
+            color: white;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+            margin-bottom: 1.5rem;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:hover {
+        .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
         }
 
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
+        .submit-btn:active {
+            transform: translateY(0);
         }
 
-        .btn-secondary:hover {
-            background: var(--surface-hover);
-            color: var(--text-primary);
-            transform: translateY(-1px);
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        /* Alert Components */
+        /* Alerts */
         .alert {
             padding: 1rem;
-            border-radius: var(--radius);
+            border-radius: 12px;
             margin-bottom: 1rem;
             font-size: 0.875rem;
             font-weight: 500;
             display: none;
-            animation: alertSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            animation: slideIn 0.3s ease;
         }
 
-        @keyframes alertSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .alert::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: currentColor;
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             color: #fca5a5;
         }
 
         .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #86efac;
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            color: #6ee7b7;
         }
 
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            color: #fcd34d;
+        /* Support */
+        .support {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
         }
 
-        .alert-info {
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            color: #67e8f9;
+        .support-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
         }
 
-        /* Dashboard Layout */
-        .dashboard-container {
-            padding-top: 80px;
+        .support-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .support-btn:hover {
+            background: var(--surface-light);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
             min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .dashboard.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .dashboard-header {
             text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, var(--glass), var(--glass-light));
-            backdrop-filter: blur(30px);
-            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 3rem;
         }
 
         .welcome-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, var(--success), #059669);
+            background: linear-gradient(135deg, var(--success), #047857);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            animation: badgeFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes badgeFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .dashboard-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .dashboard-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.25rem;
-            font-weight: 500;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--primary);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Content Grid */
-        .content-section {
-            padding: 3rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .content-card {
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            group: hover;
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .content-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-
-        .content-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            padding: 2rem;
-            position: relative;
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-stats {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-stat {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .card-stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .card-stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-footer {
-            padding: 0 2rem 2rem 2rem;
-        }
-
-        .card-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--success);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            background: currentColor;
-            border-radius: 50%;
-            animation: statusPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes statusPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Content Pages */
-        .content-page {
-            padding: 6rem 2rem 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .content-title {
             font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-primary);
+            font-weight: 700;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--text-primary), var(--primary));
             -webkit-background-clip: text;
@@ -986,557 +379,79 @@
             background-clip: text;
         }
 
-        .content-breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .breadcrumb-item {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .breadcrumb-item:hover {
-            color: var(--primary);
-        }
-
-        .breadcrumb-separator {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-        }
-
-        /* File Grid */
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .file-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .file-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transition: var(--transition);
-        }
-
-        .file-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .file-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .file-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .file-name {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .file-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .file-size {
-            font-weight: 500;
-        }
-
-        .file-date {
-            font-weight: 400;
-        }
-
-        .download-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        .download-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        /* Video Player */
-        .video-container {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .video-player {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 1.125rem;
-        }
-
-        .video-info {
-            padding: 1.5rem;
-        }
-
-        .video-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .video-description {
+        .dashboard-subtitle {
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .video-meta {
-            display: flex;
-            gap: 2rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Progress Components */
-        .progress-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .progress-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .progress-percentage {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--surface);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 0.75rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: progressGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes progressGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
-        }
-
-        .progress-details {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Quiz Components */
-        .quiz-container {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .quiz-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .quiz-progress {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .question-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .question-text {
-            font-size: 1.125rem;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .answer-option {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            background: var(--surface-light);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .answer-option:hover {
-            background: var(--surface-hover);
-            border-color: var(--primary);
-        }
-
-        .answer-option.selected {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: var(--primary);
-        }
-
-        .option-radio {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .answer-option.selected .option-radio {
-            border-color: var(--primary);
-            background: var(--primary);
-        }
-
-        .answer-option.selected .option-radio::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .option-text {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* Search Component */
-        .search-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
             font-size: 1.25rem;
         }
 
-        /* Filter Component */
-        .filter-bar {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
 
-        .filter-btn {
-            background: var(--surface);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.875rem;
-            font-weight: 500;
+        .content-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--primary);
-            color: white;
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border-color: var(--primary);
         }
 
-        /* Loading Components */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .skeleton {
-            background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
-            background-size: 200% 100%;
-            animation: shimmerSkeleton 1.5s infinite;
-            border-radius: var(--radius-sm);
-        }
-
-        @keyframes shimmerSkeleton {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* Modal Components */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            transform: scale(0.9) translateY(20px);
-            transition: var(--transition);
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            background: var(--surface);
-            color: var(--text-primary);
-        }
-
-        /* Notification System */
-        .notification-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .notification {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1rem 1.5rem;
-            min-width: 300px;
-            box-shadow: var(--shadow-xl);
-            transform: translateX(100%);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .notification.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .notification-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .notification-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: white;
-        }
-
-        .notification-title {
+        .card-title {
+            font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
+            margin-bottom: 0.75rem;
         }
 
-        .notification-message {
+        .card-description {
             color: var(--text-secondary);
             font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
-        .notification.success .notification-icon {
+        .card-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
             background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .notification.error .notification-icon {
-            background: var(--error);
-        }
-
-        .notification.warning .notification-icon {
-            background: var(--warning);
-        }
-
-        .notification.info .notification-icon {
-            background: var(--info);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .nav-menu {
-                display: none;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
             }
             
-            .mobile-menu-btn {
-                display: block;
+            .portal {
+                padding: 2rem;
+            }
+            
+            .title {
+                font-size: 2rem;
             }
             
             .dashboard-title {
@@ -1544,1763 +459,246 @@
             }
             
             .content-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-            
-            .login-portal {
-                padding: 2rem;
-                margin: 1rem;
-            }
-            
-            .login-title {
-                font-size: 2rem;
-            }
-            
-            .dashboard-title {
-                font-size: 2rem;
-            }
-            
-            .content-title {
-                font-size: 2rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .content-section {
-                padding: 2rem 1rem;
-            }
-            
-            .content-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-            
-            .filter-bar {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .verification-display {
-                font-size: 1.25rem;
-                letter-spacing: 4px;
-            }
-            
-            .btn {
-                padding: 0.875rem 1.5rem;
-            }
-            
-            .modal {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-            
-            .notification {
-                min-width: 280px;
-                margin: 0 1rem;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--surface);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Print Styles */
-        @media print {
-            .navbar,
-            .mobile-menu-btn,
-            .logout-btn,
-            .btn,
-            .modal-overlay,
-            .notification-container {
-                display: none !important;
-            }
-            
-            .page {
-                display: block !important;
-                opacity: 1 !important;
-                transform: none !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="animated-background"></div>
-    <div class="background-orbs">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-    </div>
+    <div class="background"></div>
     <div class="grid-pattern"></div>
-    <div class="particles" id="particles"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-brand" onclick="showPage('dashboard')">
-                <div class="logo">🚀</div>
-                <span>EngiVora</span>
-            </a>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active" onclick="showPage('dashboard')" data-page="dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="showPage('courses')" data-page="courses">Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="showPage('resources')" data-page="resources">Resources</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="showPage('progress')" data-page="progress">Progress</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="showPage('community')" data-page="community">Community</a>
-                </li>
-            </ul>
-            
-            <div class="nav-user">
-                <div class="user-avatar" id="userAvatar">EV</div>
-                <button class="logout-btn" onclick="logout()">Logout</button>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    
+    <!-- Login Portal -->
+    <div class="container" id="loginContainer">
+        <div class="portal">
+            <div class="header">
+                <div class="brand">
+                    🚀 EngiVora Premium
+                </div>
+                <h1 class="title">Welcome Back</h1>
+                <p class="subtitle">Access your premium learning content</p>
             </div>
-        </div>
-    </nav>
 
-    <!-- Login Page -->
-    <div class="page active" id="loginPage">
-        <div class="login-container">
-            <div class="login-portal">
-                <div class="login-header">
-                    <div class="brand-badge">
-                        🎓 Premium Learning Portal
-                    </div>
-                    <h1 class="login-title">Welcome Back</h1>
-                    <p class="login-subtitle">Access your premium educational content</p>
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
+
+            <form class="form" id="loginForm">
+                <div class="form-group">
+                    <label class="label">Access Key</label>
+                    <input 
+                        type="password" 
+                        id="accessKey" 
+                        class="input" 
+                        placeholder="Enter your access key"
+                        required
+                    >
                 </div>
 
-                <div class="alert alert-error" id="errorAlert"></div>
-                <div class="alert alert-success" id="successAlert"></div>
-
-                <form id="loginForm" onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label class="form-label">🔑 Access Key</label>
-                        <input 
-                            type="password" 
-                            id="accessKey" 
-                            class="form-input" 
-                            placeholder="Enter your access key"
-                            required
-                            autocomplete="off"
-                        >
-                        <div class="input-icon">🔒</div>
+                <div class="verification">
+                    <div class="verification-header">
+                        <span class="verification-label">Verification Code</span>
+                        <button type="button" class="refresh-btn" onclick="generateCode()">
+                            ↻ Refresh
+                        </button>
                     </div>
-
-                    <div class="verification-card">
-                        <div class="verification-header">
-                            <span class="verification-label">
-                                🛡️ Security Verification
-                            </span>
-                            <button type="button" class="refresh-code-btn" onclick="generateVerificationCode()">
-                                ↻ Refresh
-                            </button>
-                        </div>
-                        <div class="verification-display" id="verificationCode"></div>
-                        <input 
-                            type="text" 
-                            id="verificationInput" 
-                            class="form-input" 
-                            placeholder="Enter the verification code"
-                            required
-                            autocomplete="off"
-                        >
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <span class="loading-spinner" id="loginSpinner" style="display: none;"></span>
-                        <span id="loginButtonText">🚀 Access Portal</span>
-                    </button>
-                </form>
-
-                <div style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem;">
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Need access credentials?</p>
-                    <a href="https://t.me/helpengivora" target="_blank" class="btn btn-secondary">
-                        📞 Contact Support
-                    </a>
+                    <div class="challenge" id="verificationCode"></div>
+                    <input 
+                        type="text" 
+                        id="codeInput" 
+                        class="input" 
+                        placeholder="Enter the code above"
+                        required
+                    >
                 </div>
+
+                <button type="submit" class="submit-btn">
+                    Access Portal
+                </button>
+            </form>
+
+            <div class="support">
+                <p class="support-text">Need access credentials?</p>
+                <a href="https://t.me/helpengivora" class="support-btn" target="_blank">
+                    📞 Contact Support
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Dashboard Page -->
-    <div class="page" id="dashboardPage">
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
         <div class="dashboard-container">
             <div class="dashboard-header">
                 <div class="welcome-badge">
                     ✅ Access Granted
                 </div>
                 <h1 class="dashboard-title">Learning Portal</h1>
-                <p class="dashboard-subtitle">Your premium educational ecosystem</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">📚</div>
-                    <div class="stat-value">24</div>
-                    <div class="stat-label">Courses Available</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🎓</div>
-                    <div class="stat-value">156</div>
-                    <div class="stat-label">Hours of Content</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⚡</div>
-                    <div class="stat-value">89%</div>
-                    <div class="stat-label">Completion Rate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Certificates Earned</div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="section-header">
-                    <h2 class="section-title">Quick Access</h2>
-                    <p class="section-subtitle">Jump into your learning journey</p>
-                </div>
-
-                <div class="content-grid">
-                    <div class="content-card" onclick="showPage('courses')">
-                        <div class="card-header">
-                            <div class="card-icon">📚</div>
-                            <h3 class="card-title">Study Materials</h3>
-                            <p class="card-description">Comprehensive notes, PDFs, and study guides for all subjects</p>
-                            <div class="card-stats">
-                                <div class="card-stat">
-                                    <div class="card-stat-value">240+</div>
-                                    <div class="card-stat-label">Documents</div>
-                                </div>
-                                <div class="card-stat">
-                                    <div class="card-stat-value">15GB</div>
-                                    <div class="card-stat-label">Content</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="card-status">
-                                <div class="status-indicator"></div>
-                                Online
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="content-card" onclick="showPage('resources')">
-                        <div class="card-header">
-                            <div class="card-icon">🎬</div>
-                            <h3 class="card-title">Video Lectures</h3>
-                            <p class="card-description">Expert-led video content and interactive learning sessions</p>
-                            <div class="card-stats">
-                                <div class="card-stat">
-                                    <div class="card-stat-value">180+</div>
-                                    <div class="card-stat-label">Videos</div>
-                                </div>
-                                <div class="card-stat">
-                                    <div class="card-stat-value">4K</div>
-                                    <div class="card-stat-label">Quality</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="card-status">
-                                <div class="status-indicator"></div>
-                                Streaming
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="content-card" onclick="showPage('progress')">
-                        <div class="card-header">
-                            <div class="card-icon">✏️</div>
-                            <h3 class="card-title">Practice Tests</h3>
-                            <p class="card-description">Interactive quizzes and mock examinations</p>
-                            <div class="card-stats">
-                                <div class="card-stat">
-                                    <div class="card-stat-value">50+</div>
-                                    <div class="card-stat-label">Tests</div>
-                                </div>
-                                <div class="card-stat">
-                                    <div class="card-stat-value">1200+</div>
-                                    <div class="card-stat-label">Questions</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="card-status">
-                                <div class="status-indicator"></div>
-                                Available
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="content-card" onclick="showPage('community')">
-                        <div class="card-header">
-                            <div class="card-icon">🚀</div>
-                            <h3 class="card-title">Live Projects</h3>
-                            <p class="card-description">Hands-on projects and real-world applications</p>
-                            <div class="card-stats">
-                                <div class="card-stat">
-                                    <div class="card-stat-value">25+</div>
-                                    <div class="card-stat-label">Projects</div>
-                                </div>
-                                <div class="card-stat">
-                                    <div class="card-stat-value">Active</div>
-                                    <div class="card-stat-label">Status</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="card-status">
-                                <div class="status-indicator"></div>
-                                Updated
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Courses Page -->
-    <div class="page" id="coursesPage">
-        <div class="content-page">
-            <div class="content-header">
-                <div class="content-breadcrumb">
-                    <a href="#" class="breadcrumb-item" onclick="showPage('dashboard')">Dashboard</a>
-                    <span class="breadcrumb-separator">›</span>
-                    <span class="breadcrumb-item">Study Materials</span>
-                </div>
-                <h1 class="content-title">Study Materials</h1>
-            </div>
-
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search materials..." id="materialSearch">
-                <div class="search-icon">🔍</div>
-            </div>
-
-            <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="notes">Notes</button>
-                <button class="filter-btn" data-filter="books">Books</button>
-                <button class="filter-btn" data-filter="papers">Papers</button>
-                <button class="filter-btn" data-filter="guides">Guides</button>
-            </div>
-
-            <div class="file-grid" id="materialsGrid">
-                <div class="file-card" data-category="notes">
-                    <div class="file-icon">📄</div>
-                    <div class="file-name">Engineering Mathematics Notes</div>
-                    <div class="file-meta">
-                        <span class="file-size">2.4 MB</span>
-                        <span class="file-date">Dec 15, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('math-notes.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="books">
-                    <div class="file-icon">📚</div>
-                    <div class="file-name">Physics Fundamentals Textbook</div>
-                    <div class="file-meta">
-                        <span class="file-size">15.2 MB</span>
-                        <span class="file-date">Dec 12, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('physics-book.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="notes">
-                    <div class="file-icon">📝</div>
-                    <div class="file-name">Data Structures & Algorithms</div>
-                    <div class="file-meta">
-                        <span class="file-size">3.8 MB</span>
-                        <span class="file-date">Dec 10, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('dsa-notes.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="papers">
-                    <div class="file-icon">🔬</div>
-                    <div class="file-name">Research Paper Collection</div>
-                    <div class="file-meta">
-                        <span class="file-size">8.7 MB</span>
-                        <span class="file-date">Dec 8, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('research-papers.zip')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="guides">
-                    <div class="file-icon">🎯</div>
-                    <div class="file-name">Programming Best Practices</div>
-                    <div class="file-meta">
-                        <span class="file-size">1.9 MB</span>
-                        <span class="file-date">Dec 5, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('programming-guide.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="notes">
-                    <div class="file-icon">⚡</div>
-                    <div class="file-name">Electrical Engineering Notes</div>
-                    <div class="file-meta">
-                        <span class="file-size">4.2 MB</span>
-                        <span class="file-date">Dec 3, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('electrical-notes.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="books">
-                    <div class="file-icon">🧮</div>
-                    <div class="file-name">Statistics & Probability</div>
-                    <div class="file-meta">
-                        <span class="file-size">12.5 MB</span>
-                        <span class="file-date">Dec 1, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('statistics-book.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-
-                <div class="file-card" data-category="guides">
-                    <div class="file-icon">🏗️</div>
-                    <div class="file-name">Software Architecture Guide</div>
-                    <div class="file-meta">
-                        <span class="file-size">5.1 MB</span>
-                        <span class="file-date">Nov 28, 2024</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadFile('architecture-guide.pdf')">
-                        📥 Download
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Resources Page -->
-    <div class="page" id="resourcesPage">
-        <div class="content-page">
-            <div class="content-header">
-                <div class="content-breadcrumb">
-                    <a href="#" class="breadcrumb-item" onclick="showPage('dashboard')">Dashboard</a>
-                    <span class="breadcrumb-separator">›</span>
-                    <span class="breadcrumb-item">Video Resources</span>
-                </div>
-                <h1 class="content-title">Video Lectures</h1>
-            </div>
-
-            <div class="video-container">
-                <div class="video-player" id="videoPlayer">
-                    🎬 Select a video to start learning
-                </div>
-                <div class="video-info" id="videoInfo" style="display: none;">
-                    <h3 class="video-title" id="videoTitle"></h3>
-                    <p class="video-description" id="videoDescription"></p>
-                    <div class="video-meta">
-                        <span id="videoDuration"></span>
-                        <span id="videoViews"></span>
-                        <span id="videoDate"></span>
-                    </div>
-                </div>
+                <p class="dashboard-subtitle">Your premium educational resources</p>
             </div>
 
             <div class="content-grid">
-                <div class="content-card" onclick="playVideo('Introduction to Machine Learning', 'comprehensive overview of ML concepts', '2:45:30', '1.2K views', 'Dec 15, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">🤖</div>
-                        <h3 class="card-title">Machine Learning Basics</h3>
-                        <p class="card-description">Complete introduction to machine learning concepts and applications</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">2:45</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">4K</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('notes')">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Study Notes</h3>
+                    <p class="card-description">Comprehensive study materials and detailed notes</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-card" onclick="playVideo('Advanced Data Structures', 'deep dive into complex data structures', '3:20:15', '890 views', 'Dec 12, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">🌳</div>
-                        <h3 class="card-title">Data Structures Deep Dive</h3>
-                        <p class="card-description">Advanced concepts in data structures and algorithm optimization</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">3:20</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">HD</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('lectures')">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">Video Lectures</h3>
+                    <p class="card-description">Expert-led lectures and educational content</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-card" onclick="playVideo('Web Development Masterclass', 'full-stack development course', '4:15:45', '2.1K views', 'Dec 10, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">🌐</div>
-                        <h3 class="card-title">Full Stack Development</h3>
-                        <p class="card-description">Complete web development course from frontend to backend</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">4:15</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">4K</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('resources')">
+                    <span class="card-icon">📖</span>
+                    <h3 class="card-title">Learning Resources</h3>
+                    <p class="card-description">Additional materials and reference documents</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-card" onclick="playVideo('Database Management Systems', 'comprehensive DBMS tutorial', '2:55:20', '1.5K views', 'Dec 8, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">🗄️</div>
-                        <h3 class="card-title">Database Systems</h3>
-                        <p class="card-description">Complete guide to database design and management</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">2:55</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">HD</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('practice')">
+                    <span class="card-icon">✏️</span>
+                    <h3 class="card-title">Practice Tests</h3>
+                    <p class="card-description">Interactive quizzes and practice examinations</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-card" onclick="playVideo('Mobile App Development', 'iOS and Android development', '3:40:10', '980 views', 'Dec 5, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">📱</div>
-                        <h3 class="card-title">Mobile Development</h3>
-                        <p class="card-description">Cross-platform mobile app development course</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">3:40</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">4K</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('projects')">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">Projects</h3>
+                    <p class="card-description">Hands-on projects and practical assignments</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-card" onclick="playVideo('Cloud Computing Fundamentals', 'AWS, Azure, and GCP basics', '2:30:35', '1.8K views', 'Dec 3, 2024')">
-                    <div class="card-header">
-                        <div class="card-icon">☁️</div>
-                        <h3 class="card-title">Cloud Computing</h3>
-                        <p class="card-description">Introduction to major cloud platforms and services</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">2:30</div>
-                                <div class="card-stat-label">Duration</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">4K</div>
-                                <div class="card-stat-label">Quality</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="content-card" onclick="openContent('community')">
+                    <span class="card-icon">👥</span>
+                    <h3 class="card-title">Community</h3>
+                    <p class="card-description">Connect with peers and join discussions</p>
+                    <span class="card-status">• Available</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Progress Page -->
-    <div class="page" id="progressPage">
-        <div class="content-page">
-            <div class="content-header">
-                <div class="content-breadcrumb">
-                    <a href="#" class="breadcrumb-item" onclick="showPage('dashboard')">Dashboard</a>
-                    <span class="breadcrumb-separator">›</span>
-                    <span class="breadcrumb-item">Learning Progress</span>
-                </div>
-                <h1 class="content-title">Your Progress</h1>
-            </div>
-
-            <div class="progress-card">
-                <div class="progress-header">
-                    <div class="progress-title">Overall Learning Progress</div>
-                    <div class="progress-percentage">89%</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 89%"></div>
-                </div>
-                <div class="progress-details">
-                    <span>24 of 27 courses completed</span>
-                    <span>156 hours studied</span>
-                </div>
-            </div>
-
-            <div class="content-grid">
-                <div class="progress-card">
-                    <div class="progress-header">
-                        <div class="progress-title">🤖 Machine Learning</div>
-                        <div class="progress-percentage">95%</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 95%"></div>
-                    </div>
-                    <div class="progress-details">
-                        <span>19 of 20 lessons</span>
-                        <span>Certificate available</span>
-                    </div>
-                </div>
-
-                <div class="progress-card">
-                    <div class="progress-header">
-                        <div class="progress-title">🌐 Web Development</div>
-                        <div class="progress-percentage">78%</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 78%"></div>
-                    </div>
-                    <div class="progress-details">
-                        <span>23 of 30 lessons</span>
-                        <span>7 lessons remaining</span>
-                    </div>
-                </div>
-
-                <div class="progress-card">
-                    <div class="progress-header">
-                        <div class="progress-title">📱 Mobile Development</div>
-                        <div class="progress-percentage">65%</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 65%"></div>
-                    </div>
-                    <div class="progress-details">
-                        <span>13 of 20 lessons</span>
-                        <span>In progress</span>
-                    </div>
-                </div>
-
-                <div class="progress-card">
-                    <div class="progress-header">
-                        <div class="progress-title">☁️ Cloud Computing</div>
-                        <div class="progress-percentage">42%</div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 42%"></div>
-                    </div>
-                    <div class="progress-details">
-                        <span>10 of 24 lessons</span>
-                        <span>Recently started</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="quiz-container">
-                <div class="quiz-header">
-                    <h3 class="quiz-title">Quick Assessment</h3>
-                    <p class="quiz-progress">Question 1 of 5</p>
-                </div>
-                
-                <div class="question-card">
-                    <div class="question-text">
-                        What is the primary advantage of using machine learning algorithms over traditional programming approaches?
-                    </div>
-                    
-                    <div class="answer-option" onclick="selectAnswer(this)">
-                        <div class="option-radio"></div>
-                        <div class="option-text">They can learn from data without explicit programming</div>
-                    </div>
-                    
-                    <div class="answer-option" onclick="selectAnswer(this)">
-                        <div class="option-radio"></div>
-                        <div class="option-text">They execute faster than traditional algorithms</div>
-                    </div>
-                    
-                    <div class="answer-option" onclick="selectAnswer(this)">
-                        <div class="option-radio"></div>
-                        <div class="option-text">They require less computational resources</div>
-                    </div>
-                    
-                    <div class="answer-option" onclick="selectAnswer(this)">
-                        <div class="option-radio"></div>
-                        <div class="option-text">They are easier to debug and maintain</div>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary" onclick="nextQuestion()" style="margin-top: 1rem;">
-                    Next Question →
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Community Page -->
-    <div class="page" id="communityPage">
-        <div class="content-page">
-            <div class="content-header">
-                <div class="content-breadcrumb">
-                    <a href="#" class="breadcrumb-item" onclick="showPage('dashboard')">Dashboard</a>
-                    <span class="breadcrumb-separator">›</span>
-                    <span class="breadcrumb-item">Community</span>
-                </div>
-                <h1 class="content-title">Learning Community</h1>
-            </div>
-
-            <div class="content-grid">
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">💬</div>
-                        <h3 class="card-title">Discussion Forum</h3>
-                        <p class="card-description">Join discussions, ask questions, and share knowledge with fellow learners</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">2.4K+</div>
-                                <div class="card-stat-label">Members</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">Active</div>
-                                <div class="card-stat-label">24/7</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            Join Community
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">🎯</div>
-                        <h3 class="card-title">Study Groups</h3>
-                        <p class="card-description">Collaborative learning sessions and peer-to-peer support</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">45+</div>
-                                <div class="card-stat-label">Groups</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">Weekly</div>
-                                <div class="card-stat-label">Sessions</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            Find Groups
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">🏆</div>
-                        <h3 class="card-title">Leaderboard</h3>
-                        <p class="card-description">Track your progress and compete with other learners</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">#127</div>
-                                <div class="card-stat-label">Your Rank</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">8,450</div>
-                                <div class="card-stat-label">Points</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            View Rankings
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">📅</div>
-                        <h3 class="card-title">Events & Workshops</h3>
-                        <p class="card-description">Live webinars, workshops, and special learning events</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">12</div>
-                                <div class="card-stat-label">This Month</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">Live</div>
-                                <div class="card-stat-label">Available</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            View Events
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">💡</div>
-                        <h3 class="card-title">Project Showcase</h3>
-                        <p class="card-description">Share your projects and get feedback from the community</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">380+</div>
-                                <div class="card-stat-label">Projects</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">Featured</div>
-                                <div class="card-stat-label">Weekly</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            Share Project
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-card" onclick="openExternal('https://t.me/helpengivora')">
-                    <div class="card-header">
-                        <div class="card-icon">🎓</div>
-                        <h3 class="card-title">Mentor Connect</h3>
-                        <p class="card-description">Get guidance from experienced professionals and mentors</p>
-                        <div class="card-stats">
-                            <div class="card-stat">
-                                <div class="card-stat-value">150+</div>
-                                <div class="card-stat-label">Mentors</div>
-                            </div>
-                            <div class="card-stat">
-                                <div class="card-stat-value">1:1</div>
-                                <div class="card-stat-label">Sessions</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-status">
-                            <div class="status-indicator"></div>
-                            Find Mentor
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Components -->
-    <div class="modal-overlay" id="downloadModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Download File</h3>
-                <button class="modal-close" onclick="closeModal('downloadModal')">×</button>
-            </div>
-            <div id="downloadModalContent">
-                <p>Your download will begin shortly...</p>
-                <div style="margin: 2rem 0; text-align: center;">
-                    <div class="loading-spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-                </div>
-                <p style="color: var(--text-muted); font-size: 0.875rem; text-align: center;">
-                    If download doesn't start automatically, contact support.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Container -->
-    <div class="notification-container" id="notificationContainer"></div>
 
     <script>
-        // Application State
-        const appState = {
-            currentUser: null,
-            currentPage: 'loginPage',
-            verificationCode: '',
-            loginAttempts: 0,
-            maxAttempts: 5,
-            isLoggedIn: false
-        };
-
-        // Access Credentials
-        const ACCESS_CREDENTIALS = {
+        // Configuration
+        const ACCESS_KEYS = {
             user: 'EngiVora@private2025',
             admin: 'EngiVora@205082'
         };
 
-        // Verification Codes
         const VERIFICATION_CODES = [
-            'A7K9', 'M3P5', 'R8N2', 'T4X6', 'Q1W7',
-            'Z5V3', 'L9C1', 'F6B8', 'G2H4', 'J0K7'
+            '4829', '9305', '1574', '6043', '8710',
+            '2967', '7409', '5182', '3628', '8951'
         ];
 
-        // Initialize Application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            initializeParticles();
-            initializeEventListeners();
-            generateVerificationCode();
-        });
+        let currentCode = '';
+        let attemptCount = 0;
+        const maxAttempts = 5;
 
-        function initializeApp() {
-            // Check if user is already logged in
-            const savedUser = localStorage.getItem('engivora_user');
-            if (savedUser) {
-                appState.currentUser = JSON.parse(savedUser);
-                appState.isLoggedIn = true;
-                showPage('dashboard');
-                updateNavigation();
-            }
-            
-            // Initialize scroll behavior
-            initializeScrollBehavior();
-            
-            // Initialize responsive navigation
-            initializeResponsiveNav();
-        }
-
-        function initializeParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (8 + Math.random() * 4) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        function initializeEventListeners() {
-            // Filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    filterContent(this.dataset.filter);
-                });
-            });
-
-            // Search functionality
-            const searchInput = document.getElementById('materialSearch');
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    searchMaterials(this.value);
-                });
-            }
-
-            // Close modal on overlay click
-            document.querySelectorAll('.modal-overlay').forEach(overlay => {
-                overlay.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeModal(this.id);
-                    }
-                });
-            });
-
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-                        closeModal(modal.id);
-                    });
-                }
-            });
-        }
-
-        function initializeScrollBehavior() {
-            let lastScrollTop = 0;
-            const navbar = document.getElementById('navbar');
-            
-            window.addEventListener('scroll', function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > lastScrollTop && scrollTop > 100) {
-                    navbar.classList.add('hidden');
-                } else {
-                    navbar.classList.remove('hidden');
-                }
-                
-                lastScrollTop = scrollTop;
-            }, false);
-        }
-
-        function initializeResponsiveNav() {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navMenu = document.getElementById('navMenu');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    navMenu.classList.toggle('active');
-                });
-            }
-        }
-
-        // Authentication Functions
-        function generateVerificationCode() {
+        // Generate verification code
+        function generateCode() {
             const randomIndex = Math.floor(Math.random() * VERIFICATION_CODES.length);
-            appState.verificationCode = VERIFICATION_CODES[randomIndex];
-            document.getElementById('verificationCode').textContent = appState.verificationCode;
-            document.getElementById('verificationInput').value = '';
+            currentCode = VERIFICATION_CODES[randomIndex];
+            document.getElementById('verificationCode').textContent = currentCode;
+            document.getElementById('codeInput').value = '';
         }
 
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            if (appState.loginAttempts >= appState.maxAttempts) {
-                showAlert('Maximum login attempts exceeded. Please refresh the page.', 'error');
-                return;
-            }
-            
-            const accessKey = document.getElementById('accessKey').value.trim();
-            const verificationInput = document.getElementById('verificationInput').value.trim();
-            
-            // Show loading state
-            const spinner = document.getElementById('loginSpinner');
-            const buttonText = document.getElementById('loginButtonText');
-            spinner.style.display = 'inline-block';
-            buttonText.textContent = 'Authenticating...';
-            
-            // Simulate authentication delay
-            setTimeout(() => {
-                // Hide loading state
-                spinner.style.display = 'none';
-                buttonText.textContent = '🚀 Access Portal';
-                
-                // Validate verification code
-                if (verificationInput !== appState.verificationCode) {
-                    appState.loginAttempts++;
-                    showAlert('Invalid verification code. Please try again.', 'error');
-                    generateVerificationCode();
-                    return;
-                }
-                
-                // Validate access credentials
-                if (accessKey === ACCESS_CREDENTIALS.user) {
-                    loginUser('user', 'EngiVora User');
-                } else if (accessKey === ACCESS_CREDENTIALS.admin) {
-                    loginUser('admin', 'EngiVora Admin');
-                    // Redirect admin to external page
-                    setTimeout(() => {
-                        window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
-                    }, 1500);
-                } else {
-                    appState.loginAttempts++;
-                    showAlert('Invalid access credentials. Please check your key.', 'error');
-                    generateVerificationCode();
-                    clearForm();
-                    
-                    if (appState.loginAttempts >= appState.maxAttempts) {
-                        showAlert('Account temporarily locked. Please contact support.', 'error');
-                        disableLoginForm();
-                    }
-                }
-            }, 1500);
-        }
-
-        function loginUser(userType, userName) {
-            appState.currentUser = { type: userType, name: userName };
-            appState.isLoggedIn = true;
-            
-            // Save to localStorage
-            localStorage.setItem('engivora_user', JSON.stringify(appState.currentUser));
-            
-            showAlert('Login successful! Welcome to EngiVora Premium.', 'success');
+        // Show alerts
+        function showAlert(message, type = 'error') {
+            const alertElement = document.getElementById(type + 'Alert');
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
             
             setTimeout(() => {
-                showPage('dashboard');
-                updateNavigation();
-                showNotification('Welcome back!', `You have access to all premium features.`, 'success');
-            }, 2000);
-        }
-
-        function logout() {
-            appState.currentUser = null;
-            appState.isLoggedIn = false;
-            localStorage.removeItem('engivora_user');
-            
-            showPage('loginPage');
-            updateNavigation();
-            clearForm();
-            generateVerificationCode();
-            appState.loginAttempts = 0;
-            
-            showNotification('Logged out', 'You have been successfully logged out.', 'info');
-        }
-
-        function clearForm() {
-            document.getElementById('accessKey').value = '';
-            document.getElementById('verificationInput').value = '';
-        }
-
-        function disableLoginForm() {
-            document.getElementById('loginForm').style.opacity = '0.5';
-            document.getElementById('loginForm').style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                location.reload();
+                alertElement.style.display = 'none';
             }, 5000);
         }
 
-        // Page Navigation Functions
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show target page
-            const targetPage = document.getElementById(pageId + 'Page') || document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                appState.currentPage = pageId;
-            }
-            
-            // Update navigation
-            updateNavigation();
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Hide all alerts
+        function hideAlerts() {
+            document.getElementById('errorAlert').style.display = 'none';
+            document.getElementById('successAlert').style.display = 'none';
         }
 
-        function updateNavigation() {
-            const navbar = document.getElementById('navbar');
-            const navLinks = document.querySelectorAll('.nav-link');
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            if (appState.isLoggedIn) {
-                navbar.style.display = 'block';
-                
-                // Update active nav link
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.dataset.page === appState.currentPage) {
-                        link.classList.add('active');
-                    }
-                });
-                
-                // Update user avatar
-                const userAvatar = document.getElementById('userAvatar');
-                if (appState.currentUser) {
-                    userAvatar.textContent = appState.currentUser.name.split(' ').map(n => n[0]).join('');
-                }
-            } else {
-                navbar.style.display = 'none';
-            }
-        }
-
-        // Content Functions
-        function filterContent(filter) {
-            const fileCards = document.querySelectorAll('.file-card');
-            
-            fileCards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.3s ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function searchMaterials(query) {
-            const fileCards = document.querySelectorAll('.file-card');
-            const searchTerm = query.toLowerCase();
-            
-            fileCards.forEach(card => {
-                const fileName = card.querySelector('.file-name').textContent.toLowerCase();
-                
-                if (fileName.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.3s ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function downloadFile(filename) {
-            showModal('downloadModal');
-            
-            setTimeout(() => {
-                closeModal('downloadModal');
-                showNotification('Download Started', `${filename} download has begun.`, 'success');
-                
-                // Simulate file access via Telegram
-                setTimeout(() => {
-                    window.open('https://t.me/helpengivora', '_blank');
-                }, 1000);
-            }, 3000);
-        }
-
-        function playVideo(title, description, duration, views, date) {
-            const videoPlayer = document.getElementById('videoPlayer');
-            const videoInfo = document.getElementById('videoInfo');
-            const videoTitle = document.getElementById('videoTitle');
-            const videoDescription = document.getElementById('videoDescription');
-            const videoDuration = document.getElementById('videoDuration');
-            const videoViews = document.getElementById('videoViews');
-            const videoDate = document.getElementById('videoDate');
-            
-            videoPlayer.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--text-secondary);">
-                    <div style="font-size: 3rem;">🎬</div>
-                    <div>Playing: ${title}</div>
-                    <div style="font-size: 0.875rem; opacity: 0.7;">Video content available on Telegram channel</div>
-                </div>
-            `;
-            
-            videoTitle.textContent = title;
-            videoDescription.textContent = description;
-            videoDuration.textContent = duration;
-            videoViews.textContent = views;
-            videoDate.textContent = date;
-            
-            videoInfo.style.display = 'block';
-            
-            // Simulate video access
-            setTimeout(() => {
-                showNotification('Video Loading', 'Redirecting to video content...', 'info');
-                setTimeout(() => {
-                    window.open('https://t.me/helpengivora', '_blank');
-                }, 1500);
-            }, 2000);
-        }
-
-        // Quiz Functions
-        function selectAnswer(element) {
-            // Remove selection from all options
-            document.querySelectorAll('.answer-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selection to clicked option
-            element.classList.add('selected');
-        }
-
-        function nextQuestion() {
-            const selected = document.querySelector('.answer-option.selected');
-            
-            if (!selected) {
-                showAlert('Please select an answer before continuing.', 'warning');
+            if (attemptCount >= maxAttempts) {
+                showAlert('Too many failed attempts. Please refresh the page.', 'error');
                 return;
             }
+
+            const accessKey = document.getElementById('accessKey').value.trim();
+            const codeInput = document.getElementById('codeInput').value.trim();
+
+            hideAlerts();
+
+            // Validate verification code
+            if (codeInput !== currentCode) {
+                attemptCount++;
+                showAlert('Incorrect verification code. Please try again.', 'error');
+                generateCode();
+                return;
+            }
+
+            // Validate access key
+            if (accessKey === ACCESS_KEYS.user) {
+                showAlert('Login successful! Loading your dashboard...', 'success');
+                setTimeout(() => {
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('dashboard').classList.add('active');
+                }, 2000);
+            } else if (accessKey === ACCESS_KEYS.admin) {
+                showAlert('Admin access granted! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
+                }, 2000);
+            } else {
+                attemptCount++;
+                showAlert('Invalid access key. Please check your credentials.', 'error');
+                generateCode();
+                
+                if (attemptCount >= maxAttempts) {
+                    showAlert('Maximum attempts exceeded. Please contact support.', 'error');
+                }
+            }
+        });
+
+        // Open content sections
+        function openContent(section) {
+            const messages = {
+                'notes': 'Loading study notes...',
+                'lectures': 'Opening video lectures...',
+                'resources': 'Accessing learning resources...',
+                'practice': 'Loading practice tests...',
+                'projects': 'Opening projects section...',
+                'community': 'Connecting to community...'
+            };
             
-            showNotification('Answer Recorded', 'Moving to next question...', 'success');
+            showAlert(messages[section] || 'Loading content...', 'success');
             
-            // Simulate quiz progression
             setTimeout(() => {
-                showNotification('Quiz Complete', 'Great job! Check your progress page for results.', 'success');
+                window.open('https://t.me/helpengivora', '_blank');
             }, 1500);
         }
 
-        // External Link Functions
-        function openExternal(url) {
-            showNotification('Opening Link', 'Redirecting to external resource...', 'info');
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 1000);
-        }
-
-        // Modal Functions
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Alert Functions
-        function showAlert(message, type = 'info') {
-            const alertId = type + 'Alert';
-            const alertElement = document.getElementById(alertId);
+        // Initialize
+        window.addEventListener('load', function() {
+            generateCode();
             
-            if (alertElement) {
-                alertElement.textContent = message;
-                alertElement.style.display = 'block';
-                
-                setTimeout(() => {
-                    alertElement.style.display = 'none';
-                }, 5000);
-            }
-        }
-
-        // Notification System
-        function showNotification(title, message, type = 'info') {
-            const container = document.getElementById('notificationContainer');
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            
-            const icons = {
-                success: '✅',
-                error: '❌',
-                warning: '⚠️',
-                info: 'ℹ️'
-            };
-            
-            notification.innerHTML = `
-                <div class="notification-header">
-                    <div class="notification-icon">${icons[type] || 'ℹ️'}</div>
-                    <div class="notification-title">${title}</div>
-                </div>
-                <div class="notification-message">${message}</div>
-            `;
-            
-            container.appendChild(notification);
-            
-            // Show notification
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            // Remove notification
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    container.removeChild(notification);
-                }, 300);
-            }, 4000);
-        }
-
-        // Mobile Menu Functions
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('mobile-active');
-        }
-
-        // Utility Functions
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        function formatDate(date) {
-            return new Date(date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-        }
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Performance Monitoring
-        function trackPageView(page) {
-            // Analytics tracking would go here
-            console.log(`Page viewed: ${page}`);
-        }
-
-        function trackUserAction(action, details = {}) {
-            // Action tracking would go here
-            console.log(`User action: ${action}`, details);
-        }
-
-        // Error Handling
-        window.addEventListener('error', function(e) {
-            console.error('Application error:', e.error);
-            showNotification('System Error', 'An unexpected error occurred. Please refresh the page.', 'error');
+            // Auto-refresh code every 5 minutes
+            setInterval(generateCode, 300000);
         });
 
-        // Prevent right-click and common shortcuts (basic protection)
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.key === 'u') ||
-                (e.ctrlKey && e.key === 's')) {
-                e.preventDefault();
-            }
-        });
-
-        // Auto-refresh verification code
-        setInterval(generateVerificationCode, 300000); // 5 minutes
-
-        // Session timeout warning
-        let sessionTimeout;
-        function resetSessionTimeout() {
-            clearTimeout(sessionTimeout);
-            sessionTimeout = setTimeout(() => {
-                if (appState.isLoggedIn) {
-                    showNotification('Session Warning', 'Your session will expire in 5 minutes due to inactivity.', 'warning');
-                    
-                    setTimeout(() => {
-                        if (appState.isLoggedIn) {
-                            logout();
-                            showAlert('Session expired due to inactivity. Please log in again.', 'warning');
-                        }
-                    }, 300000); // 5 minutes warning
-                }
-            }, 3600000); // 1 hour of inactivity
+        // Prevent form resubmission on page refresh
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
         }
-
-        // Track user activity for session management
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetSessionTimeout, { passive: true });
-        });
-
-        // Initialize session timeout
-        resetSessionTimeout();
-
-        // Progressive Web App features
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Service worker registration would go here for offline support
-            });
-        }
-
-        // Add to mobile homescreen prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            deferredPrompt = e;
-            // Show install button if needed
-        });
-
-        // Handle online/offline status
-        window.addEventListener('online', () => {
-            showNotification('Connection Restored', 'You are back online!', 'success');
-        });
-
-        window.addEventListener('offline', () => {
-            showNotification('Connection Lost', 'You are currently offline. Some features may not work.', 'warning');
-        });
-
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', () => {
-            // Cleanup tasks if needed
-            clearTimeout(sessionTimeout);
-        });
-
-        // Dark mode toggle (future enhancement)
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark-theme');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light');
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.classList.add('dark-theme');
-        }
-
-        // Add keyboard navigation support
-        document.addEventListener('keydown', function(e) {
-            if (e.altKey && e.key >= '1' && e.key <= '5') {
-                e.preventDefault();
-                const pages = ['dashboard', 'courses', 'resources', 'progress', 'community'];
-                const pageIndex = parseInt(e.key) - 1;
-                if (pages[pageIndex] && appState.isLoggedIn) {
-                    showPage(pages[pageIndex]);
-                }
-            }
-        });
-
-        // Add loading states for better UX
-        function showLoadingState(element) {
-            element.style.opacity = '0.6';
-            element.style.pointerEvents = 'none';
-            const spinner = document.createElement('div');
-            spinner.className = 'loading-spinner';
-            spinner.style.position = 'absolute';
-            spinner.style.top = '50%';
-            spinner.style.left = '50%';
-            spinner.style.transform = 'translate(-50%, -50%)';
-            element.style.position = 'relative';
-            element.appendChild(spinner);
-        }
-
-        function hideLoadingState(element) {
-            element.style.opacity = '1';
-            element.style.pointerEvents = 'auto';
-            const spinner = element.querySelector('.loading-spinner');
-            if (spinner) {
-                element.removeChild(spinner);
-            }
-        }
-
-        // Initialize tooltips
-        function initializeTooltips() {
-            const tooltipElements = document.querySelectorAll('[data-tooltip]');
-            tooltipElements.forEach(element => {
-                element.addEventListener('mouseenter', showTooltip);
-                element.addEventListener('mouseleave', hideTooltip);
-            });
-        }
-
-        function showTooltip(e) {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = e.target.dataset.tooltip;
-            document.body.appendChild(tooltip);
-            
-            const rect = e.target.getBoundingClientRect();
-            tooltip.style.left = rect.left + (rect.width / 2) + 'px';
-            tooltip.style.top = rect.top - 40 + 'px';
-            tooltip.style.transform = 'translateX(-50%)';
-        }
-
-        function hideTooltip() {
-            const tooltip = document.querySelector('.tooltip');
-            if (tooltip) {
-                document.body.removeChild(tooltip);
-            }
-        }
-
-        // Add smooth scroll behavior for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.content-card, .stat-card, .file-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Final initialization
-        console.log('🚀 EngiVora Premium Portal Initialized Successfully!');
-        console.log('📚 Access your premium learning content');
-        console.log('🎓 Built with modern web technologies');
     </script>
-
-    <!-- Additional CSS for animations and effects -->
-    <style>
-        /* Animation classes */
-        .animate-in {
-            animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes slideInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile navigation styles */
-        @media (max-width: 1024px) {
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--glass);
-                backdrop-filter: blur(20px);
-                border-bottom: 1px solid var(--glass-border);
-                flex-direction: column;
-                padding: 1rem 2rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-            }
-            
-            .nav-menu.mobile-active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        /* Tooltip styles */
-        .tooltip {
-            position: absolute;
-            background: var(--card);
-            color: var(--text-primary);
-            padding: 0.5rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.875rem;
-            z-index: 10000;
-            pointer-events: none;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Enhanced hover effects */
-        .content-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--primary);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--primary);
-        }
-
-        /* Print styles */
-        @media print {
-            .navbar, .btn, .modal-overlay, .notification-container {
-                display: none !important;
-            }
-            
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            
-            .page {
-                display: block !important;
-                opacity: 1 !important;
-            }
-        }
-
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --text-primary: #ffffff;
-                --text-secondary: #cccccc;
-                --border: #666666;
-                --background: #000000;
-                --surface: #111111;
-            }
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus indicators for accessibility */
-        .btn:focus,
-        .form-input:focus,
-        .nav-link:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
-        /* Loading skeleton animations */
-        .skeleton-text {
-            height: 1rem;
-            background: var(--skeleton);
-            border-radius: var(--radius-sm);
-            margin-bottom: 0.5rem;
-        }
-
-        .skeleton-text.short {
-            width: 60%;
-        }
-
-        .skeleton-text.medium {
-            width: 80%;
-        }
-
-        .skeleton-text.long {
-            width: 100%;
-        }
-    </style>
 </body>
 </html>
