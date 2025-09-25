@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Access Portal</title>
+    <title>EngiVora - Premium Learning Portal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --primary-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%);
-            --accent-gradient: linear-gradient(135deg, #00f5ff 0%, #0099ff 50%, #0066cc 100%);
-            --danger-gradient: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
-            --success-gradient: linear-gradient(135deg, #06ffa5 0%, #00d4aa 100%);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(0, 245, 255, 0.15);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a9c0;
-            --text-accent: #00f5ff;
-            --shadow-glow: rgba(0, 245, 255, 0.2);
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #059669;
+            --error: #dc2626;
+            --warning: #d97706;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #334155;
+            --border-light: #475569;
+            --glass: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(148, 163, 184, 0.1);
         }
 
         * {
@@ -28,446 +33,79 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--primary-bg);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
+            color: var(--text-primary);
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Advanced Background Effects */
-        .cyber-grid {
+        /* Background Animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(220, 38, 38, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Grid Pattern */
+        .grid-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            z-index: -2;
+                linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -1;
+            animation: gridMove 30s linear infinite;
         }
 
         @keyframes gridMove {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        .energy-field {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(131, 56, 236, 0.1) 0%, transparent 50%);
-            animation: energyPulse 8s ease-in-out infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes energyPulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        /* Floating Elements */
-        .cyber-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .cyber-particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--text-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--text-accent);
-            animation: particleFloat 12s infinite linear;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% {
-                transform: translateY(-10vh) translateX(200px) rotate(360deg);
-                opacity: 0;
-            }
+            100% { transform: translate(60px, 60px); }
         }
 
         /* Main Container */
-        .portal-container {
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            position: relative;
+            padding: 2rem;
         }
 
-        /* Security Portal */
-        .security-portal {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--glass-border);
+        .portal {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 50px 40px;
+            padding: 3rem;
             width: 100%;
-            max-width: 480px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: portalActivation 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 440px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(148, 163, 184, 0.05);
+            animation: portalEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes portalActivation {
+        @keyframes portalEntry {
             0% {
                 opacity: 0;
-                transform: scale(0.7) rotateY(45deg);
-                filter: blur(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotateY(0deg);
-                filter: blur(0);
-            }
-        }
-
-        .security-portal::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: var(--accent-gradient);
-            border-radius: 24px;
-            z-index: -1;
-            animation: borderGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .portal-header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .security-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--accent-gradient);
-            color: #000;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 30px var(--shadow-glow);
-            animation: badgePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .portal-title {
-            font-size: 38px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--text-accent), #ffffff, var(--text-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
-            text-shadow: 0 0 30px var(--shadow-glow);
-        }
-
-        .portal-subtitle {
-            color: var(--text-secondary);
-            font-size: 16px;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        /* Form Elements */
-        .access-form {
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--text-accent);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .secure-input {
-            width: 100%;
-            padding: 18px 24px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid transparent;
-            border-radius: 15px;
-            color: var(--text-primary);
-            font-size: 16px;
-            font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(10px);
-        }
-
-        .secure-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-
-        .secure-input:focus {
-            outline: none;
-            border-color: var(--text-accent);
-            background: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 0 0 4px rgba(0, 245, 255, 0.1),
-                        0 0 30px rgba(0, 245, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced Verification System */
-        .verification-system {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .verification-system::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
-            animation: scanLine 4s infinite;
-        }
-
-        @keyframes scanLine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .verification-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .verification-label {
-            color: var(--text-accent);
-            font-size: 13px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .refresh-captcha {
-            background: var(--accent-gradient);
-            border: none;
-            color: #000;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .refresh-captcha:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px var(--shadow-glow);
-        }
-
-        .challenge-display {
-            background: var(--accent-gradient);
-            color: #000;
-            padding: 20px;
-            border-radius: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 4px;
-            text-align: center;
-            margin-bottom: 15px;
-            position: relative;
-            box-shadow: 0 10px 30px var(--shadow-glow);
-            animation: challengeGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes challengeGlow {
-            0% { box-shadow: 0 10px 30px var(--shadow-glow); }
-            100% { box-shadow: 0 15px 40px rgba(0, 245, 255, 0.4); }
-        }
-
-        /* Access Button */
-        .access-button {
-            width: 100%;
-            padding: 20px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 15px;
-            color: #000;
-            font-size: 18px;
-            font-weight: 800;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px var(--shadow-glow);
-        }
-
-        .access-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .access-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.5);
-        }
-
-        .access-button:hover::before {
-            left: 100%;
-        }
-
-        .access-button:active {
-            transform: translateY(-2px);
-        }
-
-        /* Status Messages */
-        .status-alert {
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            display: none;
-            animation: alertSlide 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes alertSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .status-error {
-            background: rgba(255, 0, 110, 0.1);
-            border: 2px solid rgba(255, 0, 110, 0.3);
-            color: #ff006e;
-        }
-
-        .status-success {
-            background: rgba(6, 255, 165, 0.1);
-            border: 2px solid rgba(6, 255, 165, 0.3);
-            color: #06ffa5;
-        }
-
-        /* Support Section */
-        .support-zone {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .support-text {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .contact-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--glass-border);
-            color: var(--text-secondary);
-            padding: 12px 24px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Dashboard */
-        .premium-dashboard {
-            display: none;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .premium-dashboard.active {
-            display: block;
-            animation: dashboardReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        @keyframes dashboardReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(50px) scale(0.95);
+                transform: translateY(20px) scale(0.95);
             }
             100% {
                 opacity: 1;
@@ -475,574 +113,591 @@
             }
         }
 
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Form Styles */
+        .form {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .label {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background: var(--surface-light);
+        }
+
+        .input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Verification */
+        .verification {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .verification-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .refresh-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        }
+
+        .refresh-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .challenge {
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-error {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            color: #6ee7b7;
+        }
+
+        /* Support */
+        .support {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .support-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .support-btn:hover {
+            background: var(--surface-light);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .dashboard.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         .dashboard-container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .dashboard-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 3rem;
         }
 
-        .welcome-indicator {
+        .welcome-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: var(--success-gradient);
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(6, 255, 165, 0.3);
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--success), #047857);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
         .dashboard-title {
-            font-size: 52px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--text-accent), #ffffff, #06ffa5);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
         }
 
         .dashboard-subtitle {
             color: var(--text-secondary);
-            font-size: 20px;
-            font-weight: 500;
+            font-size: 1.25rem;
         }
 
         /* Content Grid */
-        .content-matrix {
+        .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
 
-        .content-module {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px);
-            border: 2px solid var(--glass-border);
+        .content-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 35px;
+            padding: 2rem;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .content-module::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
         }
 
-        .content-module:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
-                        0 0 50px var(--shadow-glow);
-            border-color: var(--text-accent);
-        }
-
-        .content-module:hover::before {
-            opacity: 1;
-        }
-
-        .module-icon {
-            font-size: 40px;
-            margin-bottom: 25px;
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             display: block;
-            filter: drop-shadow(0 0 10px var(--shadow-glow));
         }
 
-        .module-title {
-            font-size: 22px;
-            font-weight: 700;
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 15px;
-            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.75rem;
         }
 
-        .module-description {
+        .card-description {
             color: var(--text-secondary);
-            font-size: 15px;
+            font-size: 0.875rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
-        .module-status {
+        .card-status {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: var(--accent-gradient);
-            color: #000;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
+            gap: 0.25rem;
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .security-portal {
-                padding: 40px 30px;
-                margin: 10px;
+            .container {
+                padding: 1rem;
             }
             
-            .portal-title {
-                font-size: 32px;
+            .portal {
+                padding: 2rem;
+            }
+            
+            .title {
+                font-size: 2rem;
             }
             
             .dashboard-title {
-                font-size: 40px;
+                font-size: 2.5rem;
             }
             
-            .content-matrix {
+            .content-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 1rem;
             }
-        }
-
-        /* Enhanced Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #00d4ff, #0099ff);
         }
     </style>
 </head>
 <body>
-    <!-- Enhanced Background Effects -->
-    <div class="cyber-grid"></div>
-    <div class="energy-field"></div>
-    <div class="cyber-particles" id="cyberParticles"></div>
+    <div class="background"></div>
+    <div class="grid-pattern"></div>
     
-    <!-- Main Portal -->
-    <div class="portal-container" id="portalContainer">
-        <div class="security-portal">
-            <div class="portal-header">
-                <div class="security-badge">
-                    🔒 QUANTUM SECURE
+    <!-- Login Portal -->
+    <div class="container" id="loginContainer">
+        <div class="portal">
+            <div class="header">
+                <div class="brand">
+                    🚀 EngiVora Premium
                 </div>
-                <h1 class="portal-title">PRIVATE VAULT</h1>
-                <p class="portal-subtitle">Ultra-Secure Content Access</p>
+                <h1 class="title">Welcome Back</h1>
+                <p class="subtitle">Access your premium learning content</p>
             </div>
 
-            <!-- Status Messages -->
-            <div class="status-alert status-error" id="errorAlert"></div>
-            <div class="status-alert status-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
 
-            <!-- Access Form -->
-            <form class="access-form" id="securityForm" onsubmit="return validateAccess(event)">
+            <form class="form" id="loginForm">
                 <div class="form-group">
-                    <label class="form-label">🔑 Access Key</label>
-                    <input type="password" id="accessKey" class="secure-input" 
-                           placeholder="Enter your secure access key" 
-                           autocomplete="off" spellcheck="false">
+                    <label class="label">Access Key</label>
+                    <input 
+                        type="password" 
+                        id="accessKey" 
+                        class="input" 
+                        placeholder="Enter your access key"
+                        required
+                    >
                 </div>
 
-                <div class="verification-system">
+                <div class="verification">
                     <div class="verification-header">
-                        <span class="verification-label">🛡️ Quantum Verification</span>
-                        <button type="button" class="refresh-captcha" onclick="generateNewChallenge()">
-                            ↻ REFRESH
+                        <span class="verification-label">Verification Code</span>
+                        <button type="button" class="refresh-btn" onclick="generateCode()">
+                            ↻ Refresh
                         </button>
                     </div>
-                    <div class="challenge-display" id="quantumChallenge"></div>
-                    <input type="text" id="challengeResponse" class="secure-input" 
-                           placeholder="Enter quantum code exactly as shown" 
-                           autocomplete="off" spellcheck="false">
+                    <div class="challenge" id="verificationCode"></div>
+                    <input 
+                        type="text" 
+                        id="codeInput" 
+                        class="input" 
+                        placeholder="Enter the code above"
+                        required
+                    >
                 </div>
 
-                <button type="submit" class="access-button">
-                    ⚡ INITIALIZE ACCESS SEQUENCE
+                <button type="submit" class="submit-btn">
+                    Access Portal
                 </button>
             </form>
 
-            <!-- Support Section -->
-            <div class="support-zone">
+            <div class="support">
                 <p class="support-text">Need access credentials?</p>
-                <button class="contact-button" onclick="requestCredentials()">
-                    📱 Contact Support
-                </button>
+                <a href="https://t.me/helpengivora" class="support-btn" target="_blank">
+                    📞 Contact Support
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Premium Dashboard -->
-    <div class="premium-dashboard" id="premiumDashboard">
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
         <div class="dashboard-container">
             <div class="dashboard-header">
-                <div class="welcome-indicator">
-                    ✅ ACCESS GRANTED
+                <div class="welcome-badge">
+                    ✅ Access Granted
                 </div>
-                <h1 class="dashboard-title">PREMIUM VAULT</h1>
-                <p class="dashboard-subtitle">Your exclusive content ecosystem awaits</p>
+                <h1 class="dashboard-title">Learning Portal</h1>
+                <p class="dashboard-subtitle">Your premium educational resources</p>
             </div>
 
-            <div class="content-matrix">
-                <div class="content-module" onclick="accessContent('premium-notes')">
-                    <span class="module-icon">📚</span>
-                    <h3 class="module-title">PREMIUM_NOTES</h3>
-                    <p class="module-description">Advanced study materials, exclusive notes, and comprehensive documentation</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+            <div class="content-grid">
+                <div class="content-card" onclick="openContent('notes')">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Study Notes</h3>
+                    <p class="card-description">Comprehensive study materials and detailed notes</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-module" onclick="accessContent('elite-lectures')">
-                    <span class="module-icon">🎓</span>
-                    <h3 class="module-title">ELITE_LECTURES</h3>
-                    <p class="module-description">High-value lecture series, masterclasses, and expert presentations</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+                <div class="content-card" onclick="openContent('lectures')">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">Video Lectures</h3>
+                    <p class="card-description">Expert-led lectures and educational content</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-module" onclick="accessContent('private-notes')">
-                    <span class="module-icon">🔐</span>
-                    <h3 class="module-title">PRIVATE_NOTES</h3>
-                    <p class="module-description">Confidential materials, personal insights, and restricted content</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+                <div class="content-card" onclick="openContent('resources')">
+                    <span class="card-icon">📖</span>
+                    <h3 class="card-title">Learning Resources</h3>
+                    <p class="card-description">Additional materials and reference documents</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-module" onclick="accessContent('private-lectures')">
-                    <span class="module-icon">🎯</span>
-                    <h3 class="module-title">PRIVATE_LECTURES</h3>
-                    <p class="module-description">Exclusive lecture content, insider knowledge, and premium sessions</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+                <div class="content-card" onclick="openContent('practice')">
+                    <span class="card-icon">✏️</span>
+                    <h3 class="card-title">Practice Tests</h3>
+                    <p class="card-description">Interactive quizzes and practice examinations</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-module" onclick="accessContent('exclusive-content')">
-                    <span class="module-icon">💎</span>
-                    <h3 class="module-title">EXCLUSIVE_CONTENT</h3>
-                    <p class="module-description">VIP-only materials, rare resources, and premium collections</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+                <div class="content-card" onclick="openContent('projects')">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">Projects</h3>
+                    <p class="card-description">Hands-on projects and practical assignments</p>
+                    <span class="card-status">• Available</span>
                 </div>
 
-                <div class="content-module" onclick="accessContent('special-archives')">
-                    <span class="module-icon">🗄️</span>
-                    <h3 class="module-title">SPECIAL_ARCHIVES</h3>
-                    <p class="module-description">Curated archives, historical content, and special collections</p>
-                    <span class="module-status">🟢 ACTIVE</span>
+                <div class="content-card" onclick="openContent('community')">
+                    <span class="card-icon">👥</span>
+                    <h3 class="card-title">Community</h3>
+                    <p class="card-description">Connect with peers and join discussions</p>
+                    <span class="card-status">• Available</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Ultimate Security System
-        (function() {
-            'use strict';
-            
-            // Advanced anti-debugging protection
-            const securityMonitor = {
-                devToolsOpen: false,
-                threshold: 160,
-                checkInterval: 250
-            };
-
-            function detectDevTools() {
-                if (window.outerHeight - window.innerHeight > securityMonitor.threshold || 
-                    window.outerWidth - window.innerWidth > securityMonitor.threshold) {
-                    if (!securityMonitor.devToolsOpen) {
-                        securityMonitor.devToolsOpen = true;
-                        document.documentElement.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;color:#ff006e;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:24px;">SECURITY BREACH DETECTED</div>';
-                    }
-                }
-            }
-
-            setInterval(detectDevTools, securityMonitor.checkInterval);
-
-            // Comprehensive keyboard protection
-            const forbiddenKeys = ['F12', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11'];
-            const forbiddenCombos = [
-                {ctrl: true, key: 'u'}, {ctrl: true, key: 'i'}, {ctrl: true, key: 's'},
-                {ctrl: true, key: 'a'}, {ctrl: true, key: 'c'}, {ctrl: true, key: 'v'},
-                {ctrl: true, shift: true, key: 'i'}, {ctrl: true, shift: true, key: 'c'},
-                {ctrl: true, shift: true, key: 'j'}, {ctrl: true, shift: true, key: 'k'},
-                {meta: true, key: 'u'}, {meta: true, key: 'i'}, {meta: true, key: 's'}
-            ];
-
-            document.addEventListener('keydown', function(e) {
-                if (forbiddenKeys.includes(e.key)) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-
-                for (const combo of forbiddenCombos) {
-                    if ((combo.ctrl && e.ctrlKey) || (combo.meta && e.metaKey)) {
-                        if (combo.shift && e.shiftKey && combo.key === e.key.toLowerCase()) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            return false;
-                        } else if (!combo.shift && combo.key === e.key.toLowerCase()) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            return false;
-                        }
-                    }
-                }
-            });
-
-            // Disable context menu and text selection
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            document.addEventListener('selectstart', e => e.preventDefault());
-            document.addEventListener('dragstart', e => e.preventDefault());
-            
-            // Console protection
-            Object.defineProperty(window, 'console', {
-                value: new Proxy({}, {
-                    get: () => () => {}
-                }),
-                writable: false,
-                configurable: false
-            });
-
-            // Memory protection
-            setInterval(() => {
-                if (performance.memory && performance.memory.usedJSHeapSize > 75000000) {
-                    location.reload();
-                }
-            }, 30000);
-        })();
-
-        // Quantum verification codes
-        const quantumCodes = [
-            '48291736', '93058172', '15749283', '60431825', '87105942',
-            '29673518', '74096283', '51823749', '36280591', '89512067'
-        ];
-
-        // Access credentials (encoded for security)
-        const accessCredentials = {
+        // Configuration
+        const ACCESS_KEYS = {
             user: 'EngiVora@private2025',
             admin: 'EngiVora@205082'
         };
 
-        let currentQuantumCode = '';
-        let securityAttempts = 0;
-        const maxAttempts = 3;
+        const VERIFICATION_CODES = [
+            '4829', '9305', '1574', '6043', '8710',
+            '2967', '7409', '5182', '3628', '8951'
+        ];
 
-        // Initialize cyber particles
-        function initializeCyberParticles() {
-            const particlesContainer = document.getElementById('cyberParticles');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'cyber-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 12 + 's';
-                particle.style.animationDuration = (12 + Math.random() * 8) + 's';
-                particlesContainer.appendChild(particle);
-            }
+        let currentCode = '';
+        let attemptCount = 0;
+        const maxAttempts = 5;
+
+        // Generate verification code
+        function generateCode() {
+            const randomIndex = Math.floor(Math.random() * VERIFICATION_CODES.length);
+            currentCode = VERIFICATION_CODES[randomIndex];
+            document.getElementById('verificationCode').textContent = currentCode;
+            document.getElementById('codeInput').value = '';
         }
 
-        // Generate quantum challenge
-        function generateNewChallenge() {
-            const randomIndex = Math.floor(Math.random() * quantumCodes.length);
-            currentQuantumCode = quantumCodes[randomIndex];
-            document.getElementById('quantumChallenge').textContent = currentQuantumCode;
+        // Show alerts
+        function showAlert(message, type = 'error') {
+            const alertElement = document.getElementById(type + 'Alert');
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
             
-            // Clear challenge input
-            document.getElementById('challengeResponse').value = '';
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
         }
 
-        // Clear all form data
-        function clearSecurityForm() {
-            document.getElementById('accessKey').value = '';
-            document.getElementById('challengeResponse').value = '';
-            hideAlerts();
-        }
-
-        // Show/hide alert messages
-        function showError(message) {
-            const errorAlert = document.getElementById('errorAlert');
-            errorAlert.textContent = '🚨 ' + message;
-            errorAlert.style.display = 'block';
-            setTimeout(() => errorAlert.style.display = 'none', 6000);
-        }
-
-        function showSuccess(message) {
-            const successAlert = document.getElementById('successAlert');
-            successAlert.textContent = '✅ ' + message;
-            successAlert.style.display = 'block';
-            setTimeout(() => successAlert.style.display = 'none', 4000);
-        }
-
+        // Hide all alerts
         function hideAlerts() {
             document.getElementById('errorAlert').style.display = 'none';
             document.getElementById('successAlert').style.display = 'none';
         }
 
-        // Validate access attempt
-        function validateAccess(event) {
-            event.preventDefault();
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
+            if (attemptCount >= maxAttempts) {
+                showAlert('Too many failed attempts. Please refresh the page.', 'error');
+                return;
+            }
+
             const accessKey = document.getElementById('accessKey').value.trim();
-            const challengeResponse = document.getElementById('challengeResponse').value.trim();
-            
-            // Check security attempts
-            if (securityAttempts >= maxAttempts) {
-                showError('Maximum security attempts exceeded. System locked.');
-                setTimeout(() => location.reload(), 3000);
-                return false;
+            const codeInput = document.getElementById('codeInput').value.trim();
+
+            hideAlerts();
+
+            // Validate verification code
+            if (codeInput !== currentCode) {
+                attemptCount++;
+                showAlert('Incorrect verification code. Please try again.', 'error');
+                generateCode();
+                return;
             }
-            
-            // Validate quantum challenge
-            if (challengeResponse !== currentQuantumCode) {
-                securityAttempts++;
-                showError('Invalid quantum verification code. Please check case sensitivity.');
-                generateNewChallenge();
-                document.getElementById('challengeResponse').value = '';
-                return false;
-            }
-            
-            // Validate access credentials
-            if (accessKey === accessCredentials.user) {
-                // User access - show dashboard
-                showSuccess('Quantum authentication successful! Initializing premium vault...');
+
+            // Validate access key
+            if (accessKey === ACCESS_KEYS.user) {
+                showAlert('Login successful! Loading your dashboard...', 'success');
                 setTimeout(() => {
-                    document.getElementById('portalContainer').style.display = 'none';
-                    document.getElementById('premiumDashboard').classList.add('active');
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('dashboard').classList.add('active');
                 }, 2000);
-                return true;
-            } else if (accessKey === accessCredentials.admin) {
-                // Admin access - redirect to external page
-                showSuccess('Admin quantum authentication successful! Redirecting to control panel...');
+            } else if (accessKey === ACCESS_KEYS.admin) {
+                showAlert('Admin access granted! Redirecting...', 'success');
                 setTimeout(() => {
                     window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
                 }, 2000);
-                return true;
             } else {
-                // Invalid access key
-                securityAttempts++;
-                showError('Access denied. Invalid security credentials.');
-                generateNewChallenge();
-                clearSecurityForm();
+                attemptCount++;
+                showAlert('Invalid access key. Please check your credentials.', 'error');
+                generateCode();
                 
-                if (securityAttempts >= maxAttempts) {
-                    showError('Security lockout initiated. System will reset in 5 seconds.');
-                    setTimeout(() => location.reload(), 5000);
+                if (attemptCount >= maxAttempts) {
+                    showAlert('Maximum attempts exceeded. Please contact support.', 'error');
                 }
-                return false;
             }
-        }
+        });
 
-        // Request credentials via Telegram
-        function requestCredentials() {
-            const telegramUrl = 'https://t.me/helpengivora';
-            window.open(telegramUrl, '_blank');
-        }
-
-        // Access content sections (all redirect to Telegram for demo)
-        function accessContent(section) {
-            const sectionMessages = {
-                'premium-notes': '📚 Accessing Premium Notes Module...',
-                'elite-lectures': '🎓 Loading Elite Lectures Database...',
-                'private-notes': '🔐 Decrypting Private Notes Vault...',
-                'private-lectures': '🎯 Initializing Private Lectures System...',
-                'exclusive-content': '💎 Unlocking Exclusive Content Library...',
-                'special-archives': '🗄️ Opening Special Archives Portal...'
+        // Open content sections
+        function openContent(section) {
+            const messages = {
+                'notes': 'Loading study notes...',
+                'lectures': 'Opening video lectures...',
+                'resources': 'Accessing learning resources...',
+                'practice': 'Loading practice tests...',
+                'projects': 'Opening projects section...',
+                'community': 'Connecting to community...'
             };
             
-            showSuccess(sectionMessages[section] || 'Loading content module...');
+            showAlert(messages[section] || 'Loading content...', 'success');
             
-            // Demo redirect to Telegram (replace with actual content URLs)
             setTimeout(() => {
                 window.open('https://t.me/helpengivora', '_blank');
             }, 1500);
         }
 
-        // Anti-screenshot protection
-        document.addEventListener('keyup', function(e) {
-            if (e.key === 'PrintScreen') {
-                navigator.clipboard.writeText('');
-                showError('Screenshot capture blocked by quantum security.');
-            }
-        });
-
-        // Advanced tamper detection
-        let originalScriptCount = document.querySelectorAll('script').length;
-        setInterval(() => {
-            if (document.querySelectorAll('script').length !== originalScriptCount) {
-                document.documentElement.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;color:#ff006e;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:20px;">QUANTUM SECURITY BREACH DETECTED</div>';
-            }
-        }, 1500);
-
-        // Mouse movement detection for bot prevention
-        let mouseInteractions = 0;
-        let keyboardInteractions = 0;
-
-        document.addEventListener('mousemove', () => mouseInteractions++);
-        document.addEventListener('keydown', () => keyboardInteractions++);
-        document.addEventListener('click', () => mouseInteractions++);
-
-        setTimeout(() => {
-            if (mouseInteractions < 3 && keyboardInteractions < 2) {
-                document.documentElement.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;color:#ff006e;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:18px;">AUTOMATED ACCESS DETECTED - ACCESS DENIED</div>';
-            }
-        }, 15000);
-
-        // Initialize application
+        // Initialize
         window.addEventListener('load', function() {
-            initializeCyberParticles();
-            generateNewChallenge();
+            generateCode();
             
-            // Prevent back navigation without authentication
-            history.pushState(null, null, location.href);
-            window.addEventListener('popstate', () => history.go(1));
-            
-            // Clear form data on page visibility change
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    clearSecurityForm();
-                    generateNewChallenge();
-                    securityAttempts = 0;
-                }
-            });
-            
-            // Auto-refresh challenge every 5 minutes for enhanced security
-            setInterval(generateNewChallenge, 300000);
+            // Auto-refresh code every 5 minutes
+            setInterval(generateCode, 300000);
         });
 
-        // Final security lockdown
-        Object.freeze(Object.prototype);
-        Object.freeze(Array.prototype);
-        Object.freeze(Function.prototype);
-        
-        // Prevent iframe embedding
-        if (window.top !== window.self) {
-            window.top.location = window.self.location;
+        // Prevent form resubmission on page refresh
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
         }
-
-        // Additional protection against memory dumps
-        setInterval(() => {
-            const memoryCleanup = new Array(1000).fill(Math.random().toString(36));
-            memoryCleanup.length = 0;
-        }, 10000);
     </script>
 </body>
 </html>
