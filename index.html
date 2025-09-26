@@ -1,68 +1,203 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EngiVora - Premium Learning Portal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
         
         :root {
+            /* Color Palette */
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #8b5cf6;
             --success: #059669;
+            --success-light: #10b981;
             --error: #dc2626;
+            --error-light: #ef4444;
             --warning: #d97706;
-            --background: #0f172a;
+            --warning-light: #f59e0b;
+            --info: #0891b2;
+            --info-light: #06b6d4;
+            
+            /* Dark Theme Colors */
+            --background: #0a0f1c;
+            --background-secondary: #0f172a;
             --surface: #1e293b;
             --surface-light: #334155;
+            --surface-hover: #475569;
+            --surface-active: #64748b;
+            
+            /* Text Colors */
             --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-disabled: #64748b;
+            
+            /* Border Colors */
             --border: #334155;
             --border-light: #475569;
+            --border-focus: var(--primary);
+            
+            /* Glass Effect */
             --glass: rgba(15, 23, 42, 0.8);
+            --glass-light: rgba(30, 41, 59, 0.6);
             --glass-border: rgba(148, 163, 184, 0.1);
+            --glass-hover: rgba(148, 163, 184, 0.05);
+            
+            /* Shadow System */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            /* Animation Timing */
+            --ease-in: cubic-bezier(0.4, 0, 1, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * {
+        /* CSS Reset */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, var(--background-secondary) 50%, #1a202c 100%);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
+            position: relative;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            line-height: 1.6;
         }
 
-        /* Background Animation */
-        .background {
+        /* Prevent text selection on interactive elements */
+        button, .button, .card, .portal {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Security Protection */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Background Animations */
+        .background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(220, 38, 38, 0.05) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
-            z-index: -1;
+            z-index: -2;
+            overflow: hidden;
         }
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(2deg); }
+        .background-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 60% 90%, rgba(220, 38, 38, 0.06) 0%, transparent 60%);
+            animation: backgroundFlow 25s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFlow {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg); 
+                filter: hue-rotate(0deg);
+            }
+            25% { 
+                transform: scale(1.1) rotate(1deg); 
+                filter: hue-rotate(10deg);
+            }
+            50% { 
+                transform: scale(1.05) rotate(-0.5deg); 
+                filter: hue-rotate(20deg);
+            }
+            75% { 
+                transform: scale(1.15) rotate(1.5deg); 
+                filter: hue-rotate(10deg);
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+
+        .floating-element:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .floating-element:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .floating-element:nth-child(6) { left: 60%; animation-delay: 10s; }
+        .floating-element:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .floating-element:nth-child(8) { left: 80%; animation-delay: 14s; }
+        .floating-element:nth-child(9) { left: 90%; animation-delay: 16s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(90vh) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(0);
+                opacity: 0;
+            }
         }
 
         /* Grid Pattern */
         .grid-pattern {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -70,388 +205,925 @@
             background-image: 
                 linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -1;
-            animation: gridMove 30s linear infinite;
+            background-size: 80px 80px;
+            animation: gridShift 40s linear infinite;
         }
 
-        @keyframes gridMove {
+        @keyframes gridShift {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
+            100% { transform: translate(80px, 80px); }
         }
 
         /* Main Container */
-        .container {
+        .main-container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 2rem;
+            position: relative;
         }
 
+        /* Security Warning */
+        .security-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(220, 38, 38, 0.95);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            z-index: 10000;
+            display: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .security-warning.active {
+            display: block;
+            animation: securityAlert 0.5s var(--ease-bounce);
+        }
+
+        @keyframes securityAlert {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* Login Portal */
         .portal {
             background: var(--glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 3rem;
             width: 100%;
-            max-width: 440px;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(148, 163, 184, 0.05);
-            animation: portalEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 480px;
+            box-shadow: var(--shadow-2xl);
+            animation: portalEntrance 1s var(--ease-spring);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes portalEntry {
+        .portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.03), 
+                transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes portalEntrance {
             0% {
                 opacity: 0;
-                transform: translateY(20px) scale(0.95);
+                transform: translateY(30px) scale(0.9) rotateX(15deg);
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-5px) scale(1.02) rotateX(-2deg);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0) scale(1) rotateX(0deg);
+                filter: blur(0);
             }
         }
 
-        /* Header */
-        .header {
+        /* Header Section */
+        .portal-header {
             text-align: center;
             margin-bottom: 2.5rem;
+            position: relative;
         }
 
-        .brand {
+        .brand-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--success));
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+            animation: brandPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        .title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+        .brand-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            animation: brandShine 2s infinite;
+        }
+
+        @keyframes brandPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes brandShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .portal-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary-light), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% 200%;
+            animation: titleGradient 4s ease-in-out infinite;
+            letter-spacing: -0.02em;
         }
 
-        .subtitle {
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .portal-subtitle {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.125rem;
             font-weight: 400;
+            opacity: 0;
+            animation: subtitleFadeIn 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes subtitleFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Form Styles */
-        .form {
+        .login-form {
             margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
+            position: relative;
         }
 
-        .label {
+        .form-label {
             display: block;
             color: var(--text-primary);
             font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.025em;
         }
 
-        .input {
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
             width: 100%;
-            padding: 0.875rem 1rem;
+            padding: 1rem 1.25rem;
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
             color: var(--text-primary);
             font-size: 1rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: 400;
+            transition: all 0.3s var(--ease-spring);
+            outline: none;
         }
 
-        .input:focus {
-            outline: none;
+        .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            background: var(--surface-light);
+            transform: translateY(-1px);
+        }
+
+        .form-input:hover:not(:focus) {
+            border-color: var(--border-light);
             background: var(--surface-light);
         }
 
-        .input::placeholder {
+        .form-input::placeholder {
             color: var(--text-muted);
+            font-weight: 400;
         }
 
-        /* Verification */
-        .verification {
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-size: 1.25rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+
+        .password-toggle:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Verification Section */
+        .verification-section {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            margin-bottom: 1.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% 100%;
+            animation: verificationBar 2s linear infinite;
+        }
+
+        @keyframes verificationBar {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
         .verification-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .verification-label {
             color: var(--text-secondary);
             font-size: 0.875rem;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.025em;
         }
 
-        .refresh-btn {
-            background: var(--primary);
+        .refresh-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
             color: white;
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
             font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
-            margin-left: auto;
+            transition: all 0.3s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
-        .refresh-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .challenge {
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            color: white;
-            padding: 1rem;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
-        }
-
-        /* Button */
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
-            margin-bottom: 1.5rem;
-        }
-
-        .submit-btn:hover {
+        .refresh-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
         }
 
-        .submit-btn:active {
+        .refresh-button:active {
             transform: translateY(0);
         }
 
-        /* Alerts */
-        .alert {
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: none;
-            animation: slideIn 0.3s ease;
+        .refresh-button .icon {
+            font-size: 1rem;
+            animation: refreshSpin 0.5s ease-in-out;
         }
 
-        @keyframes slideIn {
+        @keyframes refreshSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(180deg); }
+        }
+
+        .captcha-display {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 14px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .captcha-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            animation: captchaScan 3s infinite;
+        }
+
+        @keyframes captchaScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Hint System */
+        .hint-display {
+            background: rgba(217, 119, 6, 0.1);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+            color: var(--warning-light);
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: none;
+            animation: hintSlide 0.3s ease-out;
+        }
+
+        .hint-display.show {
+            display: block;
+        }
+
+        @keyframes hintSlide {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+            margin-bottom: 1.75rem;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.025em;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        .submit-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading State */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert System */
+        .alert {
+            padding: 1.25rem;
+            border-radius: 14px;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: none;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid;
+        }
+
+        .alert.show {
+            display: block;
+            animation: alertSlideIn 0.4s var(--ease-spring);
+        }
+
+        @keyframes alertSlideIn {
+            0% { 
+                opacity: 0; 
+                transform: translateY(-15px) scale(0.95); 
+            }
+            50% { 
+                transform: translateY(2px) scale(1.02); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
         .alert-error {
             background: rgba(220, 38, 38, 0.1);
-            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-color: var(--error);
             color: #fca5a5;
         }
 
         .alert-success {
             background: rgba(5, 150, 105, 0.1);
-            border: 1px solid rgba(5, 150, 105, 0.2);
+            border-color: var(--success);
             color: #6ee7b7;
         }
 
-        /* Support */
-        .support {
+        .alert-warning {
+            background: rgba(217, 119, 6, 0.1);
+            border-color: var(--warning);
+            color: #fbbf24;
+        }
+
+        .alert-info {
+            background: rgba(8, 145, 178, 0.1);
+            border-color: var(--info);
+            color: #67e8f9;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--surface);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Support Section */
+        .support-section {
             text-align: center;
-            padding-top: 1.5rem;
+            padding-top: 1.75rem;
             border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .support-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
 
         .support-text {
             color: var(--text-secondary);
             font-size: 0.875rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
         }
 
-        .support-btn {
+        .support-button {
             background: var(--surface);
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
             color: var(--text-secondary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
             font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s var(--ease-spring);
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .support-btn:hover {
+        .support-button:hover {
             background: var(--surface-light);
             color: var(--text-primary);
-            transform: translateY(-1px);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
         }
 
-        /* Dashboard */
+        /* Dashboard Styles */
         .dashboard {
             display: none;
             min-height: 100vh;
             padding: 2rem;
+            position: relative;
         }
 
         .dashboard.active {
             display: block;
-            animation: fadeIn 0.8s ease;
+            animation: dashboardFadeIn 1s var(--ease-spring);
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        @keyframes dashboardFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.95); 
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1); 
+                filter: blur(0);
+            }
         }
 
         .dashboard-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .dashboard-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
         }
 
-        .welcome-badge {
+        .success-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--success), #047857);
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--success), var(--success-light));
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3);
+            animation: successPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 32px rgba(5, 150, 105, 0.4); }
         }
 
         .dashboard-title {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 3.5rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            background: linear-gradient(135deg, var(--text-primary), var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
+            animation: dashboardTitleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes dashboardTitleGlow {
+            0%, 100% { 
+                background-position: 0% 50%; 
+                filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3));
+            }
+            50% { 
+                background-position: 100% 50%; 
+                filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
+            }
         }
 
         .dashboard-subtitle {
             color: var(--text-secondary);
-            font-size: 1.25rem;
+            font-size: 1.375rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s var(--ease-spring);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.05), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* Content Grid */
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
 
         .content-card {
             background: var(--glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 2.5rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s var(--ease-spring);
+            position: relative;
+            overflow: hidden;
+            group: content-card;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
         }
 
         .content-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             border-color: var(--primary);
         }
 
         .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             display: block;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .content-card:hover .card-title {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .card-description {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 1rem;
             line-height: 1.6;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .card-status {
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.5rem;
             background: var(--success);
             color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card-features li {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
             font-weight: 600;
         }
 
-        /* Responsive */
+        /* Security Features */
+        .security-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .security-overlay.active {
+            display: flex;
+            animation: overlayFadeIn 0.3s ease;
+        }
+
+        @keyframes overlayFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Activity Monitor */
+        .activity-monitor {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            z-index: 1000;
+            display: none;
+        }
+
+        .activity-monitor.active {
+            display: block;
+            animation: monitorSlideIn 0.3s ease;
+        }
+
+        @keyframes monitorSlideIn {
+            0% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .dashboard-title {
+                font-size: 3rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .container {
+            .main-container {
                 padding: 1rem;
             }
             
             .portal {
                 padding: 2rem;
+                margin: 1rem;
             }
             
-            .title {
-                font-size: 2rem;
+            .portal-title {
+                font-size: 2.25rem;
             }
             
             .dashboard-title {
@@ -462,65 +1134,338 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portal {
+                padding: 1.5rem;
+            }
+            
+            .portal-title {
+                font-size: 2rem;
+            }
+            
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dark Mode Adjustments */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --background: #f8fafc;
+                --background-secondary: #f1f5f9;
+                --surface: #ffffff;
+                --surface-light: #f8fafc;
+                --text-primary: #1e293b;
+                --text-secondary: #475569;
+                --text-muted: #64748b;
+                --border: #e2e8f0;
+                --glass: rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        /* Animations for Enhanced UX */
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            0% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromBottom {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Utility Classes */
+        .fade-in { animation: fadeIn 0.5s ease; }
+        .slide-up { animation: slideUp 0.5s ease; }
+        .zoom-in { animation: zoomIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
+            background-size: 200% 100%;
+            animation: skeleton 1.5s infinite;
+        }
+
+        @keyframes skeleton {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-light);
+            border-color: var(--primary);
+        }
+
+        /* Tooltip System */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface);
+            color: var(--text-primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--border-light);
+        }
+
+        /* Focus Management */
+        .focus-trap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            .portal, .dashboard {
+                box-shadow: none;
+                background: white;
+            }
+            
+            .background-container, .floating-elements {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="grid-pattern"></div>
-    
-    <!-- Login Portal -->
-    <div class="container" id="loginContainer">
+    <!-- Background Elements -->
+    <div class="background-container">
+        <div class="background-gradient"></div>
+        <div class="grid-pattern"></div>
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+    </div>
+
+    <!-- Security Warning Modal -->
+    <div class="security-warning" id="securityWarning">
+        <h2>🚨 Security Alert</h2>
+        <p>Suspicious activity detected. Access attempt logged.</p>
+        <button class="btn btn-primary" onclick="closeSecurityWarning()">Understood</button>
+    </div>
+
+    <!-- Security Overlay -->
+    <div class="security-overlay" id="securityOverlay">
         <div class="portal">
-            <div class="header">
-                <div class="brand">
-                    🚀 EngiVora Premium
-                </div>
-                <h1 class="title">Welcome Back</h1>
-                <p class="subtitle">Access your premium learning content</p>
+            <div class="portal-header">
+                <h2>🛡️ Access Denied</h2>
+                <p>Please contact administrator for access.</p>
+            </div>
+            <button class="btn btn-primary" onclick="redirectToSupport()">Contact Support</button>
+        </div>
+    </div>
+
+    <!-- Activity Monitor -->
+    <div class="activity-monitor" id="activityMonitor">
+        <div>🔍 Session Active</div>
+        <div id="sessionTime">00:00</div>
+    </div>
+
+    <!-- Login Portal -->
+    <div class="main-container" id="loginContainer">
+        <div class="portal">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
 
+            <div class="portal-header">
+                <div class="brand-badge">
+                    <span>🚀</span>
+                    <span>EngiVora Premium</span>
+                </div>
+                <h1 class="portal-title">Welcome Back</h1>
+                <p class="portal-subtitle">Access your premium learning content with advanced security</p>
+            </div>
+
+            <!-- Alert System -->
             <div class="alert alert-error" id="errorAlert"></div>
             <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-warning" id="warningAlert"></div>
+            <div class="alert alert-info" id="infoAlert"></div>
 
-            <form class="form" id="loginForm">
+            <!-- Hint Display -->
+            <div class="hint-display" id="hintDisplay"></div>
+
+            <form class="login-form" id="loginForm" autocomplete="off">
                 <div class="form-group">
-                    <label class="label">Access Key</label>
-                    <input 
-                        type="password" 
-                        id="accessKey" 
-                        class="input" 
-                        placeholder="Enter your access key"
-                        required
-                    >
-                </div>
-
-                <div class="verification">
-                    <div class="verification-header">
-                        <span class="verification-label">Verification Code</span>
-                        <button type="button" class="refresh-btn" onclick="generateCode()">
-                            ↻ Refresh
+                    <label class="form-label">🔐 Access Key</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="password" 
+                            id="accessKey" 
+                            class="form-input" 
+                            placeholder="Enter your premium access key"
+                            autocomplete="new-password"
+                            spellcheck="false"
+                            required
+                        >
+                        <button 
+                            type="button" 
+                            class="password-toggle" 
+                            id="togglePassword"
+                            data-tooltip="Toggle password visibility"
+                            onclick="togglePasswordVisibility()"
+                        >
+                            👁️
                         </button>
                     </div>
-                    <div class="challenge" id="verificationCode"></div>
+                </div>
+
+                <div class="verification-section">
+                    <div class="verification-header">
+                        <span class="verification-label">🔒 Security Verification</span>
+                        <button 
+                            type="button" 
+                            class="refresh-button" 
+                            onclick="refreshCaptcha()"
+                            data-tooltip="Generate new code"
+                        >
+                            <span class="icon">↻</span>
+                            <span>Refresh</span>
+                        </button>
+                    </div>
+                    <div class="captcha-display" id="captchaDisplay"></div>
                     <input 
                         type="text" 
-                        id="codeInput" 
-                        class="input" 
-                        placeholder="Enter the code above"
+                        id="captchaInput" 
+                        class="form-input" 
+                        placeholder="Enter the security code displayed above"
+                        autocomplete="off"
+                        spellcheck="false"
+                        maxlength="6"
                         required
                     >
                 </div>
 
-                <button type="submit" class="submit-btn">
-                    Access Portal
+                <button type="submit" class="submit-button" id="submitBtn">
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                    <span id="submitText">🚀 Access Portal</span>
                 </button>
             </form>
 
-            <div class="support">
-                <p class="support-text">Need access credentials?</p>
-                <a href="https://t.me/helpengivora" class="support-btn" target="_blank">
-                    📞 Contact Support
+            <div class="support-section">
+                <p class="support-text">Need assistance or premium access credentials?</p>
+                <a href="https://t.me/helpengivora" class="support-button" target="_blank">
+                    <span>📞</span>
+                    <span>Contact Support Team</span>
                 </a>
             </div>
         </div>
@@ -530,174 +1475,937 @@
     <div class="dashboard" id="dashboard">
         <div class="dashboard-container">
             <div class="dashboard-header">
-                <div class="welcome-badge">
-                    ✅ Access Granted
+                <div class="success-badge">
+                    <span>✅</span>
+                    <span>Access Granted - Premium Member</span>
                 </div>
                 <h1 class="dashboard-title">Learning Portal</h1>
-                <p class="dashboard-subtitle">Your premium educational resources</p>
+                <p class="dashboard-subtitle">Your comprehensive educational resources and premium content library</p>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">📚</span>
+                    <div class="stat-number" id="notesCount">150+</div>
+                    <div class="stat-label">Study Notes</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🎓</span>
+                    <div class="stat-number" id="lecturesCount">75+</div>
+                    <div class="stat-label">Video Lectures</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">📖</span>
+                    <div class="stat-number" id="resourcesCount">200+</div>
+                    <div class="stat-label">Resources</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">✏️</span>
+                    <div class="stat-number" id="testsCount">50+</div>
+                    <div class="stat-label">Practice Tests</div>
+                </div>
             </div>
 
             <div class="content-grid">
-                <div class="content-card" onclick="openContent('notes')">
+                <div class="content-card" onclick="openContentSection('notes')">
                     <span class="card-icon">📚</span>
-                    <h3 class="card-title">Study Notes</h3>
-                    <p class="card-description">Comprehensive study materials and detailed notes</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Comprehensive Study Notes</h3>
+                    <p class="card-description">Detailed study materials, summaries, and structured notes covering all essential topics with visual aids and examples.</p>
+                    <ul class="card-features">
+                        <li>Topic-wise organized content</li>
+                        <li>Visual diagrams and charts</li>
+                        <li>Quick revision guides</li>
+                        <li>Downloadable PDF formats</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Available Now</span>
+                    </span>
                 </div>
 
-                <div class="content-card" onclick="openContent('lectures')">
+                <div class="content-card" onclick="openContentSection('lectures')">
                     <span class="card-icon">🎓</span>
-                    <h3 class="card-title">Video Lectures</h3>
-                    <p class="card-description">Expert-led lectures and educational content</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Expert Video Lectures</h3>
+                    <p class="card-description">High-quality educational videos by industry experts with interactive elements and practical demonstrations.</p>
+                    <ul class="card-features">
+                        <li>HD video quality</li>
+                        <li>Interactive timestamps</li>
+                        <li>Offline download option</li>
+                        <li>Multi-language subtitles</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Streaming Ready</span>
+                    </span>
                 </div>
 
-                <div class="content-card" onclick="openContent('resources')">
+                <div class="content-card" onclick="openContentSection('resources')">
                     <span class="card-icon">📖</span>
-                    <h3 class="card-title">Learning Resources</h3>
-                    <p class="card-description">Additional materials and reference documents</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Learning Resources Hub</h3>
+                    <p class="card-description">Extensive collection of reference materials, research papers, case studies, and supplementary content.</p>
+                    <ul class="card-features">
+                        <li>Research papers & articles</li>
+                        <li>Case study analyses</li>
+                        <li>Reference materials</li>
+                        <li>Industry reports</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Library Access</span>
+                    </span>
                 </div>
 
-                <div class="content-card" onclick="openContent('practice')">
+                <div class="content-card" onclick="openContentSection('practice')">
                     <span class="card-icon">✏️</span>
-                    <h3 class="card-title">Practice Tests</h3>
-                    <p class="card-description">Interactive quizzes and practice examinations</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Interactive Practice Tests</h3>
+                    <p class="card-description">Comprehensive testing platform with adaptive questions, detailed explanations, and performance analytics.</p>
+                    <ul class="card-features">
+                        <li>Adaptive difficulty levels</li>
+                        <li>Instant result feedback</li>
+                        <li>Performance tracking</li>
+                        <li>Custom test creation</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Test Center</span>
+                    </span>
                 </div>
 
-                <div class="content-card" onclick="openContent('projects')">
+                <div class="content-card" onclick="openContentSection('projects')">
                     <span class="card-icon">🚀</span>
-                    <h3 class="card-title">Projects</h3>
-                    <p class="card-description">Hands-on projects and practical assignments</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Hands-on Projects</h3>
+                    <p class="card-description">Real-world projects and practical assignments designed to enhance your skills and build your portfolio.</p>
+                    <ul class="card-features">
+                        <li>Industry-relevant projects</li>
+                        <li>Step-by-step guidance</li>
+                        <li>Source code templates</li>
+                        <li>Portfolio building</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Project Lab</span>
+                    </span>
                 </div>
 
-                <div class="content-card" onclick="openContent('community')">
+                <div class="content-card" onclick="openContentSection('community')">
                     <span class="card-icon">👥</span>
-                    <h3 class="card-title">Community</h3>
-                    <p class="card-description">Connect with peers and join discussions</p>
-                    <span class="card-status">• Available</span>
+                    <h3 class="card-title">Learning Community</h3>
+                    <p class="card-description">Connect with peers, participate in discussions, get mentorship, and collaborate on projects.</p>
+                    <ul class="card-features">
+                        <li>Discussion forums</li>
+                        <li>Peer-to-peer learning</li>
+                        <li>Expert mentorship</li>
+                        <li>Study groups</li>
+                    </ul>
+                    <span class="card-status">
+                        <span>🟢</span>
+                        <span>Community Active</span>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Focus Trap Elements -->
+    <div class="focus-trap" tabindex="0"></div>
+    <div class="focus-trap" tabindex="0"></div>
+
     <script>
-        // Configuration
-        const ACCESS_KEYS = {
-            user: 'EngiVora@private2025',
-            admin: 'EngiVora@205082'
+        // Enhanced Security Configuration
+        const SECURITY_CONFIG = {
+            MAX_ATTEMPTS: 3,
+            LOCKOUT_DURATION: 300000, // 5 minutes
+            SESSION_TIMEOUT: 1800000, // 30 minutes
+            CAPTCHA_REFRESH_INTERVAL: 180000, // 3 minutes
+            ACTIVITY_LOG_ENABLED: true,
+            ANTI_TAMPERING: true
         };
 
-        const VERIFICATION_CODES = [
-            '4829', '9305', '1574', '6043', '8710',
-            '2967', '7409', '5182', '3628', '8951'
+        // Access Keys with Role-Based Access
+        const ACCESS_CREDENTIALS = {
+            premium: {
+                key: 'EngiVora@private2025',
+                role: 'user',
+                permissions: ['dashboard', 'content', 'community']
+            },
+            admin: {
+                key: 'EngiVora@205082',
+                role: 'admin',
+                permissions: ['admin_panel', 'user_management', 'analytics']
+            },
+            moderator: {
+                key: 'EngiVora@mod2025',
+                role: 'moderator',
+                permissions: ['content_moderation', 'user_support']
+            }
+        };
+
+        // Enhanced CAPTCHA System
+        const CAPTCHA_CODES = [
+            'A7X9K2', 'M5Q8P1', 'R3W6T4', 'B9Y2L7', 'N4H8F5',
+            'V6Z1C3', 'J8G4D2', 'X2S7A9', 'K5R3E6', 'P1T9U4',
+            'L7M2N8', 'Q4W6Y3', 'F9J1H7', 'C8V5B2', 'Z3X6K9'
         ];
 
-        let currentCode = '';
-        let attemptCount = 0;
-        const maxAttempts = 5;
+        // Security State
+        let securityState = {
+            attemptCount: 0,
+            lastAttemptTime: 0,
+            isLocked: false,
+            currentCaptcha: '',
+            sessionStartTime: Date.now(),
+            activityLog: [],
+            suspiciousActivity: false,
+            passwordVisible: false
+        };
 
-        // Generate verification code
-        function generateCode() {
-            const randomIndex = Math.floor(Math.random() * VERIFICATION_CODES.length);
-            currentCode = VERIFICATION_CODES[randomIndex];
-            document.getElementById('verificationCode').textContent = currentCode;
-            document.getElementById('codeInput').value = '';
-        }
+        // Session Management
+        let sessionManager = {
+            startTime: Date.now(),
+            lastActivity: Date.now(),
+            isActive: true,
+            warningShown: false
+        };
 
-        // Show alerts
-        function showAlert(message, type = 'error') {
-            const alertElement = document.getElementById(type + 'Alert');
-            alertElement.textContent = message;
-            alertElement.style.display = 'block';
-            
-            setTimeout(() => {
-                alertElement.style.display = 'none';
-            }, 5000);
-        }
-
-        // Hide all alerts
-        function hideAlerts() {
-            document.getElementById('errorAlert').style.display = 'none';
-            document.getElementById('successAlert').style.display = 'none';
-        }
-
-        // Handle form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (attemptCount >= maxAttempts) {
-                showAlert('Too many failed attempts. Please refresh the page.', 'error');
-                return;
-            }
-
-            const accessKey = document.getElementById('accessKey').value.trim();
-            const codeInput = document.getElementById('codeInput').value.trim();
-
-            hideAlerts();
-
-            // Validate verification code
-            if (codeInput !== currentCode) {
-                attemptCount++;
-                showAlert('Incorrect verification code. Please try again.', 'error');
-                generateCode();
-                return;
-            }
-
-            // Validate access key
-            if (accessKey === ACCESS_KEYS.user) {
-                showAlert('Login successful! Loading your dashboard...', 'success');
-                setTimeout(() => {
-                    document.getElementById('loginContainer').style.display = 'none';
-                    document.getElementById('dashboard').classList.add('active');
-                }, 2000);
-            } else if (accessKey === ACCESS_KEYS.admin) {
-                showAlert('Admin access granted! Redirecting...', 'success');
-                setTimeout(() => {
-                    window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
-                }, 2000);
-            } else {
-                attemptCount++;
-                showAlert('Invalid access key. Please check your credentials.', 'error');
-                generateCode();
-                
-                if (attemptCount >= maxAttempts) {
-                    showAlert('Maximum attempts exceeded. Please contact support.', 'error');
+        // Utility Functions
+        const utils = {
+            // Generate secure random string
+            generateRandomString(length = 16) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
                 }
-            }
-        });
+                return result;
+            },
 
-        // Open content sections
-        function openContent(section) {
-            const messages = {
-                'notes': 'Loading study notes...',
-                'lectures': 'Opening video lectures...',
-                'resources': 'Accessing learning resources...',
-                'practice': 'Loading practice tests...',
-                'projects': 'Opening projects section...',
-                'community': 'Connecting to community...'
-            };
+            // Encrypt data (simple obfuscation)
+            encrypt(data) {
+                return btoa(data).split('').reverse().join('');
+            },
+
+            // Decrypt data
+            decrypt(data) {
+                return atob(data.split('').reverse().join(''));
+            },
+
+            // Log security events
+            logSecurityEvent(event, details = {}) {
+                if (SECURITY_CONFIG.ACTIVITY_LOG_ENABLED) {
+                    const logEntry = {
+                        timestamp: new Date().toISOString(),
+                        event: event,
+                        details: details,
+                        userAgent: navigator.userAgent,
+                        ip: 'client-side', // Would be server-side in real implementation
+                        sessionId: sessionManager.startTime
+                    };
+                    securityState.activityLog.push(logEntry);
+                    console.log('Security Event:', logEntry);
+                }
+            },
+
+            // Detect developer tools
+            detectDevTools() {
+                let devtools = { open: false, orientation: null };
+                
+                setInterval(() => {
+                    if (window.outerHeight - window.innerHeight > 200 || 
+                        window.outerWidth - window.innerWidth > 200) {
+                        if (!devtools.open) {
+                            devtools.open = true;
+                            this.triggerSecurityAlert('Developer tools detected');
+                        }
+                    } else {
+                        devtools.open = false;
+                    }
+                }, 500);
+            },
+
+            // Trigger security alert
+            triggerSecurityAlert(message) {
+                securityState.suspiciousActivity = true;
+                this.logSecurityEvent('SECURITY_ALERT', { message });
+                this.showSecurityWarning(message);
+            },
+
+            // Show security warning
+            showSecurityWarning(message = 'Suspicious activity detected') {
+                const warning = document.getElementById('securityWarning');
+                warning.querySelector('p').textContent = message + '. Access attempt logged.';
+                warning.classList.add('active');
+            },
+
+            // Check if user is locked out
+            isLockedOut() {
+                if (securityState.isLocked) {
+                    const timePassed = Date.now() - securityState.lastAttemptTime;
+                    if (timePassed < SECURITY_CONFIG.LOCKOUT_DURATION) {
+                        return true;
+                    } else {
+                        // Reset lockout
+                        securityState.isLocked = false;
+                        securityState.attemptCount = 0;
+                        return false;
+                    }
+                }
+                return false;
+            }
+        };
+
+        // UI Management Functions
+        const uiManager = {
+            // Show alert with animation
+            showAlert(message, type = 'error', duration = 5000) {
+                const alertElement = document.getElementById(`${type}Alert`);
+                if (alertElement) {
+                    alertElement.textContent = message;
+                    alertElement.classList.add('show');
+                    
+                    setTimeout(() => {
+                        alertElement.classList.remove('show');
+                    }, duration);
+                }
+            },
+
+            // Hide all alerts
+            hideAllAlerts() {
+                const alertTypes = ['error', 'success', 'warning', 'info'];
+                alertTypes.forEach(type => {
+                    const alertElement = document.getElementById(`${type}Alert`);
+                    if (alertElement) {
+                        alertElement.classList.remove('show');
+                    }
+                });
+            },
+
+            // Show hint
+            showHint(message) {
+                const hintElement = document.getElementById('hintDisplay');
+                hintElement.textContent = `💡 Hint: ${message}`;
+                hintElement.classList.add('show');
+                
+                setTimeout(() => {
+                    hintElement.classList.remove('show');
+                }, 8000);
+            },
+
+            // Update progress bar
+            updateProgress(percentage) {
+                const progressBar = document.getElementById('progressBar');
+                progressBar.style.width = `${percentage}%`;
+            },
+
+            // Toggle loading state
+            toggleLoading(isLoading) {
+                const submitBtn = document.getElementById('submitBtn');
+                const loadingSpinner = document.getElementById('loadingSpinner');
+                const submitText = document.getElementById('submitText');
+                
+                if (isLoading) {
+                    submitBtn.disabled = true;
+                    loadingSpinner.style.display = 'block';
+                    submitText.textContent = 'Verifying Access...';
+                    submitBtn.style.opacity = '0.7';
+                } else {
+                    submitBtn.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                    submitText.textContent = '🚀 Access Portal';
+                    submitBtn.style.opacity = '1';
+                }
+            },
+
+            // Animate dashboard entrance
+            showDashboard() {
+                document.getElementById('loginContainer').style.display = 'none';
+                const dashboard = document.getElementById('dashboard');
+                dashboard.classList.add('active');
+                
+                // Animate stats
+                setTimeout(() => {
+                    this.animateStats();
+                }, 500);
+            },
+
+            // Animate statistics
+            animateStats() {
+                const stats = [
+                    { id: 'notesCount', target: 150, suffix: '+' },
+                    { id: 'lecturesCount', target: 75, suffix: '+' },
+                    { id: 'resourcesCount', target: 200, suffix: '+' },
+                    { id: 'testsCount', target: 50, suffix: '+' }
+                ];
+
+                stats.forEach((stat, index) => {
+                    setTimeout(() => {
+                        this.animateCounter(stat.id, stat.target, stat.suffix);
+                    }, index * 200);
+                });
+            },
+
+            // Animate counter
+            animateCounter(elementId, target, suffix = '') {
+                const element = document.getElementById(elementId);
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current) + suffix;
+                }, 30);
+            }
+        };
+
+        // Security Functions
+        const securityManager = {
+            // Initialize security measures
+            init() {
+                this.setupAntiTampering();
+                this.setupContextMenuBlocking();
+                this.setupKeyboardBlocking();
+                this.setupConsoleWarning();
+                utils.detectDevTools();
+                this.startSessionMonitoring();
+            },
+
+            // Setup anti-tampering measures
+            setupAntiTampering() {
+                if (!SECURITY_CONFIG.ANTI_TAMPERING) return;
+
+                // Detect F12, Ctrl+Shift+I, Ctrl+U, etc.
+                document.addEventListener('keydown', (e) => {
+                    if (
+                        e.key === 'F12' ||
+                        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                        (e.ctrlKey && e.key === 'u') ||
+                        (e.ctrlKey && e.key === 'U')
+                    ) {
+                        e.preventDefault();
+                        utils.triggerSecurityAlert('Attempted to open developer tools');
+                        return false;
+                    }
+                });
+            },
+
+            // Block right-click context menu
+            setupContextMenuBlocking() {
+                document.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    utils.logSecurityEvent('CONTEXT_MENU_BLOCKED');
+                    return false;
+                });
+            },
+
+            // Setup keyboard shortcuts blocking
+            setupKeyboardBlocking() {
+                const blockedKeys = [
+                    { ctrl: true, key: 'a' }, // Select all
+                    { ctrl: true, key: 's' }, // Save
+                    { ctrl: true, key: 'p' }, // Print
+                ];
+
+                document.addEventListener('keydown', (e) => {
+                    blockedKeys.forEach(blocked => {
+                        if (e.ctrlKey === blocked.ctrl && e.key.toLowerCase() === blocked.key) {
+                            e.preventDefault();
+                            utils.logSecurityEvent('BLOCKED_KEYBOARD_SHORTCUT', { key: blocked.key });
+                        }
+                    });
+                });
+            },
+
+            // Setup console warning
+            setupConsoleWarning() {
+                console.clear();
+                console.log('%c🚨 SECURITY WARNING 🚨', 'color: red; font-size: 20px; font-weight: bold;');
+                console.log('%cThis is a browser feature intended for developers. Unauthorized access attempts are logged and monitored.', 'color: red; font-size: 14px;');
+                console.log('%cIf someone told you to copy/paste something here, it is likely a scam.', 'color: red; font-size: 14px;');
+            },
+
+            // Start session monitoring
+            startSessionMonitoring() {
+                setInterval(() => {
+                    this.checkSessionTimeout();
+                    this.updateActivityMonitor();
+                }, 1000);
+
+                // Track user activity
+                ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+                    document.addEventListener(event, () => {
+                        sessionManager.lastActivity = Date.now();
+                    }, { passive: true });
+                });
+            },
+
+            // Check session timeout
+            checkSessionTimeout() {
+                const inactiveTime = Date.now() - sessionManager.lastActivity;
+                const totalTime = Date.now() - sessionManager.startTime;
+
+                if (inactiveTime > SECURITY_CONFIG.SESSION_TIMEOUT) {
+                    this.expireSession('Session timeout due to inactivity');
+                } else if (totalTime > SECURITY_CONFIG.SESSION_TIMEOUT * 2) {
+                    this.expireSession('Maximum session duration exceeded');
+                }
+            },
+
+            // Update activity monitor
+            updateActivityMonitor() {
+                const monitor = document.getElementById('activityMonitor');
+                const sessionTime = Math.floor((Date.now() - sessionManager.startTime) / 1000);
+                const minutes = Math.floor(sessionTime / 60);
+                const seconds = sessionTime % 60;
+                
+                const timeElement = document.getElementById('sessionTime');
+                if (timeElement) {
+                    timeElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+
+                if (sessionManager.isActive && document.getElementById('dashboard').classList.contains('active')) {
+                    monitor.classList.add('active');
+                } else {
+                    monitor.classList.remove('active');
+                }
+            },
+
+            // Expire session
+            expireSession(reason) {
+                utils.logSecurityEvent('SESSION_EXPIRED', { reason });
+                sessionManager.isActive = false;
+                uiManager.showAlert('Session expired. Please login again.', 'warning');
+                
+                setTimeout(() => {
+                    location.reload();
+                }, 3000);
+            }
+        };
+
+        // CAPTCHA Management
+        const captchaManager = {
+            // Generate new CAPTCHA
+            generate() {
+                const randomIndex = Math.floor(Math.random() * CAPTCHA_CODES.length);
+                const captcha = CAPTCHA_CODES[randomIndex];
+                securityState.currentCaptcha = captcha;
+                
+                const display = document.getElementById('captchaDisplay');
+                display.textContent = captcha;
+                
+                // Clear input
+                document.getElementById('captchaInput').value = '';
+                
+                utils.logSecurityEvent('CAPTCHA_GENERATED', { 
+                    captchaId: randomIndex,
+                    timestamp: Date.now() 
+                });
+            },
+
+            // Validate CAPTCHA
+            validate(input) {
+                const isValid = input.toUpperCase().trim() === securityState.currentCaptcha;
+                
+                utils.logSecurityEvent('CAPTCHA_VALIDATION', { 
+                    input: input,
+                    valid: isValid,
+                    expected: securityState.currentCaptcha 
+                });
+                
+                return isValid;
+            },
+
+            // Auto-refresh CAPTCHA
+            startAutoRefresh() {
+                setInterval(() => {
+                    if (document.getElementById('loginContainer').style.display !== 'none') {
+                        this.generate();
+                        uiManager.showAlert('Security code refreshed for your protection', 'info', 3000);
+                    }
+                }, SECURITY_CONFIG.CAPTCHA_REFRESH_INTERVAL);
+            }
+        };
+
+        // Form Management
+        const formManager = {
+            // Initialize form
+            init() {
+                const form = document.getElementById('loginForm');
+                form.addEventListener('submit', this.handleSubmit.bind(this));
+                
+                // Real-time validation
+                const accessKeyInput = document.getElementById('accessKey');
+                const captchaInput = document.getElementById('captchaInput');
+                
+                accessKeyInput.addEventListener('input', this.handleAccessKeyInput.bind(this));
+                captchaInput.addEventListener('input', this.handleCaptchaInput.bind(this));
+            },
+
+            // Handle form submission
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                // Check if locked out
+                if (utils.isLockedOut()) {
+                    const remainingTime = Math.ceil((SECURITY_CONFIG.LOCKOUT_DURATION - (Date.now() - securityState.lastAttemptTime)) / 1000 / 60);
+                    uiManager.showAlert(`Account locked. Try again in ${remainingTime} minutes.`, 'error');
+                    return;
+                }
+
+                uiManager.hideAllAlerts();
+                uiManager.toggleLoading(true);
+                uiManager.updateProgress(25);
+
+                const accessKey = document.getElementById('accessKey').value.trim();
+                const captchaInput = document.getElementById('captchaInput').value.trim();
+
+                // Validate CAPTCHA first
+                uiManager.updateProgress(50);
+                await this.delay(500); // Simulate processing
+
+                if (!captchaManager.validate(captchaInput)) {
+                    this.handleFailedAttempt('Invalid security code. Please try again.');
+                    uiManager.showHint('The security code is case-sensitive. Check the display carefully.');
+                    captchaManager.generate();
+                    uiManager.toggleLoading(false);
+                    uiManager.updateProgress(0);
+                    return;
+                }
+
+                // Validate access key
+                uiManager.updateProgress(75);
+                await this.delay(800); // Simulate processing
+
+                const credential = this.findCredential(accessKey);
+                
+                if (credential) {
+                    this.handleSuccessfulLogin(credential);
+                } else {
+                    this.handleFailedAttempt('Invalid access credentials. Please verify your key.');
+                    this.provideHints(accessKey);
+                }
+
+                uiManager.toggleLoading(false);
+                uiManager.updateProgress(0);
+            },
+
+            // Handle access key input
+            handleAccessKeyInput(e) {
+                const input = e.target.value;
+                const progress = Math.min((input.length / 20) * 100, 100);
+                
+                // Visual feedback for key strength
+                if (input.length > 0) {
+                    if (input.length < 10) {
+                        e.target.style.borderColor = '#ef4444'; // Red
+                    } else if (input.length < 15) {
+                        e.target.style.borderColor = '#f59e0b'; // Orange
+                    } else {
+                        e.target.style.borderColor = '#10b981'; // Green
+                    }
+                } else {
+                    e.target.style.borderColor = 'var(--border)';
+                }
+            },
+
+            // Handle CAPTCHA input
+            handleCaptchaInput(e) {
+                const input = e.target.value.toUpperCase();
+                e.target.value = input;
+                
+                // Visual feedback
+                if (input.length === securityState.currentCaptcha.length) {
+                    if (captchaManager.validate(input)) {
+                        e.target.style.borderColor = '#10b981'; // Green
+                    } else {
+                        e.target.style.borderColor = '#ef4444'; // Red
+                    }
+                }
+            },
+
+            // Find credential by access key
+            findCredential(accessKey) {
+                for (const [type, credential] of Object.entries(ACCESS_CREDENTIALS)) {
+                    if (credential.key === accessKey) {
+                        return { ...credential, type };
+                    }
+                }
+                return null;
+            },
+
+            // Handle successful login
+            async handleSuccessfulLogin(credential) {
+                uiManager.updateProgress(100);
+                utils.logSecurityEvent('LOGIN_SUCCESS', { 
+                    role: credential.role, 
+                    type: credential.type 
+                });
+
+                // Reset attempt counter
+                securityState.attemptCount = 0;
+                securityState.isLocked = false;
+
+                if (credential.role === 'admin') {
+                    uiManager.showAlert('Admin access granted! Redirecting to control panel...', 'success');
+                    await this.delay(2000);
+                    window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
+                } else if (credential.role === 'moderator') {
+                    uiManager.showAlert('Moderator access granted! Loading management panel...', 'success');
+                    await this.delay(2000);
+                    window.open('https://t.me/helpengivora', '_blank');
+                } else {
+                    uiManager.showAlert('Premium access granted! Loading your dashboard...', 'success');
+                    await this.delay(2000);
+                    uiManager.showDashboard();
+                    sessionManager.isActive = true;
+                }
+            },
+
+            // Handle failed attempt
+            handleFailedAttempt(message) {
+                securityState.attemptCount++;
+                securityState.lastAttemptTime = Date.now();
+
+                utils.logSecurityEvent('LOGIN_FAILED', { 
+                    attempt: securityState.attemptCount,
+                    maxAttempts: SECURITY_CONFIG.MAX_ATTEMPTS 
+                });
+
+                if (securityState.attemptCount >= SECURITY_CONFIG.MAX_ATTEMPTS) {
+                    securityState.isLocked = true;
+                    const lockoutMinutes = SECURITY_CONFIG.LOCKOUT_DURATION / 60000;
+                    uiManager.showAlert(`Too many failed attempts. Account locked for ${lockoutMinutes} minutes.`, 'error');
+                    utils.logSecurityEvent('ACCOUNT_LOCKED');
+                } else {
+                    const remainingAttempts = SECURITY_CONFIG.MAX_ATTEMPTS - securityState.attemptCount;
+                    uiManager.showAlert(`${message} ${remainingAttempts} attempts remaining.`, 'error');
+                }
+
+                // Clear form
+                document.getElementById('accessKey').value = '';
+                captchaManager.generate();
+            },
+
+            // Provide hints based on input
+            provideHints(input) {
+                if (input.length < 10) {
+                    uiManager.showHint('Access keys are typically longer than 10 characters');
+                } else if (!input.includes('@')) {
+                    uiManager.showHint('Premium access keys usually contain special characters like @');
+                } else if (!input.match(/\d/)) {
+                    uiManager.showHint('Access keys often include numbers for security');
+                } else {
+                    uiManager.showHint('Double-check your access key format: EngiVora@xxxxx####');
+                }
+            },
+
+            // Utility delay function
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        };
+
+        // Content Management
+        const contentManager = {
+            // Open content section
+            openSection(section) {
+                const sectionMessages = {
+                    'notes': 'Accessing comprehensive study notes library...',
+                    'lectures': 'Loading premium video lecture collection...',
+                    'resources': 'Opening learning resources database...',
+                    'practice': 'Initializing interactive practice test platform...',
+                    'projects': 'Loading hands-on project workspace...',
+                    'community': 'Connecting to learning community hub...'
+                };
+
+                const message = sectionMessages[section] || 'Loading premium content...';
+                uiManager.showAlert(message, 'info', 2000);
+
+                utils.logSecurityEvent('CONTENT_ACCESS', { section });
+
+                setTimeout(() => {
+                    // Simulate content loading
+                    uiManager.showAlert(`${section.charAt(0).toUpperCase() + section.slice(1)} section ready!`, 'success', 1500);
+                    
+                    setTimeout(() => {
+                        window.open('https://t.me/helpengivora', '_blank');
+                    }, 1500);
+                }, 1000);
+            }
+        };
+
+        // Password Visibility Toggle
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('accessKey');
+            const toggleButton = document.getElementById('togglePassword');
             
-            showAlert(messages[section] || 'Loading content...', 'success');
+            if (securityState.passwordVisible) {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👁️';
+                toggleButton.setAttribute('data-tooltip', 'Show password');
+                securityState.passwordVisible = false;
+            } else {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+                toggleButton.setAttribute('data-tooltip', 'Hide password');
+                securityState.passwordVisible = true;
+            }
             
-            setTimeout(() => {
-                window.open('https://t.me/helpengivora', '_blank');
-            }, 1500);
+            utils.logSecurityEvent('PASSWORD_VISIBILITY_TOGGLE', { 
+                visible: securityState.passwordVisible 
+            });
         }
 
-        // Initialize
-        window.addEventListener('load', function() {
-            generateCode();
+        // Refresh CAPTCHA
+        function refreshCaptcha() {
+            captchaManager.generate();
             
-            // Auto-refresh code every 5 minutes
-            setInterval(generateCode, 300000);
+            // Add visual feedback
+            const refreshBtn = document.querySelector('.refresh-button');
+            const icon = refreshBtn.querySelector('.icon');
+            icon.style.animation = 'refreshSpin 0.5s ease-in-out';
+            
+            setTimeout(() => {
+                icon.style.animation = '';
+            }, 500);
+            
+            uiManager.showAlert('New security code generated', 'info', 2000);
+        }
+
+        // Open content section
+        function openContentSection(section) {
+            contentManager.openSection(section);
+        }
+
+        // Close security warning
+        function closeSecurityWarning() {
+            document.getElementById('securityWarning').classList.remove('active');
+        }
+
+        // Redirect to support
+        function redirectToSupport() {
+            window.open('https://t.me/helpengivora', '_blank');
+            document.getElementById('securityOverlay').classList.remove('active');
+        }
+
+        // Window/Tab Management
+        function setupWindowManagement() {
+            // Prevent multiple tabs
+            let isOriginalTab = !sessionStorage.getItem('tabExists');
+            
+            if (isOriginalTab) {
+                sessionStorage.setItem('tabExists', 'true');
+            } else {
+                utils.triggerSecurityAlert('Multiple tabs detected');
+                document.getElementById('securityOverlay').classList.add('active');
+            }
+
+            // Handle tab/window close
+            window.addEventListener('beforeunload', () => {
+                if (isOriginalTab) {
+                    sessionStorage.removeItem('tabExists');
+                }
+            });
+
+            // Handle window focus
+            window.addEventListener('blur', () => {
+                utils.logSecurityEvent('WINDOW_BLUR');
+            });
+
+            window.addEventListener('focus', () => {
+                utils.logSecurityEvent('WINDOW_FOCUS');
+            });
+        }
+
+        // Performance Monitoring
+        function setupPerformanceMonitoring() {
+            // Monitor page load performance
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    utils.logSecurityEvent('PERFORMANCE_METRICS', {
+                        loadTime: perfData.loadEventEnd - perfData.loadEventStart,
+                        domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
+                        totalTime: perfData.loadEventEnd - perfData.fetchStart
+                    });
+                }, 0);
+            });
+        }
+
+        // Initialize Application
+        function initializeApp() {
+            // Security initialization
+            securityManager.init();
+            setupWindowManagement();
+            setupPerformanceMonitoring();
+
+            // UI initialization
+            formManager.init();
+            captchaManager.generate();
+            captchaManager.startAutoRefresh();
+
+            // Initial progress
+            uiManager.updateProgress(0);
+
+            // Log application start
+            utils.logSecurityEvent('APPLICATION_INITIALIZED', {
+                userAgent: navigator.userAgent,
+                timestamp: Date.now(),
+                sessionId: sessionManager.startTime
+            });
+
+            // Show welcome message
+            setTimeout(() => {
+                uiManager.showAlert('Welcome to EngiVora Premium Portal - Secure access initialized', 'info', 3000);
+            }, 1000);
+
+            console.log('%c✅ EngiVora Premium Portal Loaded', 'color: green; font-size: 16px; font-weight: bold;');
+            console.log('%c🛡️ Security systems active', 'color: blue; font-size: 14px;');
+        }
+
+        // Error Handling
+        window.addEventListener('error', (e) => {
+            utils.logSecurityEvent('JAVASCRIPT_ERROR', {
+                message: e.message,
+                filename: e.filename,
+                lineno: e.lineno,
+                colno: e.colno
+            });
         });
 
-        // Prevent form resubmission on page refresh
+        window.addEventListener('unhandledrejection', (e) => {
+            utils.logSecurityEvent('UNHANDLED_PROMISE_REJECTION', {
+                reason: e.reason
+            });
+        });
+
+        // Prevent form resubmission on refresh
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
+        }
+
+        // Start the application when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+
+        // Export functions for testing (in development only)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            window.EngiVoraDebug = {
+                securityState,
+                sessionManager,
+                utils,
+                uiManager,
+                securityManager,
+                captchaManager,
+                formManager,
+                contentManager
+            };
         }
     </script>
 </body>
