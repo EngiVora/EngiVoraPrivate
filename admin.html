@@ -1125,3 +1125,387 @@
         usePasswordBtn.style.marginTop = '10px';
         usePasswordBtn.onclick = useGeneratedPassword;
         document.querySelector('.password-generator').appendChild(usePasswordBtn);
+
+        // Password analytics and insights
+        function analyzePasswords() {
+            const passwordItems = document.querySelectorAll('.password-item');
+            const analytics = {
+                totalPasswords: passwordItems.length,
+                categoryCounts: {},
+                avgPasswordAge: 0,
+                securityIssues: []
+            };
+
+            // Count passwords by category
+            passwordItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                analytics.categoryCounts[category] = (analytics.categoryCounts[category] || 0) + 1;
+            });
+
+            return analytics;
+        }
+
+        // Enhanced duplicate detection
+        function findDuplicatePasswords() {
+            const passwords = new Map();
+            const duplicates = [];
+            
+            document.querySelectorAll('.password-item').forEach(item => {
+                const passwordElement = item.querySelector('.detail-value:last-of-type');
+                const password = getPasswordFromElement(passwordElement);
+                const title = item.querySelector('.password-title').textContent;
+                
+                if (passwords.has(password)) {
+                    duplicates.push({
+                        password: password,
+                        accounts: [passwords.get(password), title]
+                    });
+                } else {
+                    passwords.set(password, title);
+                }
+            });
+            
+            if (duplicates.length > 0) {
+                showNotification(`Found ${duplicates.length} duplicate passwords!`, 'warning');
+            } else {
+                showNotification('No duplicate passwords found', 'success');
+            }
+            
+            return duplicates;
+        }
+
+        // Password history tracking
+        let passwordHistory = [];
+
+        function trackPasswordChange(title, oldPassword, newPassword) {
+            passwordHistory.push({
+                title: title,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+                changeDate: new Date().toISOString()
+            });
+            
+            // Keep only last 50 changes
+            if (passwordHistory.length > 50) {
+                passwordHistory.shift();
+            }
+        }
+
+        // Enhanced security recommendations
+        function getSecurityRecommendations() {
+            const recommendations = [];
+            const passwordItems = document.querySelectorAll('.password-item');
+            
+            if (passwordItems.length < 5) {
+                recommendations.push({
+                    type: 'info',
+                    title: 'Add More Passwords',
+                    description: 'Consider adding more accounts to secure all your online presence.'
+                });
+            }
+            
+            // Check for common weak passwords
+            passwordItems.forEach(item => {
+                const title = item.querySelector('.password-title').textContent;
+                if (title.toLowerCase().includes('admin') || title.toLowerCase().includes('root')) {
+                    recommendations.push({
+                        type: 'critical',
+                        title: 'Critical Account Detected',
+                        description: `${title} appears to be an admin account. Ensure it has a very strong password.`
+                    });
+                }
+            });
+            
+            return recommendations;
+        }
+
+        // Auto-save functionality
+        let autoSaveInterval;
+
+        function startAutoSave() {
+            autoSaveInterval = setInterval(() => {
+                const data = gatherAllData();
+                // In a real application, this would save to a secure backend
+                console.log('Auto-save triggered', new Date().toLocaleTimeString());
+            }, 30000); // Auto-save every 30 seconds
+        }
+
+        function stopAutoSave() {
+            if (autoSaveInterval) {
+                clearInterval(autoSaveInterval);
+            }
+        }
+
+        function gatherAllData() {
+            const passwordItems = document.querySelectorAll('.password-item');
+            const data = {
+                passwords: [],
+                settings: {},
+                lastModified: new Date().toISOString()
+            };
+            
+            passwordItems.forEach(item => {
+                const title = item.querySelector('.password-title').textContent;
+                const category = item.getAttribute('data-category');
+                const username = item.querySelector('.detail-value').textContent;
+                
+                data.passwords.push({
+                    id: Math.random().toString(36).substr(2, 9),
+                    title: title,
+                    username: username,
+                    category: category,
+                    dateAdded: new Date().toISOString(),
+                    lastModified: new Date().toISOString()
+                });
+            });
+            
+            return data;
+        }
+
+        // Initialize auto-save
+        startAutoSave();
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            stopAutoSave();
+        });
+
+        // Add context menu for passwords
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.password-item')) {
+                e.preventDefault();
+                showContextMenu(e, e.target.closest('.password-item'));
+            }
+        });
+
+        function showContextMenu(event, passwordItem) {
+            // Remove existing context menu
+            const existingMenu = document.querySelector('.context-menu');
+            if (existingMenu) {
+                existingMenu.remove();
+            }
+
+            const contextMenu = document.createElement('div');
+            contextMenu.className = 'context-menu';
+            contextMenu.style.cssText = `
+                position: fixed;
+                top: ${event.clientY}px;
+                left: ${event.clientX}px;
+                background: var(--dark-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 10px 0;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                z-index: 1000;
+                min-width: 150px;
+            `;
+
+            const menuItems = [
+                { text: 'Copy Username', action: () => copyUsername(passwordItem) },
+                { text: 'Copy Password', action: () => copyPassword(passwordItem) },
+                { text: 'Edit', action: () => editPassword(passwordItem.querySelector('.btn-primary')) },
+                { text: 'Delete', action: () => deletePassword(passwordItem.querySelector('.btn-danger')) },
+                { text: 'Duplicate Check', action: () => findDuplicatePasswords() }
+            ];
+
+            menuItems.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.style.cssText = `
+                    padding: 8px 15px;
+                    cursor: pointer;
+                    color: var(--text-light);
+                    font-size: 0.9rem;
+                    transition: background-color 0.2s;
+                `;
+                menuItem.textContent = item.text;
+                menuItem.addEventListener('click', () => {
+                    item.action();
+                    contextMenu.remove();
+                });
+                menuItem.addEventListener('mouseenter', () => {
+                    menuItem.style.backgroundColor = 'var(--primary-color)';
+                });
+                menuItem.addEventListener('mouseleave', () => {
+                    menuItem.style.backgroundColor = 'transparent';
+                });
+                contextMenu.appendChild(menuItem);
+            });
+
+            document.body.appendChild(contextMenu);
+
+            // Remove context menu when clicking elsewhere
+            setTimeout(() => {
+                document.addEventListener('click', () => {
+                    contextMenu.remove();
+                }, { once: true });
+            }, 100);
+        }
+
+        function copyUsername(passwordItem) {
+            const username = passwordItem.querySelector('.detail-value').textContent;
+            copyToClipboard(username);
+        }
+
+        function copyPassword(passwordItem) {
+            const passwordElement = passwordItem.querySelector('.detail-value:last-of-type');
+            const password = getPasswordFromElement(passwordElement);
+            copyToClipboard(password);
+        }
+
+        // Add advanced filtering options
+        function addAdvancedFilters() {
+            const filtersContainer = document.createElement('div');
+            filtersContainer.className = 'filters-container';
+            filtersContainer.style.cssText = `
+                display: flex;
+                gap: 15px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+            `;
+
+            const categoryFilter = document.createElement('select');
+            categoryFilter.className = 'form-select';
+            categoryFilter.style.width = 'auto';
+            categoryFilter.innerHTML = `
+                <option value="all">All Categories</option>
+                <option value="social">Social Media</option>
+                <option value="work">Work</option>
+                <option value="banking">Banking</option>
+                <option value="shopping">Shopping</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="other">Other</option>
+            `;
+            categoryFilter.addEventListener('change', (e) => {
+                filterByCategory(e.target.value);
+            });
+
+            const sortSelect = document.createElement('select');
+            sortSelect.className = 'form-select';
+            sortSelect.style.width = 'auto';
+            sortSelect.innerHTML = `
+                <option value="name">Sort by Name</option>
+                <option value="category">Sort by Category</option>
+                <option value="date">Sort by Date Added</option>
+            `;
+            sortSelect.addEventListener('change', (e) => {
+                sortPasswords(e.target.value);
+            });
+
+            filtersContainer.appendChild(categoryFilter);
+            filtersContainer.appendChild(sortSelect);
+
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.parentNode.insertBefore(filtersContainer, searchBar.nextSibling);
+        }
+
+        function sortPasswords(criteria) {
+            const passwordGrid = document.getElementById('password-grid');
+            const passwordItems = Array.from(passwordGrid.querySelectorAll('.password-item'));
+
+            passwordItems.sort((a, b) => {
+                switch (criteria) {
+                    case 'name':
+                        return a.querySelector('.password-title').textContent.localeCompare(
+                            b.querySelector('.password-title').textContent
+                        );
+                    case 'category':
+                        return a.getAttribute('data-category').localeCompare(
+                            b.getAttribute('data-category')
+                        );
+                    case 'date':
+                        // For now, sort by DOM order (oldest first)
+                        return 0;
+                    default:
+                        return 0;
+                }
+            });
+
+            passwordItems.forEach(item => passwordGrid.appendChild(item));
+            showNotification(`Passwords sorted by ${criteria}`, 'success');
+        }
+
+        // Initialize advanced filters
+        setTimeout(() => {
+            addAdvancedFilters();
+        }, 1000);
+
+        // Add help tooltips
+        function addTooltips() {
+            const tooltipElements = [
+                { selector: '.search-input', text: 'Search by title, username, or category (Ctrl+F)' },
+                { selector: '.password-generator button', text: 'Generate a secure random password (Ctrl+G)' },
+                { selector: '.btn-primary:contains("Export")', text: 'Export all passwords to JSON file (Ctrl+S)' }
+            ];
+
+            tooltipElements.forEach(({ selector, text }) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    element.title = text;
+                });
+            });
+        }
+
+        // Initialize tooltips
+        setTimeout(addTooltips, 1500);
+
+        // Add drag and drop reordering
+        let draggedElement = null;
+
+        function enableDragAndDrop() {
+            const passwordItems = document.querySelectorAll('.password-item');
+            
+            passwordItems.forEach(item => {
+                item.draggable = true;
+                item.style.cursor = 'move';
+                
+                item.addEventListener('dragstart', (e) => {
+                    draggedElement = item;
+                    e.dataTransfer.effectAllowed = 'move';
+                    item.style.opacity = '0.5';
+                });
+                
+                item.addEventListener('dragend', () => {
+                    item.style.opacity = '1';
+                    draggedElement = null;
+                });
+                
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+                
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (draggedElement && draggedElement !== item) {
+                        const passwordGrid = document.getElementById('password-grid');
+                        const allItems = Array.from(passwordGrid.querySelectorAll('.password-item'));
+                        const draggedIndex = allItems.indexOf(draggedElement);
+                        const targetIndex = allItems.indexOf(item);
+                        
+                        if (draggedIndex < targetIndex) {
+                            item.parentNode.insertBefore(draggedElement, item.nextSibling);
+                        } else {
+                            item.parentNode.insertBefore(draggedElement, item);
+                        }
+                        
+                        showNotification('Password reordered', 'success');
+                    }
+                });
+            });
+        }
+
+        // Re-enable drag and drop when new passwords are added
+        const originalAddNewPassword = addNewPassword;
+        addNewPassword = function() {
+            originalAddNewPassword();
+            setTimeout(enableDragAndDrop, 100);
+        };
+
+        // Initialize drag and drop
+        setTimeout(enableDragAndDrop, 2000);
+
+        console.log('🔐 SecureVault Password Manager loaded successfully!');
+        console.log('💡 Keyboard shortcuts: Ctrl+F (search), Ctrl+N (new), Ctrl+G (generate), Ctrl+S (export)');
+    </script>
+</body>
+</html>
