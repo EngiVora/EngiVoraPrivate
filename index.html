@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngiVora - Premium Learning Portal</title>
+    <title>EngiVora - Premium Engineering Portal</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -43,12 +43,12 @@
             --border-focus: var(--primary);
             
             /* Glass Effect */
-            --glass: rgba(15, 23, 42, 0.8);
-            --glass-light: rgba(30, 41, 59, 0.6);
-            --glass-border: rgba(148, 163, 184, 0.1);
-            --glass-hover: rgba(148, 163, 184, 0.05);
+            --glass: rgba(15, 23, 42, 0.85);
+            --glass-light: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(148, 163, 184, 0.15);
+            --glass-hover: rgba(148, 163, 184, 0.08);
             
-            /* Shadow System */
+            /* Shadows */
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -56,16 +56,12 @@
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
             --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
             
-            /* Animation Timing */
-            --ease-in: cubic-bezier(0.4, 0, 1, 1);
-            --ease-out: cubic-bezier(0, 0, 0.2, 1);
-            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            /* Animation */
             --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        /* CSS Reset */
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -84,27 +80,10 @@
             color: var(--text-primary);
             overflow-x: hidden;
             position: relative;
-            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
             line-height: 1.6;
         }
 
-        /* Prevent text selection on interactive elements */
-        button, .button, .card, .portal {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        /* Security Protection */
-        .no-select {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        /* Background Animations */
+        /* Background Animation */
         .background-container {
             position: fixed;
             top: 0;
@@ -122,80 +101,17 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 60% 90%, rgba(220, 38, 38, 0.06) 0%, transparent 60%);
-            animation: backgroundFlow 25s ease-in-out infinite;
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(5, 150, 105, 0.10) 0%, transparent 60%),
+                radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+            animation: backgroundFlow 20s ease-in-out infinite;
         }
 
         @keyframes backgroundFlow {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                filter: hue-rotate(0deg);
-            }
-            25% { 
-                transform: scale(1.1) rotate(1deg); 
-                filter: hue-rotate(10deg);
-            }
-            50% { 
-                transform: scale(1.05) rotate(-0.5deg); 
-                filter: hue-rotate(20deg);
-            }
-            75% { 
-                transform: scale(1.15) rotate(1.5deg); 
-                filter: hue-rotate(10deg);
-            }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
         }
 
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(148, 163, 184, 0.3);
-            border-radius: 50%;
-            animation: float 20s linear infinite;
-        }
-
-        .floating-element:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .floating-element:nth-child(2) { left: 20%; animation-delay: 2s; }
-        .floating-element:nth-child(3) { left: 30%; animation-delay: 4s; }
-        .floating-element:nth-child(4) { left: 40%; animation-delay: 6s; }
-        .floating-element:nth-child(5) { left: 50%; animation-delay: 8s; }
-        .floating-element:nth-child(6) { left: 60%; animation-delay: 10s; }
-        .floating-element:nth-child(7) { left: 70%; animation-delay: 12s; }
-        .floating-element:nth-child(8) { left: 80%; animation-delay: 14s; }
-        .floating-element:nth-child(9) { left: 90%; animation-delay: 16s; }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                transform: translateY(90vh) scale(1);
-                opacity: 1;
-            }
-            90% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-20vh) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Grid Pattern */
         .grid-pattern {
             position: absolute;
             top: 0;
@@ -205,13 +121,84 @@
             background-image: 
                 linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
-            background-size: 80px 80px;
-            animation: gridShift 40s linear infinite;
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
         }
 
-        @keyframes gridShift {
+        @keyframes gridMove {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(80px, 80px); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Header with Logout */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header.show {
+            display: flex;
+            animation: slideDown 0.5s var(--ease-spring);
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-badge {
+            background: linear-gradient(135deg, var(--success), var(--success-light));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .logout-btn {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            color: var(--error-light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(220, 38, 38, 0.15);
+            transform: translateY(-1px);
         }
 
         /* Main Container */
@@ -220,11 +207,738 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 1rem;
+            padding-top: 1rem;
+        }
+
+        .main-container.with-header {
+            padding-top: 5rem;
+        }
+
+        /* Login Portal */
+        .portal {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: var(--shadow-2xl);
+            animation: portalEntrance 1s var(--ease-spring);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes portalEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .portal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.01em;
+        }
+
+        .portal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* Branch Selection */
+        .branch-selection {
+            margin-bottom: 1.5rem;
+        }
+
+        .branch-label {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .branch-select {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+        }
+
+        .branch-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
             position: relative;
         }
 
-        /* Security Warning */
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s var(--ease-spring);
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background: var(--surface-light);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+
+        /* Verification Section */
+        .verification-section {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .verification-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .refresh-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .captcha-display {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Buttons */
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Alert System */
+        .alert {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: none;
+            border-left: 4px solid;
+        }
+
+        .alert.show {
+            display: block;
+            animation: alertSlide 0.4s var(--ease-spring);
+        }
+
+        @keyframes alertSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-error {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: var(--error);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background: rgba(5, 150, 105, 0.1);
+            border-color: var(--success);
+            color: #6ee7b7;
+        }
+
+        .alert-info {
+            background: rgba(8, 145, 178, 0.1);
+            border-color: var(--info);
+            color: #67e8f9;
+        }
+
+        /* Support Section */
+        .support-section {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .support-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-button {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-button:hover {
+            background: var(--surface-light);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+            padding: 1rem;
+            width: 100%;
+        }
+
+        .dashboard.active {
+            display: block;
+            animation: dashboardFade 0.8s var(--ease-spring);
+        }
+
+        @keyframes dashboardFade {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 1rem;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--success), var(--success-light));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dashboard-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .branch-info {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .branch-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .branch-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .card-status {
+            background: var(--success);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: modalFade 0.3s ease;
+        }
+
+        @keyframes modalFade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlide 0.4s var(--ease-spring);
+        }
+
+        @keyframes modalSlide {
+            0% { transform: translateY(30px) scale(0.95); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+
+        /* Subject List */
+        .subject-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .subject-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .subject-item:hover {
+            background: var(--surface-light);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .subject-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subject-link {
+            color: var(--primary-light);
+            font-size: 0.875rem;
+            text-decoration: none;
+        }
+
+        /* Coaching Filter */
+        .coaching-filter {
+            margin-bottom: 1.5rem;
+        }
+
+        .coaching-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .coaching-tab {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .coaching-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .coaching-tab:hover:not(.active) {
+            background: var(--surface-light);
+            color: var(--text-primary);
+        }
+
+        /* Branch Selection Modal */
+        .branch-modal .branch-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .branch-option {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            text-align: center;
+        }
+
+        .branch-option:hover {
+            border-color: var(--primary);
+            background: var(--surface-light);
+        }
+
+        .branch-option.selected {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .branch-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .branch-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .branch-desc {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 480px) {
+            .portal {
+                padding: 2.5rem;
+                max-width: 450px;
+            }
+            
+            .portal-title {
+                font-size: 2.25rem;
+            }
+            
+            .branch-modal .branch-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-container {
+                padding: 2rem;
+            }
+            
+            .portal {
+                max-width: 480px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .dashboard-title {
+                font-size: 2.5rem;
+            }
+            
+            .user-badge {
+                display: block;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard-container {
+                padding-top: 2rem;
+            }
+            
+            .dashboard-title {
+                font-size: 3rem;
+            }
+            
+            .content-grid {
+                gap: 2.5rem;
+            }
+        }
+
+        /* Security Styles */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
         .security-warning {
             position: fixed;
             top: 50%;
@@ -252,1088 +966,6 @@
             50% { transform: translate(-50%, -50%) scale(1.1); }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
-
-        /* Login Portal */
-        .portal {
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: var(--shadow-2xl);
-            animation: portalEntrance 1s var(--ease-spring);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.03), 
-                transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        @keyframes portalEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.9) rotateX(15deg);
-                filter: blur(10px);
-            }
-            50% {
-                opacity: 0.7;
-                transform: translateY(-5px) scale(1.02) rotateX(-2deg);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1) rotateX(0deg);
-                filter: blur(0);
-            }
-        }
-
-        /* Header Section */
-        .portal-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
-            animation: brandPulse 2s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .brand-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            animation: brandShine 2s infinite;
-        }
-
-        @keyframes brandPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes brandShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .portal-title {
-            font-size: 2.75rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: titleGradient 4s ease-in-out infinite;
-            letter-spacing: -0.02em;
-        }
-
-        @keyframes titleGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .portal-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-            font-weight: 400;
-            opacity: 0;
-            animation: subtitleFadeIn 1s ease-out 0.3s forwards;
-        }
-
-        @keyframes subtitleFadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Form Styles */
-        .login-form {
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.75rem;
-            position: relative;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.025em;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            border-radius: 14px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 400;
-            transition: all 0.3s var(--ease-spring);
-            outline: none;
-        }
-
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-            background: var(--surface-light);
-            transform: translateY(-1px);
-        }
-
-        .form-input:hover:not(:focus) {
-            border-color: var(--border-light);
-            background: var(--surface-light);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        /* Password Toggle */
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            font-size: 1.25rem;
-        }
-
-        .password-toggle:hover {
-            color: var(--text-primary);
-            background: var(--glass-hover);
-        }
-
-        .password-toggle:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        /* Verification Section */
-        .verification-section {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            margin-bottom: 1.75rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .verification-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
-            background-size: 200% 100%;
-            animation: verificationBar 2s linear infinite;
-        }
-
-        @keyframes verificationBar {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .verification-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.25rem;
-        }
-
-        .verification-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 600;
-            letter-spacing: 0.025em;
-        }
-
-        .refresh-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none;
-            color: white;
-            padding: 0.6rem 1rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-spring);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        .refresh-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
-        }
-
-        .refresh-button:active {
-            transform: translateY(0);
-        }
-
-        .refresh-button .icon {
-            font-size: 1rem;
-            animation: refreshSpin 0.5s ease-in-out;
-        }
-
-        @keyframes refreshSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(180deg); }
-        }
-
-        .captcha-display {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem;
-            border-radius: 14px;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
-            font-size: 1.75rem;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 8px;
-            margin-bottom: 1.25rem;
-            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
-            position: relative;
-            overflow: hidden;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .captcha-display::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2), 
-                transparent);
-            animation: captchaScan 3s infinite;
-        }
-
-        @keyframes captchaScan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Hint System */
-        .hint-display {
-            background: rgba(217, 119, 6, 0.1);
-            border: 1px solid rgba(217, 119, 6, 0.2);
-            color: var(--warning-light);
-            padding: 1rem;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            display: none;
-            animation: hintSlide 0.3s ease-out;
-        }
-
-        .hint-display.show {
-            display: block;
-        }
-
-        @keyframes hintSlide {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Submit Button */
-        .submit-button {
-            width: 100%;
-            padding: 1.25rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-spring);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
-            margin-bottom: 1.75rem;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.025em;
-        }
-
-        .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.6s ease;
-        }
-
-        .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.4);
-        }
-
-        .submit-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .submit-button:active {
-            transform: translateY(-1px);
-        }
-
-        .submit-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Loading State */
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Alert System */
-        .alert {
-            padding: 1.25rem;
-            border-radius: 14px;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: none;
-            position: relative;
-            overflow: hidden;
-            border-left: 4px solid;
-        }
-
-        .alert.show {
-            display: block;
-            animation: alertSlideIn 0.4s var(--ease-spring);
-        }
-
-        @keyframes alertSlideIn {
-            0% { 
-                opacity: 0; 
-                transform: translateY(-15px) scale(0.95); 
-            }
-            50% { 
-                transform: translateY(2px) scale(1.02); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
-        }
-
-        .alert-error {
-            background: rgba(220, 38, 38, 0.1);
-            border-color: var(--error);
-            color: #fca5a5;
-        }
-
-        .alert-success {
-            background: rgba(5, 150, 105, 0.1);
-            border-color: var(--success);
-            color: #6ee7b7;
-        }
-
-        .alert-warning {
-            background: rgba(217, 119, 6, 0.1);
-            border-color: var(--warning);
-            color: #fbbf24;
-        }
-
-        .alert-info {
-            background: rgba(8, 145, 178, 0.1);
-            border-color: var(--info);
-            color: #67e8f9;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
-            height: 4px;
-            background: var(--surface);
-            border-radius: 2px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        /* Support Section */
-        .support-section {
-            text-align: center;
-            padding-top: 1.75rem;
-            border-top: 1px solid var(--border);
-            position: relative;
-        }
-
-        .support-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-        }
-
-        .support-text {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-bottom: 1.25rem;
-            font-weight: 400;
-        }
-
-        .support-button {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            color: var(--text-secondary);
-            padding: 0.875rem 1.75rem;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-spring);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .support-button:hover {
-            background: var(--surface-light);
-            color: var(--text-primary);
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
-        }
-
-        /* Dashboard Styles */
-        .dashboard {
-            display: none;
-            min-height: 100vh;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .dashboard.active {
-            display: block;
-            animation: dashboardFadeIn 1s var(--ease-spring);
-        }
-
-        @keyframes dashboardFadeIn {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.95); 
-                filter: blur(10px);
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1); 
-                filter: blur(0);
-            }
-        }
-
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .success-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, var(--success), var(--success-light));
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3);
-            animation: successPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes successPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 12px 32px rgba(5, 150, 105, 0.4); }
-        }
-
-        .dashboard-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-            animation: dashboardTitleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes dashboardTitleGlow {
-            0%, 100% { 
-                background-position: 0% 50%; 
-                filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3));
-            }
-            50% { 
-                background-position: 100% 50%; 
-                filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
-            }
-        }
-
-        .dashboard-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.375rem;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s var(--ease-spring);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.05), 
-                transparent);
-            transition: left 0.6s ease;
-        }
-
-        .stat-card:hover::before {
-            left: 100%;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary);
-        }
-
-        .stat-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Content Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .content-card {
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            cursor: pointer;
-            transition: all 0.4s var(--ease-spring);
-            position: relative;
-            overflow: hidden;
-            group: content-card;
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .content-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .content-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .content-card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .content-card:hover .card-title {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--success);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.025em;
-        }
-
-        .card-features {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .card-features li {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .card-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        /* Security Features */
-        .security-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .security-overlay.active {
-            display: flex;
-            animation: overlayFadeIn 0.3s ease;
-        }
-
-        @keyframes overlayFadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* Activity Monitor */
-        .activity-monitor {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            z-index: 1000;
-            display: none;
-        }
-
-        .activity-monitor.active {
-            display: block;
-            animation: monitorSlideIn 0.3s ease;
-        }
-
-        @keyframes monitorSlideIn {
-            0% { transform: translateX(100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 1.5rem;
-            }
-            
-            .dashboard-title {
-                font-size: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 1rem;
-            }
-            
-            .portal {
-                padding: 2rem;
-                margin: 1rem;
-            }
-            
-            .portal-title {
-                font-size: 2.25rem;
-            }
-            
-            .dashboard-title {
-                font-size: 2.5rem;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .portal {
-                padding: 1.5rem;
-            }
-            
-            .portal-title {
-                font-size: 2rem;
-            }
-            
-            .dashboard-title {
-                font-size: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Dark Mode Adjustments */
-        @media (prefers-color-scheme: light) {
-            :root {
-                --background: #f8fafc;
-                --background-secondary: #f1f5f9;
-                --surface: #ffffff;
-                --surface-light: #f8fafc;
-                --text-primary: #1e293b;
-                --text-secondary: #475569;
-                --text-muted: #64748b;
-                --border: #e2e8f0;
-                --glass: rgba(255, 255, 255, 0.8);
-            }
-        }
-
-        /* Animations for Enhanced UX */
-        @keyframes slideInFromLeft {
-            0% { transform: translateX(-100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInFromRight {
-            0% { transform: translateX(100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInFromBottom {
-            0% { transform: translateY(100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes zoomIn {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Utility Classes */
-        .fade-in { animation: fadeIn 0.5s ease; }
-        .slide-up { animation: slideUp 0.5s ease; }
-        .zoom-in { animation: zoomIn 0.5s ease; }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Loading States */
-        .skeleton {
-            background: linear-gradient(90deg, var(--surface) 25%, var(--surface-light) 50%, var(--surface) 75%);
-            background-size: 200% 100%;
-            animation: skeleton 1.5s infinite;
-        }
-
-        @keyframes skeleton {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* Enhanced Button Styles */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-spring);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-secondary:hover {
-            background: var(--surface-light);
-            border-color: var(--primary);
-        }
-
-        /* Tooltip System */
-        .tooltip {
-            position: relative;
-        }
-
-        .tooltip::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface);
-            color: var(--text-primary);
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .tooltip:hover::after {
-            opacity: 1;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--surface);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--border-light);
-        }
-
-        /* Focus Management */
-        .focus-trap {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Print Styles */
-        @media print {
-            .portal, .dashboard {
-                box-shadow: none;
-                background: white;
-            }
-            
-            .background-container, .floating-elements {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1341,16 +973,20 @@
     <div class="background-container">
         <div class="background-gradient"></div>
         <div class="grid-pattern"></div>
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
+    </div>
+
+    <!-- App Header with Logout -->
+    <div class="app-header" id="appHeader">
+        <div class="header-brand">
+            <span>🚀</span>
+            <span>EngiVora Premium</span>
+        </div>
+        <div class="user-info">
+            <div class="user-badge" id="userBadge">Premium Member</div>
+            <button class="logout-btn" onclick="logout()">
+                <span>🚪</span>
+                <span>Logout</span>
+            </button>
         </div>
     </div>
 
@@ -1358,53 +994,39 @@
     <div class="security-warning" id="securityWarning">
         <h2>🚨 Security Alert</h2>
         <p>Suspicious activity detected. Access attempt logged.</p>
-        <button class="btn btn-primary" onclick="closeSecurityWarning()">Understood</button>
-    </div>
-
-    <!-- Security Overlay -->
-    <div class="security-overlay" id="securityOverlay">
-        <div class="portal">
-            <div class="portal-header">
-                <h2>🛡️ Access Denied</h2>
-                <p>Please contact administrator for access.</p>
-            </div>
-            <button class="btn btn-primary" onclick="redirectToSupport()">Contact Support</button>
-        </div>
-    </div>
-
-    <!-- Activity Monitor -->
-    <div class="activity-monitor" id="activityMonitor">
-        <div>🔍 Session Active</div>
-        <div id="sessionTime">00:00</div>
+        <button class="submit-button" onclick="closeSecurityWarning()" style="margin-top: 1rem; margin-bottom: 0;">Understood</button>
     </div>
 
     <!-- Login Portal -->
     <div class="main-container" id="loginContainer">
         <div class="portal">
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-
             <div class="portal-header">
                 <div class="brand-badge">
                     <span>🚀</span>
                     <span>EngiVora Premium</span>
                 </div>
                 <h1 class="portal-title">Welcome Back</h1>
-                <p class="portal-subtitle">Access your premium learning content with advanced security</p>
+                <p class="portal-subtitle">Access your premium engineering resources</p>
             </div>
 
             <!-- Alert System -->
             <div class="alert alert-error" id="errorAlert"></div>
             <div class="alert alert-success" id="successAlert"></div>
-            <div class="alert alert-warning" id="warningAlert"></div>
             <div class="alert alert-info" id="infoAlert"></div>
 
-            <!-- Hint Display -->
-            <div class="hint-display" id="hintDisplay"></div>
+            <form id="loginForm" autocomplete="off">
+                <!-- Branch Selection -->
+                <div class="branch-selection">
+                    <label class="branch-label">🎓 Select Your Branch</label>
+                    <select id="branchSelect" class="branch-select" required>
+                        <option value="">Choose Engineering Branch</option>
+                        <option value="civil">Civil Engineering</option>
+                        <option value="mechanical">Mechanical Engineering</option>
+                        <option value="electrical">Electrical Engineering</option>
+                        <option value="computer">Computer Science Engineering</option>
+                    </select>
+                </div>
 
-            <form class="login-form" id="loginForm" autocomplete="off">
                 <div class="form-group">
                     <label class="form-label">🔐 Access Key</label>
                     <div class="input-wrapper">
@@ -1414,14 +1036,12 @@
                             class="form-input" 
                             placeholder="Enter your premium access key"
                             autocomplete="new-password"
-                            spellcheck="false"
                             required
                         >
                         <button 
                             type="button" 
                             class="password-toggle" 
                             id="togglePassword"
-                            data-tooltip="Toggle password visibility"
                             onclick="togglePasswordVisibility()"
                         >
                             👁️
@@ -1431,14 +1051,13 @@
 
                 <div class="verification-section">
                     <div class="verification-header">
-                        <span class="verification-label">🔒 Security Verification</span>
+                        <span class="verification-label">🔒 Security Code</span>
                         <button 
                             type="button" 
                             class="refresh-button" 
                             onclick="refreshCaptcha()"
-                            data-tooltip="Generate new code"
                         >
-                            <span class="icon">↻</span>
+                            <span>↻</span>
                             <span>Refresh</span>
                         </button>
                     </div>
@@ -1447,9 +1066,8 @@
                         type="text" 
                         id="captchaInput" 
                         class="form-input" 
-                        placeholder="Enter the security code displayed above"
+                        placeholder="Enter security code"
                         autocomplete="off"
-                        spellcheck="false"
                         maxlength="6"
                         required
                     >
@@ -1462,10 +1080,10 @@
             </form>
 
             <div class="support-section">
-                <p class="support-text">Need assistance or premium access credentials?</p>
+                <p class="support-text">Need premium access credentials?</p>
                 <a href="https://t.me/helpengivora" class="support-button" target="_blank">
                     <span>📞</span>
-                    <span>Contact Support Team</span>
+                    <span>Contact Support</span>
                 </a>
             </div>
         </div>
@@ -1475,938 +1093,532 @@
     <div class="dashboard" id="dashboard">
         <div class="dashboard-container">
             <div class="dashboard-header">
-                <div class="success-badge">
+                <div class="welcome-badge">
                     <span>✅</span>
-                    <span>Access Granted - Premium Member</span>
+                    <span>Access Granted</span>
                 </div>
-                <h1 class="dashboard-title">Learning Portal</h1>
-                <p class="dashboard-subtitle">Your comprehensive educational resources and premium content library</p>
-            </div>
-
-            <!-- Stats Section -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-icon">📚</span>
-                    <div class="stat-number" id="notesCount">150+</div>
-                    <div class="stat-label">Study Notes</div>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-icon">🎓</span>
-                    <div class="stat-number" id="lecturesCount">75+</div>
-                    <div class="stat-label">Video Lectures</div>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-icon">📖</span>
-                    <div class="stat-number" id="resourcesCount">200+</div>
-                    <div class="stat-label">Resources</div>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-icon">✏️</span>
-                    <div class="stat-number" id="testsCount">50+</div>
-                    <div class="stat-label">Practice Tests</div>
+                <h1 class="dashboard-title">Engineering Portal</h1>
+                <p class="dashboard-subtitle">Premium educational resources for engineering excellence</p>
+                
+                <div class="branch-info" id="branchInfo">
+                    <div class="branch-name" id="selectedBranchName">Select Branch</div>
+                    <div class="branch-description" id="selectedBranchDesc">Choose your engineering branch to access specialized content</div>
                 </div>
             </div>
 
             <div class="content-grid">
-                <div class="content-card" onclick="openContentSection('notes')">
+                <div class="content-card" onclick="openContentModal('books')">
                     <span class="card-icon">📚</span>
-                    <h3 class="card-title">Comprehensive Study Notes</h3>
-                    <p class="card-description">Detailed study materials, summaries, and structured notes covering all essential topics with visual aids and examples.</p>
-                    <ul class="card-features">
-                        <li>Topic-wise organized content</li>
-                        <li>Visual diagrams and charts</li>
-                        <li>Quick revision guides</li>
-                        <li>Downloadable PDF formats</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Available Now</span>
-                    </span>
+                    <h3 class="card-title">Private Engineering Books</h3>
+                    <p class="card-description">Comprehensive collection of premium engineering textbooks, reference materials, and specialized publications.</p>
+                    <span class="card-status">Available</span>
                 </div>
 
-                <div class="content-card" onclick="openContentSection('lectures')">
-                    <span class="card-icon">🎓</span>
-                    <h3 class="card-title">Expert Video Lectures</h3>
-                    <p class="card-description">High-quality educational videos by industry experts with interactive elements and practical demonstrations.</p>
-                    <ul class="card-features">
-                        <li>HD video quality</li>
-                        <li>Interactive timestamps</li>
-                        <li>Offline download option</li>
-                        <li>Multi-language subtitles</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Streaming Ready</span>
-                    </span>
+                <div class="content-card" onclick="openContentModal('notes')">
+                    <span class="card-icon">📝</span>
+                    <h3 class="card-title">Premium Study Notes</h3>
+                    <p class="card-description">Expertly crafted study notes from top coaching institutes with detailed explanations and examples.</p>
+                    <span class="card-status">Available</span>
                 </div>
 
-                <div class="content-card" onclick="openContentSection('resources')">
-                    <span class="card-icon">📖</span>
-                    <h3 class="card-title">Learning Resources Hub</h3>
-                    <p class="card-description">Extensive collection of reference materials, research papers, case studies, and supplementary content.</p>
-                    <ul class="card-features">
-                        <li>Research papers & articles</li>
-                        <li>Case study analyses</li>
-                        <li>Reference materials</li>
-                        <li>Industry reports</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Library Access</span>
-                    </span>
-                </div>
-
-                <div class="content-card" onclick="openContentSection('practice')">
-                    <span class="card-icon">✏️</span>
-                    <h3 class="card-title">Interactive Practice Tests</h3>
-                    <p class="card-description">Comprehensive testing platform with adaptive questions, detailed explanations, and performance analytics.</p>
-                    <ul class="card-features">
-                        <li>Adaptive difficulty levels</li>
-                        <li>Instant result feedback</li>
-                        <li>Performance tracking</li>
-                        <li>Custom test creation</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Test Center</span>
-                    </span>
-                </div>
-
-                <div class="content-card" onclick="openContentSection('projects')">
-                    <span class="card-icon">🚀</span>
-                    <h3 class="card-title">Hands-on Projects</h3>
-                    <p class="card-description">Real-world projects and practical assignments designed to enhance your skills and build your portfolio.</p>
-                    <ul class="card-features">
-                        <li>Industry-relevant projects</li>
-                        <li>Step-by-step guidance</li>
-                        <li>Source code templates</li>
-                        <li>Portfolio building</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Project Lab</span>
-                    </span>
-                </div>
-
-                <div class="content-card" onclick="openContentSection('community')">
-                    <span class="card-icon">👥</span>
-                    <h3 class="card-title">Learning Community</h3>
-                    <p class="card-description">Connect with peers, participate in discussions, get mentorship, and collaborate on projects.</p>
-                    <ul class="card-features">
-                        <li>Discussion forums</li>
-                        <li>Peer-to-peer learning</li>
-                        <li>Expert mentorship</li>
-                        <li>Study groups</li>
-                    </ul>
-                    <span class="card-status">
-                        <span>🟢</span>
-                        <span>Community Active</span>
-                    </span>
+                <div class="content-card" onclick="openContentModal('lectures')">
+                    <span class="card-icon">🎥</span>
+                    <h3 class="card-title">Private Video Lectures</h3>
+                    <p class="card-description">High-quality video lectures from renowned coaching institutes and expert professors.</p>
+                    <span class="card-status">Available</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Focus Trap Elements -->
-    <div class="focus-trap" tabindex="0"></div>
-    <div class="focus-trap" tabindex="0"></div>
+    <!-- Content Modal -->
+    <div class="modal-overlay" id="contentModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeContentModal()">×</button>
+            
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Select Content</h2>
+                <p class="modal-subtitle" id="modalSubtitle">Choose from our premium collection</p>
+            </div>
+
+            <!-- Coaching Filter (for notes and lectures) -->
+            <div class="coaching-filter" id="coachingFilter" style="display: none;">
+                <div class="coaching-tabs">
+                    <button class="coaching-tab active" data-coaching="pw" onclick="selectCoaching('pw')">Physics Wallah</button>
+                    <button class="coaching-tab" data-coaching="made-easy" onclick="selectCoaching('made-easy')">Made Easy</button>
+                    <button class="coaching-tab" data-coaching="gate-academy" onclick="selectCoaching('gate-academy')">Gate Academy</button>
+                </div>
+            </div>
+
+            <div class="subject-list" id="subjectList">
+                <!-- Subjects will be populated here -->
+            </div>
+
+            <button class="submit-button" onclick="closeContentModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Branch Selection Modal -->
+    <div class="modal-overlay branch-modal" id="branchModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeBranchModal()">×</button>
+            
+            <div class="modal-header">
+                <h2 class="modal-title">Select Your Branch</h2>
+                <p class="modal-subtitle">Choose your engineering specialization</p>
+            </div>
+
+            <div class="branch-grid">
+                <div class="branch-option" data-branch="civil" onclick="selectBranch('civil')">
+                    <span class="branch-icon">🏗️</span>
+                    <div class="branch-title">Civil Engineering</div>
+                    <div class="branch-desc">Structures, Construction & Infrastructure</div>
+                </div>
+                
+                <div class="branch-option" data-branch="mechanical" onclick="selectBranch('mechanical')">
+                    <span class="branch-icon">⚙️</span>
+                    <div class="branch-title">Mechanical Engineering</div>
+                    <div class="branch-desc">Machines, Thermodynamics & Design</div>
+                </div>
+                
+                <div class="branch-option" data-branch="electrical" onclick="selectBranch('electrical')">
+                    <span class="branch-icon">⚡</span>
+                    <div class="branch-title">Electrical Engineering</div>
+                    <div class="branch-desc">Power Systems & Electronics</div>
+                </div>
+                
+                <div class="branch-option" data-branch="computer" onclick="selectBranch('computer')">
+                    <span class="branch-icon">💻</span>
+                    <div class="branch-title">Computer Science</div>
+                    <div class="branch-desc">Programming & Software Development</div>
+                </div>
+            </div>
+
+            <button class="submit-button" id="confirmBranch" onclick="confirmBranchSelection()" disabled>
+                Continue with Selected Branch
+            </button>
+        </div>
+    </div>
 
     <script>
-        // Enhanced Security Configuration
-        const SECURITY_CONFIG = {
-            MAX_ATTEMPTS: 3,
-            LOCKOUT_DURATION: 300000, // 5 minutes
-            SESSION_TIMEOUT: 1800000, // 30 minutes
-            CAPTCHA_REFRESH_INTERVAL: 180000, // 3 minutes
-            ACTIVITY_LOG_ENABLED: true,
-            ANTI_TAMPERING: true
+        // Application State
+        let appState = {
+            isLoggedIn: false,
+            selectedBranch: '',
+            currentUser: null,
+            sessionStartTime: Date.now(),
+            passwordVisible: false,
+            currentCaptcha: '',
+            attemptCount: 0,
+            maxAttempts: 3,
+            selectedCoaching: 'pw'
         };
 
-        // Access Keys with Role-Based Access
-        const ACCESS_CREDENTIALS = {
-            premium: {
-                key: 'EngiVora@private2025',
-                role: 'user',
-                permissions: ['dashboard', 'content', 'community']
-            },
-            admin: {
-                key: 'EngiVora@205082',
-                role: 'admin',
-                permissions: ['admin_panel', 'user_management', 'analytics']
-            },
-            moderator: {
-                key: 'EngiVora@mod2025',
-                role: 'moderator',
-                permissions: ['content_moderation', 'user_support']
-            }
+        // Access Credentials
+        const ACCESS_KEYS = {
+            premium: 'EngiVora@private2025',
+            admin: 'EngiVora@205082'
         };
 
-        // Enhanced CAPTCHA System
+        // CAPTCHA Codes
         const CAPTCHA_CODES = [
             'A7X9K2', 'M5Q8P1', 'R3W6T4', 'B9Y2L7', 'N4H8F5',
-            'V6Z1C3', 'J8G4D2', 'X2S7A9', 'K5R3E6', 'P1T9U4',
-            'L7M2N8', 'Q4W6Y3', 'F9J1H7', 'C8V5B2', 'Z3X6K9'
+            'V6Z1C3', 'J8G4D2', 'X2S7A9', 'K5R3E6', 'P1T9U4'
         ];
 
-        // Security State
-        let securityState = {
-            attemptCount: 0,
-            lastAttemptTime: 0,
-            isLocked: false,
-            currentCaptcha: '',
-            sessionStartTime: Date.now(),
-            activityLog: [],
-            suspiciousActivity: false,
-            passwordVisible: false
-        };
-
-        // Session Management
-        let sessionManager = {
-            startTime: Date.now(),
-            lastActivity: Date.now(),
-            isActive: true,
-            warningShown: false
+        // Branch Information
+        const BRANCHES = {
+            civil: {
+                name: 'Civil Engineering',
+                icon: '🏗️',
+                description: 'Building the infrastructure of tomorrow with structural design and construction expertise',
+                subjects: {
+                    books: [
+                        { name: 'Strength of Materials', link: 'https://drive.google.com/drive/folders/demo_som_books' },
+                        { name: 'Structural Analysis', link: 'https://drive.google.com/drive/folders/demo_sa_books' },
+                        { name: 'Concrete Technology', link: 'https://drive.google.com/drive/folders/demo_ct_books' },
+                        { name: 'Soil Mechanics', link: 'https://drive.google.com/drive/folders/demo_sm_books' },
+                        { name: 'Fluid Mechanics', link: 'https://drive.google.com/drive/folders/demo_fm_books' },
+                        { name: 'Transportation Engineering', link: 'https://drive.google.com/drive/folders/demo_te_books' }
+                    ],
+                    notes: {
+                        pw: [
+                            { name: 'Strength of Materials Notes', link: 'https://drive.google.com/drive/folders/demo_som_pw_notes' },
+                            { name: 'RCC Design Notes', link: 'https://drive.google.com/drive/folders/demo_rcc_pw_notes' },
+                            { name: 'Steel Structures Notes', link: 'https://drive.google.com/drive/folders/demo_steel_pw_notes' }
+                        ],
+                        'made-easy': [
+                            { name: 'Strength of Materials ME', link: 'https://drive.google.com/drive/folders/demo_som_me_notes' },
+                            { name: 'Concrete Technology ME', link: 'https://drive.google.com/drive/folders/demo_ct_me_notes' },
+                            { name: 'Geotechnical Engineering ME', link: 'https://drive.google.com/drive/folders/demo_geo_me_notes' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Structural Analysis GA', link: 'https://drive.google.com/drive/folders/demo_sa_ga_notes' },
+                            { name: 'Construction Management GA', link: 'https://drive.google.com/drive/folders/demo_cm_ga_notes' }
+                        ]
+                    },
+                    lectures: {
+                        pw: [
+                            { name: 'Strength of Materials Video Series', link: 'https://drive.google.com/drive/folders/demo_som_pw_videos' },
+                            { name: 'Structural Design Masterclass', link: 'https://drive.google.com/drive/folders/demo_design_pw_videos' }
+                        ],
+                        'made-easy': [
+                            { name: 'Complete Civil Engineering Course', link: 'https://drive.google.com/drive/folders/demo_complete_me_videos' },
+                            { name: 'GATE Civil Preparation', link: 'https://drive.google.com/drive/folders/demo_gate_me_videos' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Advanced Civil Engineering', link: 'https://drive.google.com/drive/folders/demo_advanced_ga_videos' }
+                        ]
+                    }
+                }
+            },
+            mechanical: {
+                name: 'Mechanical Engineering',
+                icon: '⚙️',
+                description: 'Mastering the art of machines, thermodynamics, and mechanical design',
+                subjects: {
+                    books: [
+                        { name: 'Thermodynamics', link: 'https://drive.google.com/drive/folders/demo_thermo_books' },
+                        { name: 'Machine Design', link: 'https://drive.google.com/drive/folders/demo_machine_books' },
+                        { name: 'Heat Transfer', link: 'https://drive.google.com/drive/folders/demo_heat_books' },
+                        { name: 'Fluid Mechanics', link: 'https://drive.google.com/drive/folders/demo_fluid_books' },
+                        { name: 'Manufacturing Processes', link: 'https://drive.google.com/drive/folders/demo_manufacturing_books' }
+                    ],
+                    notes: {
+                        pw: [
+                            { name: 'Thermodynamics Complete Notes', link: 'https://drive.google.com/drive/folders/demo_thermo_pw_notes' },
+                            { name: 'Machine Design Notes', link: 'https://drive.google.com/drive/folders/demo_machine_pw_notes' }
+                        ],
+                        'made-easy': [
+                            { name: 'Heat Transfer ME Notes', link: 'https://drive.google.com/drive/folders/demo_heat_me_notes' },
+                            { name: 'Manufacturing ME Notes', link: 'https://drive.google.com/drive/folders/demo_manu_me_notes' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Fluid Mechanics GA Notes', link: 'https://drive.google.com/drive/folders/demo_fluid_ga_notes' }
+                        ]
+                    },
+                    lectures: {
+                        pw: [
+                            { name: 'Complete Mechanical Course', link: 'https://drive.google.com/drive/folders/demo_mech_pw_videos' }
+                        ],
+                        'made-easy': [
+                            { name: 'GATE Mechanical Preparation', link: 'https://drive.google.com/drive/folders/demo_gate_mech_me' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Advanced Mechanical Topics', link: 'https://drive.google.com/drive/folders/demo_adv_mech_ga' }
+                        ]
+                    }
+                }
+            },
+            electrical: {
+                name: 'Electrical Engineering',
+                icon: '⚡',
+                description: 'Powering the future with electrical systems and electronic innovations',
+                subjects: {
+                    books: [
+                        { name: 'Circuit Theory', link: 'https://drive.google.com/drive/folders/demo_circuit_books' },
+                        { name: 'Power Systems', link: 'https://drive.google.com/drive/folders/demo_power_books' },
+                        { name: 'Control Systems', link: 'https://drive.google.com/drive/folders/demo_control_books' },
+                        { name: 'Electrical Machines', link: 'https://drive.google.com/drive/folders/demo_machines_books' }
+                    ],
+                    notes: {
+                        pw: [
+                            { name: 'Circuit Analysis Notes', link: 'https://drive.google.com/drive/folders/demo_circuit_pw_notes' },
+                            { name: 'Power Systems Notes', link: 'https://drive.google.com/drive/folders/demo_power_pw_notes' }
+                        ],
+                        'made-easy': [
+                            { name: 'Control Systems ME', link: 'https://drive.google.com/drive/folders/demo_control_me_notes' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Electrical Machines GA', link: 'https://drive.google.com/drive/folders/demo_machines_ga_notes' }
+                        ]
+                    },
+                    lectures: {
+                        pw: [
+                            { name: 'Complete Electrical Course', link: 'https://drive.google.com/drive/folders/demo_elec_pw_videos' }
+                        ],
+                        'made-easy': [
+                            { name: 'GATE Electrical ME', link: 'https://drive.google.com/drive/folders/demo_gate_elec_me' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Advanced Electrical GA', link: 'https://drive.google.com/drive/folders/demo_adv_elec_ga' }
+                        ]
+                    }
+                }
+            },
+            computer: {
+                name: 'Computer Science Engineering',
+                icon: '💻',
+                description: 'Coding the digital future with software engineering and computational thinking',
+                subjects: {
+                    books: [
+                        { name: 'Data Structures & Algorithms', link: 'https://drive.google.com/drive/folders/demo_dsa_books' },
+                        { name: 'Operating Systems', link: 'https://drive.google.com/drive/folders/demo_os_books' },
+                        { name: 'Database Management', link: 'https://drive.google.com/drive/folders/demo_dbms_books' },
+                        { name: 'Computer Networks', link: 'https://drive.google.com/drive/folders/demo_networks_books' },
+                        { name: 'Software Engineering', link: 'https://drive.google.com/drive/folders/demo_se_books' }
+                    ],
+                    notes: {
+                        pw: [
+                            { name: 'DSA Complete Notes', link: 'https://drive.google.com/drive/folders/demo_dsa_pw_notes' },
+                            { name: 'Operating Systems Notes', link: 'https://drive.google.com/drive/folders/demo_os_pw_notes' }
+                        ],
+                        'made-easy': [
+                            { name: 'DBMS ME Notes', link: 'https://drive.google.com/drive/folders/demo_dbms_me_notes' },
+                            { name: 'Computer Networks ME', link: 'https://drive.google.com/drive/folders/demo_cn_me_notes' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Software Engineering GA', link: 'https://drive.google.com/drive/folders/demo_se_ga_notes' }
+                        ]
+                    },
+                    lectures: {
+                        pw: [
+                            { name: 'Complete CS Course', link: 'https://drive.google.com/drive/folders/demo_cs_pw_videos' },
+                            { name: 'Programming Masterclass', link: 'https://drive.google.com/drive/folders/demo_prog_pw_videos' }
+                        ],
+                        'made-easy': [
+                            { name: 'GATE CS Preparation', link: 'https://drive.google.com/drive/folders/demo_gate_cs_me' }
+                        ],
+                        'gate-academy': [
+                            { name: 'Advanced CS Topics', link: 'https://drive.google.com/drive/folders/demo_adv_cs_ga' }
+                        ]
+                    }
+                }
+            }
         };
 
         // Utility Functions
         const utils = {
-            // Generate secure random string
-            generateRandomString(length = 16) {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    result += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                return result;
-            },
-
-            // Encrypt data (simple obfuscation)
-            encrypt(data) {
-                return btoa(data).split('').reverse().join('');
-            },
-
-            // Decrypt data
-            decrypt(data) {
-                return atob(data.split('').reverse().join(''));
-            },
-
-            // Log security events
-            logSecurityEvent(event, details = {}) {
-                if (SECURITY_CONFIG.ACTIVITY_LOG_ENABLED) {
-                    const logEntry = {
-                        timestamp: new Date().toISOString(),
-                        event: event,
-                        details: details,
-                        userAgent: navigator.userAgent,
-                        ip: 'client-side', // Would be server-side in real implementation
-                        sessionId: sessionManager.startTime
-                    };
-                    securityState.activityLog.push(logEntry);
-                    console.log('Security Event:', logEntry);
-                }
-            },
-
-            // Detect developer tools
-            detectDevTools() {
-                let devtools = { open: false, orientation: null };
-                
-                setInterval(() => {
-                    if (window.outerHeight - window.innerHeight > 200 || 
-                        window.outerWidth - window.innerWidth > 200) {
-                        if (!devtools.open) {
-                            devtools.open = true;
-                            this.triggerSecurityAlert('Developer tools detected');
-                        }
-                    } else {
-                        devtools.open = false;
-                    }
-                }, 500);
-            },
-
-            // Trigger security alert
-            triggerSecurityAlert(message) {
-                securityState.suspiciousActivity = true;
-                this.logSecurityEvent('SECURITY_ALERT', { message });
-                this.showSecurityWarning(message);
-            },
-
-            // Show security warning
-            showSecurityWarning(message = 'Suspicious activity detected') {
-                const warning = document.getElementById('securityWarning');
-                warning.querySelector('p').textContent = message + '. Access attempt logged.';
-                warning.classList.add('active');
-            },
-
-            // Check if user is locked out
-            isLockedOut() {
-                if (securityState.isLocked) {
-                    const timePassed = Date.now() - securityState.lastAttemptTime;
-                    if (timePassed < SECURITY_CONFIG.LOCKOUT_DURATION) {
-                        return true;
-                    } else {
-                        // Reset lockout
-                        securityState.isLocked = false;
-                        securityState.attemptCount = 0;
-                        return false;
-                    }
-                }
-                return false;
-            }
-        };
-
-        // UI Management Functions
-        const uiManager = {
-            // Show alert with animation
             showAlert(message, type = 'error', duration = 5000) {
                 const alertElement = document.getElementById(`${type}Alert`);
                 if (alertElement) {
                     alertElement.textContent = message;
                     alertElement.classList.add('show');
-                    
                     setTimeout(() => {
                         alertElement.classList.remove('show');
                     }, duration);
                 }
             },
 
-            // Hide all alerts
             hideAllAlerts() {
-                const alertTypes = ['error', 'success', 'warning', 'info'];
-                alertTypes.forEach(type => {
-                    const alertElement = document.getElementById(`${type}Alert`);
-                    if (alertElement) {
-                        alertElement.classList.remove('show');
-                    }
+                ['error', 'success', 'info'].forEach(type => {
+                    const alert = document.getElementById(`${type}Alert`);
+                    if (alert) alert.classList.remove('show');
                 });
             },
 
-            // Show hint
-            showHint(message) {
-                const hintElement = document.getElementById('hintDisplay');
-                hintElement.textContent = `💡 Hint: ${message}`;
-                hintElement.classList.add('show');
+            toggleLoading(loading) {
+                const btn = document.getElementById('submitBtn');
+                const spinner = document.getElementById('loadingSpinner');
+                const text = document.getElementById('submitText');
                 
-                setTimeout(() => {
-                    hintElement.classList.remove('show');
-                }, 8000);
-            },
-
-            // Update progress bar
-            updateProgress(percentage) {
-                const progressBar = document.getElementById('progressBar');
-                progressBar.style.width = `${percentage}%`;
-            },
-
-            // Toggle loading state
-            toggleLoading(isLoading) {
-                const submitBtn = document.getElementById('submitBtn');
-                const loadingSpinner = document.getElementById('loadingSpinner');
-                const submitText = document.getElementById('submitText');
-                
-                if (isLoading) {
-                    submitBtn.disabled = true;
-                    loadingSpinner.style.display = 'block';
-                    submitText.textContent = 'Verifying Access...';
-                    submitBtn.style.opacity = '0.7';
+                if (loading) {
+                    btn.disabled = true;
+                    spinner.style.display = 'block';
+                    text.textContent = 'Verifying...';
                 } else {
-                    submitBtn.disabled = false;
-                    loadingSpinner.style.display = 'none';
-                    submitText.textContent = '🚀 Access Portal';
-                    submitBtn.style.opacity = '1';
+                    btn.disabled = false;
+                    spinner.style.display = 'none';
+                    text.textContent = '🚀 Access Portal';
                 }
             },
 
-            // Animate dashboard entrance
-            showDashboard() {
-                document.getElementById('loginContainer').style.display = 'none';
-                const dashboard = document.getElementById('dashboard');
-                dashboard.classList.add('active');
-                
-                // Animate stats
-                setTimeout(() => {
-                    this.animateStats();
-                }, 500);
-            },
-
-            // Animate statistics
-            animateStats() {
-                const stats = [
-                    { id: 'notesCount', target: 150, suffix: '+' },
-                    { id: 'lecturesCount', target: 75, suffix: '+' },
-                    { id: 'resourcesCount', target: 200, suffix: '+' },
-                    { id: 'testsCount', target: 50, suffix: '+' }
-                ];
-
-                stats.forEach((stat, index) => {
-                    setTimeout(() => {
-                        this.animateCounter(stat.id, stat.target, stat.suffix);
-                    }, index * 200);
-                });
-            },
-
-            // Animate counter
-            animateCounter(elementId, target, suffix = '') {
-                const element = document.getElementById(elementId);
-                let current = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    element.textContent = Math.floor(current) + suffix;
-                }, 30);
-            }
-        };
-
-        // Security Functions
-        const securityManager = {
-            // Initialize security measures
-            init() {
-                this.setupAntiTampering();
-                this.setupContextMenuBlocking();
-                this.setupKeyboardBlocking();
-                this.setupConsoleWarning();
-                utils.detectDevTools();
-                this.startSessionMonitoring();
-            },
-
-            // Setup anti-tampering measures
-            setupAntiTampering() {
-                if (!SECURITY_CONFIG.ANTI_TAMPERING) return;
-
-                // Detect F12, Ctrl+Shift+I, Ctrl+U, etc.
-                document.addEventListener('keydown', (e) => {
-                    if (
-                        e.key === 'F12' ||
-                        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-                        (e.ctrlKey && e.key === 'u') ||
-                        (e.ctrlKey && e.key === 'U')
-                    ) {
-                        e.preventDefault();
-                        utils.triggerSecurityAlert('Attempted to open developer tools');
-                        return false;
-                    }
-                });
-            },
-
-            // Block right-click context menu
-            setupContextMenuBlocking() {
-                document.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                    utils.logSecurityEvent('CONTEXT_MENU_BLOCKED');
-                    return false;
-                });
-            },
-
-            // Setup keyboard shortcuts blocking
-            setupKeyboardBlocking() {
-                const blockedKeys = [
-                    { ctrl: true, key: 'a' }, // Select all
-                    { ctrl: true, key: 's' }, // Save
-                    { ctrl: true, key: 'p' }, // Print
-                ];
-
-                document.addEventListener('keydown', (e) => {
-                    blockedKeys.forEach(blocked => {
-                        if (e.ctrlKey === blocked.ctrl && e.key.toLowerCase() === blocked.key) {
-                            e.preventDefault();
-                            utils.logSecurityEvent('BLOCKED_KEYBOARD_SHORTCUT', { key: blocked.key });
-                        }
-                    });
-                });
-            },
-
-            // Setup console warning
-            setupConsoleWarning() {
-                console.clear();
-                console.log('%c🚨 SECURITY WARNING 🚨', 'color: red; font-size: 20px; font-weight: bold;');
-                console.log('%cThis is a browser feature intended for developers. Unauthorized access attempts are logged and monitored.', 'color: red; font-size: 14px;');
-                console.log('%cIf someone told you to copy/paste something here, it is likely a scam.', 'color: red; font-size: 14px;');
-            },
-
-            // Start session monitoring
-            startSessionMonitoring() {
-                setInterval(() => {
-                    this.checkSessionTimeout();
-                    this.updateActivityMonitor();
-                }, 1000);
-
-                // Track user activity
-                ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-                    document.addEventListener(event, () => {
-                        sessionManager.lastActivity = Date.now();
-                    }, { passive: true });
-                });
-            },
-
-            // Check session timeout
-            checkSessionTimeout() {
-                const inactiveTime = Date.now() - sessionManager.lastActivity;
-                const totalTime = Date.now() - sessionManager.startTime;
-
-                if (inactiveTime > SECURITY_CONFIG.SESSION_TIMEOUT) {
-                    this.expireSession('Session timeout due to inactivity');
-                } else if (totalTime > SECURITY_CONFIG.SESSION_TIMEOUT * 2) {
-                    this.expireSession('Maximum session duration exceeded');
-                }
-            },
-
-            // Update activity monitor
-            updateActivityMonitor() {
-                const monitor = document.getElementById('activityMonitor');
-                const sessionTime = Math.floor((Date.now() - sessionManager.startTime) / 1000);
-                const minutes = Math.floor(sessionTime / 60);
-                const seconds = sessionTime % 60;
-                
-                const timeElement = document.getElementById('sessionTime');
-                if (timeElement) {
-                    timeElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                }
-
-                if (sessionManager.isActive && document.getElementById('dashboard').classList.contains('active')) {
-                    monitor.classList.add('active');
-                } else {
-                    monitor.classList.remove('active');
-                }
-            },
-
-            // Expire session
-            expireSession(reason) {
-                utils.logSecurityEvent('SESSION_EXPIRED', { reason });
-                sessionManager.isActive = false;
-                uiManager.showAlert('Session expired. Please login again.', 'warning');
-                
-                setTimeout(() => {
-                    location.reload();
-                }, 3000);
-            }
-        };
-
-        // CAPTCHA Management
-        const captchaManager = {
-            // Generate new CAPTCHA
-            generate() {
-                const randomIndex = Math.floor(Math.random() * CAPTCHA_CODES.length);
-                const captcha = CAPTCHA_CODES[randomIndex];
-                securityState.currentCaptcha = captcha;
-                
-                const display = document.getElementById('captchaDisplay');
-                display.textContent = captcha;
-                
-                // Clear input
-                document.getElementById('captchaInput').value = '';
-                
-                utils.logSecurityEvent('CAPTCHA_GENERATED', { 
-                    captchaId: randomIndex,
-                    timestamp: Date.now() 
-                });
-            },
-
-            // Validate CAPTCHA
-            validate(input) {
-                const isValid = input.toUpperCase().trim() === securityState.currentCaptcha;
-                
-                utils.logSecurityEvent('CAPTCHA_VALIDATION', { 
-                    input: input,
-                    valid: isValid,
-                    expected: securityState.currentCaptcha 
-                });
-                
-                return isValid;
-            },
-
-            // Auto-refresh CAPTCHA
-            startAutoRefresh() {
-                setInterval(() => {
-                    if (document.getElementById('loginContainer').style.display !== 'none') {
-                        this.generate();
-                        uiManager.showAlert('Security code refreshed for your protection', 'info', 3000);
-                    }
-                }, SECURITY_CONFIG.CAPTCHA_REFRESH_INTERVAL);
-            }
-        };
-
-        // Form Management
-        const formManager = {
-            // Initialize form
-            init() {
-                const form = document.getElementById('loginForm');
-                form.addEventListener('submit', this.handleSubmit.bind(this));
-                
-                // Real-time validation
-                const accessKeyInput = document.getElementById('accessKey');
-                const captchaInput = document.getElementById('captchaInput');
-                
-                accessKeyInput.addEventListener('input', this.handleAccessKeyInput.bind(this));
-                captchaInput.addEventListener('input', this.handleCaptchaInput.bind(this));
-            },
-
-            // Handle form submission
-            async handleSubmit(e) {
-                e.preventDefault();
-                
-                // Check if locked out
-                if (utils.isLockedOut()) {
-                    const remainingTime = Math.ceil((SECURITY_CONFIG.LOCKOUT_DURATION - (Date.now() - securityState.lastAttemptTime)) / 1000 / 60);
-                    uiManager.showAlert(`Account locked. Try again in ${remainingTime} minutes.`, 'error');
-                    return;
-                }
-
-                uiManager.hideAllAlerts();
-                uiManager.toggleLoading(true);
-                uiManager.updateProgress(25);
-
-                const accessKey = document.getElementById('accessKey').value.trim();
-                const captchaInput = document.getElementById('captchaInput').value.trim();
-
-                // Validate CAPTCHA first
-                uiManager.updateProgress(50);
-                await this.delay(500); // Simulate processing
-
-                if (!captchaManager.validate(captchaInput)) {
-                    this.handleFailedAttempt('Invalid security code. Please try again.');
-                    uiManager.showHint('The security code is case-sensitive. Check the display carefully.');
-                    captchaManager.generate();
-                    uiManager.toggleLoading(false);
-                    uiManager.updateProgress(0);
-                    return;
-                }
-
-                // Validate access key
-                uiManager.updateProgress(75);
-                await this.delay(800); // Simulate processing
-
-                const credential = this.findCredential(accessKey);
-                
-                if (credential) {
-                    this.handleSuccessfulLogin(credential);
-                } else {
-                    this.handleFailedAttempt('Invalid access credentials. Please verify your key.');
-                    this.provideHints(accessKey);
-                }
-
-                uiManager.toggleLoading(false);
-                uiManager.updateProgress(0);
-            },
-
-            // Handle access key input
-            handleAccessKeyInput(e) {
-                const input = e.target.value;
-                const progress = Math.min((input.length / 20) * 100, 100);
-                
-                // Visual feedback for key strength
-                if (input.length > 0) {
-                    if (input.length < 10) {
-                        e.target.style.borderColor = '#ef4444'; // Red
-                    } else if (input.length < 15) {
-                        e.target.style.borderColor = '#f59e0b'; // Orange
-                    } else {
-                        e.target.style.borderColor = '#10b981'; // Green
-                    }
-                } else {
-                    e.target.style.borderColor = 'var(--border)';
-                }
-            },
-
-            // Handle CAPTCHA input
-            handleCaptchaInput(e) {
-                const input = e.target.value.toUpperCase();
-                e.target.value = input;
-                
-                // Visual feedback
-                if (input.length === securityState.currentCaptcha.length) {
-                    if (captchaManager.validate(input)) {
-                        e.target.style.borderColor = '#10b981'; // Green
-                    } else {
-                        e.target.style.borderColor = '#ef4444'; // Red
-                    }
-                }
-            },
-
-            // Find credential by access key
-            findCredential(accessKey) {
-                for (const [type, credential] of Object.entries(ACCESS_CREDENTIALS)) {
-                    if (credential.key === accessKey) {
-                        return { ...credential, type };
-                    }
-                }
-                return null;
-            },
-
-            // Handle successful login
-            async handleSuccessfulLogin(credential) {
-                uiManager.updateProgress(100);
-                utils.logSecurityEvent('LOGIN_SUCCESS', { 
-                    role: credential.role, 
-                    type: credential.type 
-                });
-
-                // Reset attempt counter
-                securityState.attemptCount = 0;
-                securityState.isLocked = false;
-
-                if (credential.role === 'admin') {
-                    uiManager.showAlert('Admin access granted! Redirecting to control panel...', 'success');
-                    await this.delay(2000);
-                    window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
-                } else if (credential.role === 'moderator') {
-                    uiManager.showAlert('Moderator access granted! Loading management panel...', 'success');
-                    await this.delay(2000);
-                    window.open('https://t.me/helpengivora', '_blank');
-                } else {
-                    uiManager.showAlert('Premium access granted! Loading your dashboard...', 'success');
-                    await this.delay(2000);
-                    uiManager.showDashboard();
-                    sessionManager.isActive = true;
-                }
-            },
-
-            // Handle failed attempt
-            handleFailedAttempt(message) {
-                securityState.attemptCount++;
-                securityState.lastAttemptTime = Date.now();
-
-                utils.logSecurityEvent('LOGIN_FAILED', { 
-                    attempt: securityState.attemptCount,
-                    maxAttempts: SECURITY_CONFIG.MAX_ATTEMPTS 
-                });
-
-                if (securityState.attemptCount >= SECURITY_CONFIG.MAX_ATTEMPTS) {
-                    securityState.isLocked = true;
-                    const lockoutMinutes = SECURITY_CONFIG.LOCKOUT_DURATION / 60000;
-                    uiManager.showAlert(`Too many failed attempts. Account locked for ${lockoutMinutes} minutes.`, 'error');
-                    utils.logSecurityEvent('ACCOUNT_LOCKED');
-                } else {
-                    const remainingAttempts = SECURITY_CONFIG.MAX_ATTEMPTS - securityState.attemptCount;
-                    uiManager.showAlert(`${message} ${remainingAttempts} attempts remaining.`, 'error');
-                }
-
-                // Clear form
-                document.getElementById('accessKey').value = '';
-                captchaManager.generate();
-            },
-
-            // Provide hints based on input
-            provideHints(input) {
-                if (input.length < 10) {
-                    uiManager.showHint('Access keys are typically longer than 10 characters');
-                } else if (!input.includes('@')) {
-                    uiManager.showHint('Premium access keys usually contain special characters like @');
-                } else if (!input.match(/\d/)) {
-                    uiManager.showHint('Access keys often include numbers for security');
-                } else {
-                    uiManager.showHint('Double-check your access key format: EngiVora@xxxxx####');
-                }
-            },
-
-            // Utility delay function
             delay(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
         };
 
-        // Content Management
-        const contentManager = {
-            // Open content section
-            openSection(section) {
-                const sectionMessages = {
-                    'notes': 'Accessing comprehensive study notes library...',
-                    'lectures': 'Loading premium video lecture collection...',
-                    'resources': 'Opening learning resources database...',
-                    'practice': 'Initializing interactive practice test platform...',
-                    'projects': 'Loading hands-on project workspace...',
-                    'community': 'Connecting to learning community hub...'
-                };
-
-                const message = sectionMessages[section] || 'Loading premium content...';
-                uiManager.showAlert(message, 'info', 2000);
-
-                utils.logSecurityEvent('CONTENT_ACCESS', { section });
-
-                setTimeout(() => {
-                    // Simulate content loading
-                    uiManager.showAlert(`${section.charAt(0).toUpperCase() + section.slice(1)} section ready!`, 'success', 1500);
-                    
-                    setTimeout(() => {
-                        window.open('https://t.me/helpengivora', '_blank');
-                    }, 1500);
-                }, 1000);
-            }
-        };
-
-        // Password Visibility Toggle
-        function togglePasswordVisibility() {
-            const passwordInput = document.getElementById('accessKey');
-            const toggleButton = document.getElementById('togglePassword');
-            
-            if (securityState.passwordVisible) {
-                passwordInput.type = 'password';
-                toggleButton.textContent = '👁️';
-                toggleButton.setAttribute('data-tooltip', 'Show password');
-                securityState.passwordVisible = false;
-            } else {
-                passwordInput.type = 'text';
-                toggleButton.textContent = '🙈';
-                toggleButton.setAttribute('data-tooltip', 'Hide password');
-                securityState.passwordVisible = true;
-            }
-            
-            utils.logSecurityEvent('PASSWORD_VISIBILITY_TOGGLE', { 
-                visible: securityState.passwordVisible 
-            });
+        // CAPTCHA Management
+        function generateCaptcha() {
+            const randomIndex = Math.floor(Math.random() * CAPTCHA_CODES.length);
+            appState.currentCaptcha = CAPTCHA_CODES[randomIndex];
+            document.getElementById('captchaDisplay').textContent = appState.currentCaptcha;
+            document.getElementById('captchaInput').value = '';
         }
 
-        // Refresh CAPTCHA
         function refreshCaptcha() {
-            captchaManager.generate();
-            
-            // Add visual feedback
-            const refreshBtn = document.querySelector('.refresh-button');
-            const icon = refreshBtn.querySelector('.icon');
-            icon.style.animation = 'refreshSpin 0.5s ease-in-out';
-            
-            setTimeout(() => {
-                icon.style.animation = '';
-            }, 500);
-            
-            uiManager.showAlert('New security code generated', 'info', 2000);
+            generateCaptcha();
+            utils.showAlert('New security code generated', 'info', 2000);
         }
 
-        // Open content section
-        function openContentSection(section) {
-            contentManager.openSection(section);
+        function validateCaptcha(input) {
+            return input.toUpperCase().trim() === appState.currentCaptcha;
         }
 
-        // Close security warning
-        function closeSecurityWarning() {
-            document.getElementById('securityWarning').classList.remove('active');
-        }
-
-        // Redirect to support
-        function redirectToSupport() {
-            window.open('https://t.me/helpengivora', '_blank');
-            document.getElementById('securityOverlay').classList.remove('active');
-        }
-
-        // Window/Tab Management
-        function setupWindowManagement() {
-            // Prevent multiple tabs
-            let isOriginalTab = !sessionStorage.getItem('tabExists');
+        // Password Toggle
+        function togglePasswordVisibility() {
+            const input = document.getElementById('accessKey');
+            const toggle = document.getElementById('togglePassword');
             
-            if (isOriginalTab) {
-                sessionStorage.setItem('tabExists', 'true');
+            if (appState.passwordVisible) {
+                input.type = 'password';
+                toggle.textContent = '👁️';
+                appState.passwordVisible = false;
             } else {
-                utils.triggerSecurityAlert('Multiple tabs detected');
-                document.getElementById('securityOverlay').classList.add('active');
+                input.type = 'text';
+                toggle.textContent = '🙈';
+                appState.passwordVisible = true;
             }
+        }
 
-            // Handle tab/window close
-            window.addEventListener('beforeunload', () => {
-                if (isOriginalTab) {
-                    sessionStorage.removeItem('tabExists');
+        // Form Submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            utils.hideAllAlerts();
+            utils.toggleLoading(true);
+            
+            const branch = document.getElementById('branchSelect').value;
+            const accessKey = document.getElementById('accessKey').value.trim();
+            const captchaInput = document.getElementById('captchaInput').value.trim();
+            
+            await utils.delay(500);
+            
+            // Validate branch selection
+            if (!branch) {
+                utils.showAlert('Please select your engineering branch first', 'error');
+                utils.toggleLoading(false);
+                return;
+            }
+            
+            // Validate CAPTCHA
+            if (!validateCaptcha(captchaInput)) {
+                appState.attemptCount++;
+                utils.showAlert('Invalid security code. Please try again.', 'error');
+                generateCaptcha();
+                utils.toggleLoading(false);
+                
+                if (appState.attemptCount >= appState.maxAttempts) {
+                    utils.showAlert('Too many failed attempts. Please refresh the page.', 'error');
                 }
-            });
-
-            // Handle window focus
-            window.addEventListener('blur', () => {
-                utils.logSecurityEvent('WINDOW_BLUR');
-            });
-
-            window.addEventListener('focus', () => {
-                utils.logSecurityEvent('WINDOW_FOCUS');
-            });
-        }
-
-        // Performance Monitoring
-        function setupPerformanceMonitoring() {
-            // Monitor page load performance
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    const perfData = performance.getEntriesByType('navigation')[0];
-                    utils.logSecurityEvent('PERFORMANCE_METRICS', {
-                        loadTime: perfData.loadEventEnd - perfData.loadEventStart,
-                        domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
-                        totalTime: perfData.loadEventEnd - perfData.fetchStart
-                    });
-                }, 0);
-            });
-        }
-
-        // Initialize Application
-        function initializeApp() {
-            // Security initialization
-            securityManager.init();
-            setupWindowManagement();
-            setupPerformanceMonitoring();
-
-            // UI initialization
-            formManager.init();
-            captchaManager.generate();
-            captchaManager.startAutoRefresh();
-
-            // Initial progress
-            uiManager.updateProgress(0);
-
-            // Log application start
-            utils.logSecurityEvent('APPLICATION_INITIALIZED', {
-                userAgent: navigator.userAgent,
-                timestamp: Date.now(),
-                sessionId: sessionManager.startTime
-            });
-
-            // Show welcome message
-            setTimeout(() => {
-                uiManager.showAlert('Welcome to EngiVora Premium Portal - Secure access initialized', 'info', 3000);
-            }, 1000);
-
-            console.log('%c✅ EngiVora Premium Portal Loaded', 'color: green; font-size: 16px; font-weight: bold;');
-            console.log('%c🛡️ Security systems active', 'color: blue; font-size: 14px;');
-        }
-
-        // Error Handling
-        window.addEventListener('error', (e) => {
-            utils.logSecurityEvent('JAVASCRIPT_ERROR', {
-                message: e.message,
-                filename: e.filename,
-                lineno: e.lineno,
-                colno: e.colno
-            });
+                return;
+            }
+            
+            await utils.delay(800);
+            
+            // Validate access key
+            if (accessKey === ACCESS_KEYS.premium) {
+                appState.selectedBranch = branch;
+                appState.isLoggedIn = true;
+                appState.currentUser = 'premium';
+                
+                utils.showAlert('Login successful! Loading your engineering portal...', 'success');
+                await utils.delay(2000);
+                
+                showDashboard();
+            } else if (accessKey === ACCESS_KEYS.admin) {
+                utils.showAlert('Admin access granted! Redirecting to control panel...', 'success');
+                await utils.delay(2000);
+                window.open('https://engivora.github.io/EngiVoraPrivate/admin.html', '_blank');
+            } else {
+                appState.attemptCount++;
+                utils.showAlert(`Invalid access key. ${appState.maxAttempts - appState.attemptCount} attempts remaining.`, 'error');
+                
+                if (appState.attemptCount >= appState.maxAttempts) {
+                    utils.showAlert('Account temporarily locked. Contact support for assistance.', 'error');
+                }
+            }
+            
+            utils.toggleLoading(false);
         });
 
-        window.addEventListener('unhandledrejection', (e) => {
-            utils.logSecurityEvent('UNHANDLED_PROMISE_REJECTION', {
-                reason: e.reason
-            });
-        });
-
-        // Prevent form resubmission on refresh
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            document.getElementById('appHeader').classList.add('show');
+            document.querySelector('.main-container').classList.add('with-header');
+            
+            updateBranchInfo();
         }
 
-        // Start the application when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeApp);
-        } else {
-            initializeApp();
+        // Update Branch Information
+        function updateBranchInfo() {
+            const branchData = BRANCHES[appState.selectedBranch];
+            if (branchData) {
+                document.getElementById('selectedBranchName').textContent = branchData.name;
+                document.getElementById('selectedBranchDesc').textContent = branchData.description;
+            }
         }
 
-        // Export functions for testing (in development only)
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            window.EngiVoraDebug = {
-                securityState,
-                sessionManager,
-                utils,
-                uiManager,
-                securityManager,
-                captchaManager,
-                formManager,
-                contentManager
+        // Content Modal Management
+        let currentContentType = '';
+
+        function openContentModal(type) {
+            currentContentType = type;
+            const modal = document.getElementById('contentModal');
+            const title = document.getElementById('modalTitle');
+            const subtitle = document.getElementById('modalSubtitle');
+            const coachingFilter = document.getElementById('coachingFilter');
+            
+            const titles = {
+                books: 'Engineering Books',
+                notes: 'Study Notes',
+                lectures: 'Video Lectures'
             };
+            
+            const subtitles = {
+                books: 'Access premium engineering textbooks and references',
+                notes: 'Premium study notes from top coaching institutes',
+                lectures: 'High-quality video lectures from expert instructors'
+            };
+            
+            title.textContent = titles[type];
+            subtitle.textContent = subtitles[type];
+            
+            // Show coaching filter for notes and lectures
+            if (type === 'notes' || type === 'lectures') {
+                coachingFilter.style.display = 'block';
+            } else {
+                coachingFilter.style.display = 'none';
+            }
+            
+            loadSubjects();
+            modal.classList.add('active');
         }
-    </script>
-</body>
-</html>
+
+        function closeContentModal() {
+            document.getElementById('contentModal').classList.remove('active');
+        }
+
+        function selectCoaching(coaching) {
+            appState.selectedCoaching = coaching;
+            
+            // Update active tab
+            document.querySelectorAll('.coaching-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-coaching="${coaching}"]`).classList.add('active');
+            
+            loadSubjects();
+        }
+
+        function loadSubjects() {
+            const subjectList = document.getElementById('subjectList');
+            const branchData = BRANCHES[appState.selectedBranch];
+            
+            if (!branchData) return;
+            
+            let subjects = [];
+            
+            if (currentContentType === 'books') {
+                subjects = branchData.subjects.books;
+            } else if (currentContentType === 'notes') {
+                subjects = branchData.subjects.notes[appState.selectedCoaching] || [];
+            } else if (currentContentType === 'lectures') {
+                subjects = branchData.subjects.lectures[appState.selectedCoaching] || [];
+            }
+            
+            subjectList.innerHTML = '';
+            
+            subjects.forEach(subject => {
+                const subjectItem = document.createElement('div');
+                subjectItem.className = 'subject-item';
+                subjectItem.innerHTML = `
+                    <span class="subject-name">${subject.name}</span>
+                    <a href="${subject.link}" target="_blank" class="subject-link" onclick="event.stopPropagation()">
+                        Access →
+                    </a>
+                `;
+                
+                subjectItem.onclick = ()
